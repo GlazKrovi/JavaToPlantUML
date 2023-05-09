@@ -1,0 +1,23 @@
+@startuml
+!theme reddress-darkgreen
+
+
+
+class Barman {}
+class Boisson {}
+class Brigand {}
+class Cowboy {}
+class Dame {}
+class Genre {}
+class Histoire4 {}
+class Histoire5 {}
+interface HorsLaLoi {}
+class Narrateur {}
+interface Nommable {}
+class Personnage {}
+class Ripou {}
+class Sherif {}
+class Substantif {}
+
+@enduml
+
