@@ -6,17 +6,21 @@ import java.io.PrintWriter;
 
 public class Writer {
     private PrintWriter pw;
-    private String filename;
+    private String filepath;
 
     /* CREATE */
+    public Writer(String filepath, String filename)
+    {
+        this.filepath = filepath + filename;
+        create_directories(filepath); // create nonexistent parents directories
+    }
     public Writer(String filename)
     {
-        this.filename = filename;
+        this.filepath = filename;
     }
-
     public Writer()
     {
-        this.filename = "gen.puml";
+        this.filepath = "autogen.puml";
     }
 
     /* Function */
@@ -25,7 +29,7 @@ public class Writer {
      * @return true
      */
     public boolean open(){
-        verify();
+        createFile();
         links();
         return true;
     }
@@ -56,18 +60,8 @@ public class Writer {
      * Checks for the existence of a file, otherwise creates it
      * @return
      */
-    private boolean verify(){
-        File file = new File(filename);
-        /*
-        // Directory
-        if (filepath != null && filepath != ""){
-            File dir = new File(filepath);
-            if (!dir.exists()){
-                dir.mkdir();
-            }
-        }
-        */
-        // File
+    private boolean createFile(){
+        File file = new File(filepath);
         if (file.exists()){
             file.delete();
         }
@@ -87,12 +81,23 @@ public class Writer {
                 pw = new PrintWriter(filepath + filename);
             }
             else{ } */
-                pw = new PrintWriter(filename);
+                pw = new PrintWriter(filepath);
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found");
             throw new RuntimeException(e);
         }
+        return true;
+    }
+
+    /**
+     * Test if specified directory exists
+     * @param path
+     * @return Returns true if and only if directory exists, else returns false
+     */
+    private boolean create_directories(String path){
+        File directories = new File(path);
+        directories.mkdirs();
         return true;
     }
 }

@@ -10,7 +10,10 @@ import javax.lang.model.element.Element;
 import java.util.Locale;
 import java.util.Set;
 
-/* Directories management is not yet complete */
+/* Directories management is not yet complete
+* A command line wich work:
+* -private -sourcepath .\src -doclet pumlFromJava.PumlDoclet western -out Western.puml -d .\tests\
+* */
 
 public class PumlDoclet implements Doclet {
 
@@ -42,17 +45,23 @@ public class PumlDoclet implements Doclet {
         Element[] elements = environment.getIncludedElements().toArray(new Element[0]);
         Writer writer;
         // options
-        if (oOut != null
+        if (oOut != null    // specific path and file name
                 && oOut.getFileName() != null
-                && !oOut.getNames().equals("")){
+                && !oOut.getNames().equals("")
+                && oPath != null
+                && oPath.getNames() != null
+                && !oPath.getNames().equals(""))
+        {
+            writer = new Writer(oPath.getPath(), oOut.getFileName());
+        }
+        else if (oOut != null   // just specific file name
+                && oOut.getFileName() != null
+                && !oOut.getNames().equals(""))
+        {
             writer = new Writer(oOut.getFileName());
         }
-        /* TODO
-        else if (oOut != null && oOut.equals("")){ // just specific file name
-            writer = new Writer(oOut.getFileName());
-        }
-         */
-        else{
+        else
+        {
             writer =  new Writer("gen.puml");
         }
         // writing
