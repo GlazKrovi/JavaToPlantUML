@@ -1,0 +1,21 @@
+# Java
+out/ 
+.idea/
+*.iml
+
+# WSL
+*:Zone.Identifier
+
+# Visual studio
+.vs/
+.vscode/
+
+# Godot 
+mono/
+.mono/
+.godot/
+.import/
+*.import
+
+# DotNet
+*.csproj
