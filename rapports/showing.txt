@@ -1,9 +1,0 @@
-[western]
-[unnamed module, western, western.Barman, western.Boisson, western.Brigand, western.Cowboy, western.Dame, western.Genre, western.Histoire4, western.Histoire5, western.HorsLaLoi, western.Narrateur, western.Nommable, western.Personnage, western.Ripou, western.Sherif, western.Substantif]
----- element: western
-kind: PACKAGE
-simpleName: western
-enclosingElement: unnamed module
-enclosedElement: western.Barman,western.Boisson,western.Brigand,western.Cowboy,western.Dame,western.Genre,western.Histoire4,western.Histoire5,western.HorsLaLoi,western.Narrateur,western.Nommable,western.Personnage,western.Ripou,western.Sherif,western.Substantif
-modifiers: []
-
