@@ -2,7 +2,7 @@ package pumlFromJava.doclets;
 
 
 import pumlFromJava.diagrams.PumlDiagram;
-import pumlFromJava.translator.marker.Markor;
+import pumlFromJava.translator.pumlMarker.Marker;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
@@ -47,7 +47,7 @@ public class PumlDoclet implements Doclet {
 
     @Override
     public boolean run(DocletEnvironment environment) {
-        Markor translater = new Markor();
+        Marker translater = new Marker();
         Element[] elements = environment.getIncludedElements().toArray(new Element[0]);
         Writer writer;
         // options
@@ -75,7 +75,7 @@ public class PumlDoclet implements Doclet {
 
         // WRITING WHAT YOU WANT HERE
         PumlDiagram diagram = new PumlDiagram();
-        writer.write(diagram.design_simpleDCA(environment));
+        writer.write(diagram.getACD(environment));
 
         // close file
         writer.close();

@@ -8,7 +8,7 @@ public class VisibilityViewer {
      * @param annotation any annotationMirror from a class' attribute or method
      * @return + for public, - for private, ~ for protected
      */
-    public String translate_visibility(AnnotationMirror annotation){
+    public String getVisibility(AnnotationMirror annotation){
         String res = "";
         if (annotation.getAnnotationType().toString().equals("public")){
             res = "+";

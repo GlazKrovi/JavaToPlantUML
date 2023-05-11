@@ -4,17 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class Writer {
-    private PrintWriter pw;
+public class Writer implements IWriter {
     private final String filepath;
+    private PrintWriter pw;
 
-    public Writer(String filepath, String filename)
-    {
+    public Writer(String filepath, String filename) {
         this.filepath = filepath + filename;
         create_directories(filepath); // create nonexistent parents directories
     }
-    public Writer(String filename)
-    {
+
+    public Writer(String filename) {
         this.filepath = filename;
     }
 
@@ -23,7 +22,7 @@ public class Writer {
      * If the file is not closed, the changes will be left in a buffer,
      * and the file will not be edited
      */
-    public void open(){
+    public void open() {
         createFile();
         links();
     }
@@ -31,17 +30,18 @@ public class Writer {
     /**
      * Closes the current file (necessary to open another one!)
      */
-    public void close(){
+    public void close() {
         // close file
         if (pw != null) pw.close();
     }
 
     /**
      * Write the specified text into the opened file
+     *
      * @param text any text
      */
-    public void write(String text){
-        if (pw != null){
+    public void write(String text) {
+        if (pw != null) {
             pw.println(text);
         }
     }
@@ -49,9 +49,9 @@ public class Writer {
     /**
      * Checks for the existence of a file, otherwise creates it
      */
-    private void createFile(){
+    private void createFile() {
         File file = new File(filepath);
-        if (file.exists()){
+        if (file.exists()) {
             file.delete();
         }
     }
@@ -59,14 +59,11 @@ public class Writer {
     /**
      * Binds the file to the class
      */
-    private void links()
-    {
-        try
-        {
+    private void links() {
+        try {
 
-                pw = new PrintWriter(filepath);
-        }
-        catch (FileNotFoundException e) {
+            pw = new PrintWriter(filepath);
+        } catch (FileNotFoundException e) {
             System.out.println("File not found");
             throw new RuntimeException(e);
         }
@@ -77,7 +74,7 @@ public class Writer {
      *
      * @param path the path to the file
      */
-    private void create_directories(String path){
+    private void create_directories(String path) {
         File directories = new File(path);
         directories.mkdirs();
     }
