@@ -1,4 +1,4 @@
-package pumlFromJava;
+package pumlFromJava.doclets;
 
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;

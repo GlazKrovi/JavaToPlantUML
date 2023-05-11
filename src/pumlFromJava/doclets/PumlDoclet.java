@@ -1,9 +1,14 @@
-package pumlFromJava;
+package pumlFromJava.doclets;
 
 
+import pumlFromJava.diagrams.PumlDiagram;
+import pumlFromJava.translator.marker.Markor;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
+import pumlFromJava.doclets.Options.OutOption;
+import pumlFromJava.doclets.Options.PathOption;
+import pumlFromJava.writer.Writer;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -11,9 +16,9 @@ import java.util.Locale;
 import java.util.Set;
 
 /* Directories management is not yet complete
-* A command line wich work:
-* -private -sourcepath .\src -doclet pumlFromJava.PumlDoclet western -out Western.puml -d .\tests\
-* */
+ * A command line which work:
+ * -private -sourcepath .\src -doclet pumlFromJava.PumlDoclet western -out Western.puml -d .\tests\
+ * */
 
 public class PumlDoclet implements Doclet {
 
@@ -42,6 +47,7 @@ public class PumlDoclet implements Doclet {
 
     @Override
     public boolean run(DocletEnvironment environment) {
+        Markor translater = new Markor();
         Element[] elements = environment.getIncludedElements().toArray(new Element[0]);
         Writer writer;
         // options
@@ -64,15 +70,26 @@ public class PumlDoclet implements Doclet {
         {
             writer =  new Writer("gen.puml");
         }
-        // writing
+        // open file
         writer.open();
-        writer.write(PumlTranslater.mark_umlStart());
-        for (Element elm : elements) {
-            writer.write(PumlTranslater.translate_umlObject(elm));
-        }
-        writer.write(PumlTranslater.mark_umlEnd());
-        // close
+
+        // WRITING WHAT YOU WANT HERE
+        PumlDiagram diagram = new PumlDiagram();
+        writer.write(diagram.design_simpleDCA(environment));
+
+        // close file
         writer.close();
         return true;
     }
 }
+
+/*
+
+        for (Element includeEl : environment.getIncludedElements())
+        {
+            for (Element anotherEl : includeEl.getEnclosedElements()){
+                System.out.println(anotherEl.getKind().toString());
+            }
+        }
+        return true;
+ */
