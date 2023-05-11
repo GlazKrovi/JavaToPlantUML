@@ -1,0 +1,124 @@
+@startuml
+'https://plantuml.com/class-diagram
+package javax.lang.model.element{
+interface Element <<interface>> {
++asType() : TypeMirror
++equals(obj : Object) : boolean
++getEnclosedElements() : List<? extends Element>
++getEnclosingElement() : Element
++getKind() : ElementKind
++getModifiers() : Set<Modifier>
++getSimpleName() : Name
++hashCode() : int
+}
+
+enum ElementKind <<enum>>{
+PACKAGE
+MODULE
+ANNOTATION_TYPE
+CLASS
+ENUM
+INTERFACE
+RECORD
+ENUM_CONSTANT
+EXCEPTION_PARAMETER
+FIELD
+LOCAL_VARIABLE
+PARAMETER
+RESOURCE_VARIABLE
+BINDING_VARIABLE
+CONSTRUCTOR
+INSTANCE_INIT
+METHOD
+STATIC_INIT
+TYPE_PARAMETER
+RECORD_COMPONENT
+}
+
+interface Name <<interface>>{
++contentEquals(cs CharSequence) : boolean
++equals(obj Object ) : boolean
++hashCode() : int
+}
+
+interface ExecutableElement <<interface>> implements Element{
++asType() : TypeMirror
++getDefaultValue() : AnnotationValue
++getEnclosingElement() : Element
++getParameters() : List<? extends VariableElement>
++getReceiverType() : TypeMirror
++getReturnType() : TypeMirror
++getSimpleName() : Name
++getThrownTypes() : List<? extends TypeMirror>
++getTypeParameters() : List<? extends TypeParameterElement>
++isDefault() : boolean
++isVarArgs() : boolean
+}
+
+interface PackageElement <<interface>> implements Element{
++asType() : TypeMirror
++getEnclosedElements() : List<? extends Element>
++getEnclosingElement() : Element
++getQualifiedName() : Name
++getSimpleName() : Name
++isUnnamed() : boolean
+}
+
+interface VariableElement <<interface>> implements Element{
++asType() : TypeMirror
++getConstantValue() : Object
++getEnclosingElement() : Element
++getSimpleName() : Name
+}
+
+interface ModuleElement <<interface>> implements Element{}
+
+interface Parameterizable <<interface>> implements Element{}
+interface QualifiedNameable <<interface>> implements Element{}
+interface RecordComponentElement <<interface>> implements Element{}
+interface TypeElement <<interface>> implements Element{}
+interface TypeParameterElement <<interface>> implements Element{}
+
+Element .> ElementKind : --use++
+Element .> Name : --use++
+Element -l[hidden]> Name : --use++
+}
+
+package javax.lang.model.type{
+
+interface TypeMirror <<interface>>{
++equals(obj Object) : boolean
++hashCode() : int
++getKind() : TypeKind
++toString() : String
+}
+
+enum TypeKind <<enum>>{
+ARRAY
+BOOLEAN
+BYTE
+CHAR
+DECLARED
+DOUBLE
+ERROR
+EXECUTABLE
+FLOAT
+INT
+LONG
+NONE
+NULL
+PACKAGE
+UNION
+VOID
+}
+TypeMirror .> TypeKind : --use++
+}
+
+
+package javax.lang.model.util{
+
+interface Elements <<interface>>{}
+
+}
+
+@enduml
