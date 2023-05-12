@@ -1,0 +1,11 @@
+@startuml
+!theme reddress-darkgreen
+skinparam style strictuml
+
+package pumlFromJava {
+class Java2Puml {
+
+}
+
+@enduml
+

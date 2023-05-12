@@ -7,37 +7,15 @@ import pumlFromJava.translator.pumlObjects.*;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public class PumlDiagram implements IPumlDiagram {
+public class PumlDCA implements IPumlDiagram {
     /**
-     * Translate a specified environment into a very simple Puml scheme
-     * including class, enum and interfaces, without any other info
+     * Design a full Puml Analyze Class Diagram scheme
      *
      * @param environment a java environment
-     * @return Returns Puml translated String
+     * @return Returns string representing a .puml file's content, for a ACD
      */
-    public String design_basis(DocletEnvironment environment) {
-        Marker marker = new Marker();
-        StringBuilder res = new StringBuilder();
-        // puml objects
-        PumlClass pumlclass = new PumlClass();
-        PumlEnum pumlenum = new PumlEnum();
-        PumlInterface pumlinterface = new PumlInterface();
-        // start uml scheme
-        res.append(marker.umlStart());
-        // translate every "big" elements (class, enum, interface)
-        for (Element elm : environment.getIncludedElements()) {
-            res.append(pumlclass.getName(elm));
-            res.append(pumlenum.getName(elm));
-            res.append(pumlinterface.getName(elm));
-            res.append("\n");
-        }
-        // end uml scheme
-        res.append(marker.umlEnd());
-        return res.toString();
-    }
-
     @Override
-    public String getACD(DocletEnvironment environment) {
+    public String getScheme(DocletEnvironment environment) {
         Marker marker = new Marker();
         StringBuilder res = new StringBuilder();
         // puml objects
@@ -79,14 +57,5 @@ public class PumlDiagram implements IPumlDiagram {
         return res.toString();
     }
 
-    /**
-     * Design a full Puml Conception Class Diagram scheme
-     *
-     * @param environment a java environment
-     * @return Returns string representing a .puml file's content, for a CCD
-     */
-    @Override
-    public String getCCD(DocletEnvironment environment) {
-        return "";
-    }
+
 }

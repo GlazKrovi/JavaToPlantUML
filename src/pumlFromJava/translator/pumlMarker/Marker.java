@@ -1,6 +1,6 @@
 package pumlFromJava.translator.pumlMarker;
 
-public class Marker implements PumlMarker {
+public class Marker implements IPumlMarker {
 
     public Marker() {
     }

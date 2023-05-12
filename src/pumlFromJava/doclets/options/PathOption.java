@@ -1,4 +1,4 @@
-package pumlFromJava.doclets.Options;
+package pumlFromJava.doclets.options;
 
 import jdk.javadoc.doclet.Doclet;
 

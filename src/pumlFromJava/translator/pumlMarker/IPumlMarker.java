@@ -1,6 +1,6 @@
 package pumlFromJava.translator.pumlMarker;
 
-public interface PumlMarker {
+public interface IPumlMarker {
     // TRANSLATE
 
     /**

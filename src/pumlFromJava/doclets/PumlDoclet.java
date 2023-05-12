@@ -1,13 +1,14 @@
 package pumlFromJava.doclets;
 
 
-import pumlFromJava.diagrams.PumlDiagram;
+import pumlFromJava.diagrams.PumlDCA;
+import pumlFromJava.diagrams.PumlDCC;
 import pumlFromJava.translator.pumlMarker.Marker;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
-import pumlFromJava.doclets.Options.OutOption;
-import pumlFromJava.doclets.Options.PathOption;
+import pumlFromJava.doclets.options.OutOption;
+import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.writer.Writer;
 
 import javax.lang.model.SourceVersion;
@@ -47,8 +48,16 @@ public class PumlDoclet implements Doclet {
 
     @Override
     public boolean run(DocletEnvironment environment) {
+       generateDCA(environment);
+       generateDCC(environment);
+
+       return true;
+    }
+
+    private boolean generateDCA(DocletEnvironment environment){
         Marker translater = new Marker();
         Element[] elements = environment.getIncludedElements().toArray(new Element[0]);
+        PumlDCA diagram = new PumlDCA();
         Writer writer;
         // options
         if (oOut != null    // specific path and file name
@@ -58,38 +67,58 @@ public class PumlDoclet implements Doclet {
                 && oPath.getNames() != null
                 && !oPath.getNames().equals(""))
         {
-            writer = new Writer(oPath.getPath(), oOut.getFileName());
+            writer = new Writer(oPath.getPath(), "DCA_" + oOut.getFileName());
         }
         else if (oOut != null   // just specific file name
                 && oOut.getFileName() != null
                 && !oOut.getNames().equals(""))
         {
-            writer = new Writer(oOut.getFileName());
+            writer = new Writer("DCA_" + oOut.getFileName());
         }
         else
         {
-            writer =  new Writer("gen.puml");
+            writer =  new Writer("DCA_gen.puml");
         }
         // open file
         writer.open();
-
         // WRITING WHAT YOU WANT HERE
-        PumlDiagram diagram = new PumlDiagram();
-        writer.write(diagram.getACD(environment));
+        writer.write(diagram.getScheme(environment));
+        // close file
+        writer.close();
+        return true;
+    }
 
+    private boolean generateDCC(DocletEnvironment environment){
+        Marker translater = new Marker();
+        Element[] elements = environment.getIncludedElements().toArray(new Element[0]);
+        PumlDCC diagram = new PumlDCC();
+        Writer writer;
+        // options
+        if (oOut != null    // specific path and file name
+                && oOut.getFileName() != null
+                && !oOut.getNames().equals("")
+                && oPath != null
+                && oPath.getNames() != null
+                && !oPath.getNames().equals(""))
+        {
+            writer = new Writer(oPath.getPath(), "DCC_" + oOut.getFileName());
+        }
+        else if (oOut != null   // just specific file name
+                && oOut.getFileName() != null
+                && !oOut.getNames().equals(""))
+        {
+            writer = new Writer("DCC_" + oOut.getFileName());
+        }
+        else
+        {
+            writer =  new Writer("DCC_gen.puml");
+        }
+        // open file
+        writer.open();
+        // WRITING WHAT YOU WANT HERE
+        writer.write(diagram.getScheme(environment));
         // close file
         writer.close();
         return true;
     }
 }
-
-/*
-
-        for (Element includeEl : environment.getIncludedElements())
-        {
-            for (Element anotherEl : includeEl.getEnclosedElements()){
-                System.out.println(anotherEl.getKind().toString());
-            }
-        }
-        return true;
- */
