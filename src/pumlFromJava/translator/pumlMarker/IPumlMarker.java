@@ -1,8 +1,6 @@
 package pumlFromJava.translator.pumlMarker;
 
 public interface IPumlMarker {
-    // TRANSLATE
-
     /**
      * Returns '@startUml'
      */

@@ -3,7 +3,7 @@ package pumlFromJava.translator.pumlObjects;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public interface IPumlClass extends PumlObject {
+public interface IPumlClass extends IPumlObject {
     /**
      * Translate a Java class file into his Puml equivalent
      *

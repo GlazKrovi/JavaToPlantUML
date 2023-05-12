@@ -8,7 +8,7 @@ import javax.lang.model.element.ElementKind;
 /**
  * Represents a Puml translator for java enumeration
  */
-public class PumlEnum implements PumlObject {
+public class PumlEnum implements IPumlObject {
 
     VisibilityViewer visibilityViewer = new VisibilityViewer();
 

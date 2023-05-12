@@ -6,7 +6,7 @@ import javax.lang.model.type.TypeMirror;
 /**
  * Translator for any java package, class, enum or interface
  */
-public interface PumlObject {
+public interface IPumlObject {
     /**
      * Translates any Java file type into his Puml equivalent
      * (Ex : class Test, enum Kinds, etc)
