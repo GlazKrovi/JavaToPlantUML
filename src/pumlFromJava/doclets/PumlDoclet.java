@@ -9,6 +9,7 @@ import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
+import pumlFromJava.doclets.Options.TypeOption;
 import pumlFromJava.writer.Writer;
 
 import javax.lang.model.SourceVersion;
@@ -25,6 +26,9 @@ public class PumlDoclet implements Doclet {
 
     PathOption oPath = new PathOption();
     OutOption oOut = new OutOption();
+
+    TypeOption oType = new TypeOption();
+
     @Override
     public void init(Locale locale, Reporter reporter) {
 
@@ -37,7 +41,7 @@ public class PumlDoclet implements Doclet {
 
     @Override
     public Set<? extends Option> getSupportedOptions() {
-        Option[] options = {oPath, oOut};
+        Option[] options = {oPath, oOut, oType};
         return Set.of(options);
     }
 
@@ -48,11 +52,27 @@ public class PumlDoclet implements Doclet {
 
     @Override
     public boolean run(DocletEnvironment environment) {
-       generateDCA(environment);
-       generateDCC(environment);
-
-       return true;
+        try {
+            if (oType.getType().equalsIgnoreCase("both")) {
+                generateDCA(environment);
+                generateDCC(environment);
+            }
+            else if (oType.getType().equalsIgnoreCase("dcc")) {
+                generateDCC(environment);
+            }
+            else if (oType.getType().equalsIgnoreCase("dca")) {
+                generateDCA(environment);
+            }
+            else {
+                throw new IllegalArgumentException("Please specify if you want 'both', 'dca' or 'dcc' scheme");
+            }
+        }
+        catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
+
 
     private boolean generateDCA(DocletEnvironment environment){
         Marker translater = new Marker();
