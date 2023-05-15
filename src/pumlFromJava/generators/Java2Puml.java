@@ -1,4 +1,4 @@
-package pumlFromJava;
+package pumlFromJava.generators;
 
 import java.util.spi.ToolProvider;
 

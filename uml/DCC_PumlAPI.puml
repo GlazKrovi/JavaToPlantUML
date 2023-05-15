@@ -1,0 +1,131 @@
+@startuml
+!theme reddress-darkgreen
+skinparam style strictuml
+
+/' Add the creates !! '/
+
+package pumlFromJava {
+    package diagrams {
+        interface IPumlDiagram {
+            getScheme(environment : DocletEnvironment) : String
+        }
+        class PumlBasis { /' week 1 '/
+            getScheme(environment : DocletEnvironment) : String
+        }
+        class PumlDCA {
+            getScheme(environment : DocletEnvironment) : String
+        }
+        class PumlDCC {
+            getScheme(environment : DocletEnvironment) : String
+        }
+    }
+
+    package doclets {
+        package options {
+            class OutOption {
+                NameFile : String
+                getArgumentCount() : Integer
+                getDescription() : String
+                getFileName() : String
+                getNames() : String[*]
+                getParameters() : String
+                process(String, String[*]) : boolean
+            }
+            class PathOption{
+            NameFile : String
+                getArgumentCount() : Integer
+                getDescription() : String
+                getFileName() : String
+                getNames() : String[*]
+                getParameters() : String
+                process(String, String[*]) : boolean
+            }
+            class TypeOption{
+                NameFile : String
+                getArgumentCount() : Integer
+                getDescription() : String
+                getFileName() : String
+                getNames() : String[*]
+                getParameters() : String
+                process(String, String[*]) : boolean
+            }
+        }
+        class FirstDoclet{
+            dempElement(element : Element)
+            getName(element : Element)
+            getSupportedOptions() : Options[*]
+            getSupportedSourceVersion() : SourceVersion
+            init(locale : Locale, reporter : Reporter)
+            run(environment : DocletEnvironment) : boolean
+        }
+        class PumlDoclet{
+           - oOout : OutOption
+           - oPath : OutPath
+           - oType : TypeOption
+           + getName(element : Element)
+           + getSupportedOptions() : Options[*]
+           + getSupportedSourceVersion() : SourceVersion
+           + init(locale : Locale, reporter : Reporter)
+           + run(environment : DocletEnvironment) : boolean
+        }
+    }
+    package generators {
+            class Java2Puml {
+                + main(String[*])
+            }
+    }
+    package translators {
+        package pumlMarker {
+            interface IPumlMarker{
+               options_strictUml() : String
+               umlStart() : String
+               umlEnd() : String
+            }
+            class Marker{
+                + <<Create>> Marker()
+                + umlStart() : String
+            }
+        }
+        package pumlObjects {
+            interface IPumlObject{
+                + getName(element : Element) : String
+                + getContent(element : Element) : String
+                + getLineBreaker() : String
+                + getTranslation() : String
+                + is_primitive(typeMirror : TypeMirror) : boolean
+                + open()
+                + close()
+            }
+            interface IPumlClass{
+                 + getName(element : Element) : String
+                 + getContent(element : Element) : String
+            }
+            class PumlClass{
+                - visibilityViewer : VisibilityViewer
+                + <<Create>> PumlClass()
+                + getName(element : Element) : String
+                + getContent(element : Element) : String
+                - translate_field(element : Element) : String
+                - translate_method(element : Element) : String
+            }
+            class PumlEnum{
+                + <<Create>> PumlEnum()
+                + getName(element : Element) : String
+                + getContent(element : Element) : String
+            } /' koll '/
+            class PumlInterface
+            class PumlNonVisibleClass
+            class PumlPackage
+        }
+        package visibilityViewer {
+            class VisibilityViewer
+        }
+    }
+    package writers {
+        interface IWriter
+        class Writer
+    }
+}
+
+@enduml
+

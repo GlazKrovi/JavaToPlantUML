@@ -1,4 +1,4 @@
-package pumlFromJava.translator.pumlMarker;
+package pumlFromJava.translators.pumlMarker;
 
 public class Marker implements IPumlMarker {
 

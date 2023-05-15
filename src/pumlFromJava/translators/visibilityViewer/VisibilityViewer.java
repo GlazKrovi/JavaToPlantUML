@@ -1,4 +1,4 @@
-package pumlFromJava.translator.visibilityViewer;
+package pumlFromJava.translators.visibilityViewer;
 
 import javax.lang.model.element.AnnotationMirror;
 

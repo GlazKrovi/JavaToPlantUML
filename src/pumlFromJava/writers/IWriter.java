@@ -1,4 +1,4 @@
-package pumlFromJava.writer;
+package pumlFromJava.writers;
 
 public interface IWriter {
     /**

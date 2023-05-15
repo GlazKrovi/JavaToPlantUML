@@ -3,14 +3,14 @@ package pumlFromJava.doclets;
 
 import pumlFromJava.diagrams.PumlDCA;
 import pumlFromJava.diagrams.PumlDCC;
-import pumlFromJava.translator.pumlMarker.Marker;
+import pumlFromJava.translators.pumlMarker.Marker;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.doclets.Options.TypeOption;
-import pumlFromJava.writer.Writer;
+import pumlFromJava.writers.Writer;
 
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;

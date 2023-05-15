@@ -1,0 +1,55 @@
+@startuml
+!theme reddress-darkgreen
+skinparam style strictuml
+
+package western {
+class Barman {
+
+}
+class Boisson {
+
+}
+class Brigand {
+recompense
+estLibre
+
+}
+class Cowboy {
+gains
+
+}
+class Dame {
+estLibre
+
+}
+enum Genre <<enumeration>> {
+FEMININ
+MASCULIN
+
+}
+class Histoire4 {
+
+}
+class Histoire5 {
+
+}
+interface HorsLaLoi <<interface>>
+class Narrateur {
+
+}
+interface Nommable <<interface>>
+class Personnage {
+
+}
+class Ripou {
+
+}
+class Sherif {
+
+}
+class Substantif {
+
+}
+
+@enduml
+

@@ -1,6 +1,6 @@
-package pumlFromJava.translator.pumlObjects;
+package pumlFromJava.translators.pumlObjects;
 
-import pumlFromJava.translator.visibilityViewer.VisibilityViewer;
+import pumlFromJava.translators.visibilityViewer.VisibilityViewer;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;

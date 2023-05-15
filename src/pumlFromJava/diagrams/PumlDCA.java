@@ -1,8 +1,8 @@
 package pumlFromJava.diagrams;
 
 import jdk.javadoc.doclet.DocletEnvironment;
-import pumlFromJava.translator.pumlMarker.Marker;
-import pumlFromJava.translator.pumlObjects.*;
+import pumlFromJava.translators.pumlMarker.Marker;
+import pumlFromJava.translators.pumlObjects.*;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
