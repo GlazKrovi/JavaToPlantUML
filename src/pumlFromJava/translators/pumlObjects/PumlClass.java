@@ -9,8 +9,8 @@ import javax.lang.model.element.ElementKind;
 /**
  * Represents a Puml translator for java class
  */
-public class PumlClass implements IPumlClass {
-    VisibilityViewer visibilityViewer = new VisibilityViewer();
+public class PumlClass extends APumlClass {
+    private final VisibilityViewer visibilityViewer = new VisibilityViewer();
 
     public PumlClass() {}
 

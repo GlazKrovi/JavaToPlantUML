@@ -3,7 +3,10 @@ package pumlFromJava.translators.pumlObjects;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public class PumlNonVisibleClass implements IPumlClass {
+public class PumlNonVisibleClass extends APumlClass {
+    public PumlNonVisibleClass() {
+    }
+
     /**
      * Translate what is inside the Element (like attributes, constants or method),
      * but without his visibility

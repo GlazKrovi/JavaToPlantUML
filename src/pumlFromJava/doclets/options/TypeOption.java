@@ -1,12 +1,15 @@
-package pumlFromJava.doclets.Options;
+package pumlFromJava.doclets.options;
 
 import jdk.javadoc.doclet.Doclet;
 
 import java.util.List;
 
-public class TypeOption  implements Doclet.Option {
+public class TypeOption implements Doclet.Option {
 
     private String type;
+
+    public TypeOption() {
+    }
 
     @Override
     public int getArgumentCount() {

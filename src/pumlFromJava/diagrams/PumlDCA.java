@@ -8,6 +8,9 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
 public class PumlDCA implements IPumlDiagram {
+    public PumlDCA() {
+    }
+
     /**
      * Design a full Puml Analyze Class Diagram scheme
      *

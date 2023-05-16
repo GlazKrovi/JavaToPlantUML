@@ -8,6 +8,9 @@ public class PathOption implements Doclet.Option {
 
     private String path;
 
+    public PathOption() {
+    }
+
     @Override
     public int getArgumentCount() {
         return 1;

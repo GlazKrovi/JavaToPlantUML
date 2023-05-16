@@ -3,6 +3,9 @@ package pumlFromJava.diagrams;
 import jdk.javadoc.doclet.DocletEnvironment;
 
 public class PumlDCC implements IPumlDiagram {
+    public PumlDCC() {
+    }
+
     /**
      * Design a full Puml Conception Class Diagram scheme
      *

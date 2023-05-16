@@ -1,92 +1,132 @@
 @startuml
 !theme reddress-darkgreen
-skinparam style strictuml
 
-/' Add the creates !! '/
+package jdk.javadoc.doclet {
+    interface Doclet
+    interface Doclet_Option
+}
+
+
 
 package pumlFromJava {
+
+
     package diagrams {
+
         interface IPumlDiagram {
             getScheme(environment : DocletEnvironment) : String
         }
-        class PumlBasis { /' week 1 '/
+
+        class PumlBasis implements IPumlDiagram { /' week 1 '/
+            + <<Create>> PumlBasis()
+            + getScheme(environment : DocletEnvironment) : String
+        }
+
+        class PumlDCA implements IPumlDiagram {
+            + <<Create>> PumlDCA()
             getScheme(environment : DocletEnvironment) : String
         }
-        class PumlDCA {
-            getScheme(environment : DocletEnvironment) : String
-        }
-        class PumlDCC {
-            getScheme(environment : DocletEnvironment) : String
+
+        class PumlDCC implements IPumlDiagram {
+            + <<Create>> PumlDCC()
+            + getScheme(environment : DocletEnvironment) : String
         }
     }
 
+
     package doclets {
+
         package options {
-            class OutOption {
+
+            class OutOption implements jdk.javadoc.doclet.Doclet_Option {
                 NameFile : String
+                + <<Create>> OutOption()
                 getArgumentCount() : Integer
                 getDescription() : String
                 getFileName() : String
+                getKind() : String
                 getNames() : String[*]
                 getParameters() : String
                 process(String, String[*]) : boolean
             }
-            class PathOption{
-            NameFile : String
+
+            class PathOption implements jdk.javadoc.doclet.Doclet_Option {
+                path : String
+                + <<Create>> PathOption()
+                getPath() : Integer
                 getArgumentCount() : Integer
                 getDescription() : String
-                getFileName() : String
+                getKind() : String
                 getNames() : String[*]
                 getParameters() : String
                 process(String, String[*]) : boolean
             }
-            class TypeOption{
-                NameFile : String
+
+            class TypeOption implements jdk.javadoc.doclet.Doclet_Option {
+                type : String
+                + <<Create>> TypeOption()
+                getType() : String
                 getArgumentCount() : Integer
                 getDescription() : String
-                getFileName() : String
                 getNames() : String[*]
                 getParameters() : String
                 process(String, String[*]) : boolean
             }
         }
-        class FirstDoclet{
-            dempElement(element : Element)
-            getName(element : Element)
-            getSupportedOptions() : Options[*]
-            getSupportedSourceVersion() : SourceVersion
-            init(locale : Locale, reporter : Reporter)
-            run(environment : DocletEnvironment) : boolean
+
+        class FirstDoclet implements jdk.javadoc.doclet.Doclet {
+            + <<Create>> FirstDoclet()
+            + getName(element : Element)
+            + getSupportedOptions() : Options[*]
+            + getSupportedSourceVersion() : SourceVersion
+            + init(locale : Locale, reporter : Reporter)
+            + run(environment : DocletEnvironment) : boolean
         }
-        class PumlDoclet{
+
+        class PumlDoclet implements jdk.javadoc.doclet.Doclet {
            - oOout : OutOption
            - oPath : OutPath
            - oType : TypeOption
+           + + <<Create>> PumlDoclet()
            + getName(element : Element)
            + getSupportedOptions() : Options[*]
            + getSupportedSourceVersion() : SourceVersion
            + init(locale : Locale, reporter : Reporter)
            + run(environment : DocletEnvironment) : boolean
+           - generateDCA(environment : DocletEnvironment)
+           - generateDCC(environment : DocletEnvironment)
         }
     }
+
+
     package generators {
             class Java2Puml {
                 + main(String[*])
             }
     }
+
+
     package translators {
+
         package pumlMarker {
+
             interface IPumlMarker{
-               options_strictUml() : String
-               umlStart() : String
-               umlEnd() : String
+               +options_strictUml() : String
+               +umlStart() : String
+               +umlEnd() : String
             }
-            class Marker{
+
+            class Marker implements IPumlMarker {
                 + <<Create>> Marker()
+                + options_strictUml() : String
                 + umlStart() : String
+                + umlEnd() : String
             }
         }
+
+
         package pumlObjects {
+
             interface IPumlObject{
                 + getName(element : Element) : String
                 + getContent(element : Element) : String
@@ -96,11 +136,23 @@ package pumlFromJava {
                 + open()
                 + close()
             }
-            interface IPumlClass{
+
+            abstract APumlObject implements IPumlObject{
+                + {abstract} getName(element : Element) : String
+                + {abstract} getContent(element : Element) : String
+                + getLineBreaker() : String
+                + getTranslation() : String
+                + is_primitive(typeMirror : TypeMirror) : boolean
+                + open()
+                + close()
+            }
+
+            abstract APumlClass extends APumlObject {
                  + getName(element : Element) : String
                  + getContent(element : Element) : String
             }
-            class PumlClass{
+
+            class PumlClass extends APumlClass {
                 - visibilityViewer : VisibilityViewer
                 + <<Create>> PumlClass()
                 + getName(element : Element) : String
@@ -108,22 +160,68 @@ package pumlFromJava {
                 - translate_field(element : Element) : String
                 - translate_method(element : Element) : String
             }
-            class PumlEnum{
+
+            class PumlEnum extends APumlObject {
                 + <<Create>> PumlEnum()
                 + getName(element : Element) : String
                 + getContent(element : Element) : String
-            } /' koll '/
-            class PumlInterface
-            class PumlNonVisibleClass
-            class PumlPackage
+            }
+
+            class PumlInterface extends APumlObject {
+                 + <<Create>> PumlInterface()
+                 + getName(element : Element) : String
+                 + getContent(element : Element) : String
+            }
+
+            class PumlNonVisibleClass extends APumlClass{
+                + <<Create>> PumlInterface()
+                + getName(element : Element) : String
+                + getContent(element : Element) : String
+                - translate_field(element : Element) : String
+                - translate_method(element : Element) : String
+            }
+
+            class PumlPackage extends APumlObject {
+                + <<Create>> PumlPackage()
+                + getName(element : Element) : String
+                + getContent(element : Element) : String
+            }
         }
+
+
         package visibilityViewer {
-            class VisibilityViewer
+
+            interface IVisibilityViewer{
+                + getVisibility(annotationMirror : AnnotationMirror) : String
+            }
+
+            class VisibilityViewer implements IVisibilityViewer {
+                + getVisibility(annotationMirror : AnnotationMirror) : String
+            }
         }
     }
+
+
     package writers {
-        interface IWriter
-        class Writer
+
+        interface IWriter{
+            + open()
+            + write(text : String)
+            + close()
+        }
+
+        class Write implements IWriter{
+            - filepath : String
+            - pw : PrintWriter
+            + <<Create>> Writer(filename : String)
+            + <<Create>> Writer(filepath : String, filename : String)
+            + open()
+            + write(text : String)
+            + close()
+            - createFile()
+            - createDirectoriesPath()
+            - links()
+        }
     }
 }
 

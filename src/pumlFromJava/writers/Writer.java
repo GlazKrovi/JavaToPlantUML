@@ -10,7 +10,7 @@ public class Writer implements IWriter {
 
     public Writer(String filepath, String filename) {
         this.filepath = filepath + filename;
-        create_directories(filepath); // create nonexistent parents directories
+        createDirectoriesPath(filepath); // create nonexistent parents directories
     }
 
     public Writer(String filename) {
@@ -74,7 +74,7 @@ public class Writer implements IWriter {
      *
      * @param path the path to the file
      */
-    private void create_directories(String path) {
+    private void createDirectoriesPath(String path) {
         File directories = new File(path);
         directories.mkdirs();
     }

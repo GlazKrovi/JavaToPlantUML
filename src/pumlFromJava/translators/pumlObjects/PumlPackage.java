@@ -3,13 +3,10 @@ package pumlFromJava.translators.pumlObjects;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public class PumlPackage implements IPumlObject {
-    /**
-     * Translate java package into his Puml equivalent
-     *
-     * @param element a package
-     * @return Returns string of type "file-type name" for Uml
-     */
+public class PumlPackage extends APumlObject {
+    public PumlPackage() {
+    }
+
     @Override
     public String getName(Element element) {
         StringBuilder res = new StringBuilder();

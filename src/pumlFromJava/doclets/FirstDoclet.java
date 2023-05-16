@@ -26,6 +26,9 @@ import java.util.Set;
  * selected elements.
  */
 public class FirstDoclet implements Doclet {
+    public FirstDoclet() {
+    }
+
     @Override
     public void init(Locale locale, Reporter reporter) {  }
 
