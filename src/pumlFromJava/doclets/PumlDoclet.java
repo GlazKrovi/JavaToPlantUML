@@ -76,16 +76,11 @@ public class PumlDoclet implements Doclet {
         PumlDCA diagram = new PumlDCA();
         Writer writer;
         // options
-        if (oOut != null    // specific path and file name
-                && oOut.getFileName() != null
-                && !oOut.getNames().equals("")
-                && oPath != null
-                && oPath.getNames() != null
-                && !oPath.getNames().equals("")) {
+        // specific path and file name
+        // just specific file name
+        if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().equals("")) {
             writer = new Writer(oPath.getPath(), "DCA_" + oOut.getFileName());
-        } else if (oOut != null   // just specific file name
-                && oOut.getFileName() != null
-                && !oOut.getNames().equals("")) {
+        } else if (oOut.getFileName() != null && !oOut.getNames().isEmpty()) {
             writer = new Writer("DCA_" + oOut.getFileName());
         } else {
             writer = new Writer("DCA_gen.puml");
@@ -104,16 +99,11 @@ public class PumlDoclet implements Doclet {
         PumlDCC diagram = new PumlDCC();
         Writer writer;
         // options
-        if (oOut != null    // specific path and file name
-                && oOut.getFileName() != null
-                && !oOut.getNames().equals("")
-                && oPath != null
-                && oPath.getNames() != null
-                && !oPath.getNames().equals("")) {
+        // specific path and file name
+        // just specific file name
+        if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().isEmpty()) {
             writer = new Writer(oPath.getPath(), "DCC_" + oOut.getFileName());
-        } else if (oOut != null   // just specific file name
-                && oOut.getFileName() != null
-                && !oOut.getNames().equals("")) {
+        } else if (oOut.getFileName() != null && !oOut.getNames().isEmpty()) {
             writer = new Writer("DCC_" + oOut.getFileName());
         } else {
             writer = new Writer("DCC_gen.puml");
