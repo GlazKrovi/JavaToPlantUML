@@ -41,7 +41,7 @@ interface Name <<interface>>{
 +hashCode() : int
 }
 
-interface ExecutableElement <<interface>> implements Element{
+interface ExecutableElement <<interface>> extends Parameterizable{
 +asType() : TypeMirror
 +getDefaultValue() : AnnotationValue
 +getEnclosingElement() : Element
@@ -55,7 +55,7 @@ interface ExecutableElement <<interface>> implements Element{
 +isVarArgs() : boolean
 }
 
-interface PackageElement <<interface>> implements Element{
+interface PackageElement <<interface>> extends QualifiedNameable{
 +asType() : TypeMirror
 +getEnclosedElements() : List<? extends Element>
 +getEnclosingElement() : Element
@@ -64,25 +64,62 @@ interface PackageElement <<interface>> implements Element{
 +isUnnamed() : boolean
 }
 
-interface VariableElement <<interface>> implements Element{
+interface VariableElement <<interface>> extends Element{
 +asType() : TypeMirror
 +getConstantValue() : Object
 +getEnclosingElement() : Element
 +getSimpleName() : Name
 }
 
-interface ModuleElement <<interface>> implements Element{}
+interface ModuleElement <<interface>> extends Element{}
 
-interface Parameterizable <<interface>> implements Element{}
-interface QualifiedNameable <<interface>> implements Element{}
-interface RecordComponentElement <<interface>> implements Element{}
-interface TypeElement <<interface>> implements Element{}
-interface TypeParameterElement <<interface>> implements Element{}
+interface Parameterizable <<interface>> extends Element{
+getTypeParameters() : List<? extends TypeParameterElement>
+}
+
+interface QualifiedNameable <<interface>> extends Element{
+getQualifiedName() : Name
+}
+
+interface RecordComponentElement <<interface>> extends Element{}
+
+interface TypeElement <<interface>> extends QualifiedNameable, Parameterizable{
++asType() : TypeMirror
++getEnclosedElements() : List<? extends Element>
++getEnclosingElement() : Element
++getInterfaces() : List<? extends TypeMirror>
++getNestingKind() : NestingKind
++getPermittedSubclasses() : default List<? extends TypeMirror>
++getQualifiedName() : Name
++getRecordComponents() : default List<? extends RecordComponentElement>
++getSimpleName() : Name
++getSuperclass() : TypeMirror
++getTypeParameters() : List<? extends TypeParameterElement>
+}
+
+enum NestingKind <<enum>> {
+ANONYMOUS
+LOCAL
+MEMBER
+TOP_LEVEL
+}
+
+interface TypeParameterElement <<interface>> extends Element{
++asType() : TypeMirror
++getBounds() : List<? extends TypeMirror>
++getEnclosingElement() : Element
++getGenericElement() : Element
+}
 
 Element .> ElementKind : --use++
 Element .> Name : --use++
-Element -l[hidden]> Name : --use++
+TypeElement .> NestingKind : --use++
+ExecutableElement .> VariableElement : --use++
+ExecutableElement .> TypeParameterElement : --use++
+QualifiedNameable .> Name : --use++
+Parameterizable .> TypeParameterElement : --use++
 }
+
 
 package javax.lang.model.type{
 
