@@ -8,6 +8,9 @@ public class OutOption implements Doclet.Option {
 
     private String NameFile;
 
+    public OutOption() {
+    }
+
     @Override
     public int getArgumentCount() {
         return 1;

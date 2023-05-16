@@ -1,14 +1,12 @@
 package pumlFromJava.translators.pumlObjects;
 
-import pumlFromJava.translators.visibilityViewer.VisibilityViewer;
-
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
 /**
  * Represents a Puml translator for java enumeration
  */
-public class PumlEnum implements IPumlObject {
+public class PumlEnum extends APumlObject {
 
     public PumlEnum() {
     }

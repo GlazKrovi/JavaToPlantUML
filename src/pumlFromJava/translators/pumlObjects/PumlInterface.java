@@ -6,7 +6,7 @@ import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public class PumlInterface implements IPumlObject {
+public class PumlInterface extends APumlObject {
 
     public PumlInterface() {
     }
