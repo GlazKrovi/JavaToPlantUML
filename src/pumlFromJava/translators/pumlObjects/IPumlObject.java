@@ -4,6 +4,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
+import java.util.List;
 
 /**
  * Translator for any java package, class, enum or interface
@@ -33,30 +34,9 @@ public interface IPumlObject {
      * @param element an element like class, enum or interface
      * @return Puml equivalents for smt extends/inherit Asmt/Ismt
      */
-    default String getInheritance(Type element){ // Todo
-        String res = "";
-        // 'enclosed' into an interface
-        if(element.enclo().getKind().equals(ElementKind.INTERFACE)){
-            // is an interface who extends another interface?
-            if (element.getKind().equals(ElementKind.INTERFACE)){
-                res = " extends ";
-            }
-            // it's smt which implements her
-            else{
-                res = " implements ";
-            }
-        }
-        // 'enclosed' into an clas
-        else if (element.getEnclosingElement().getKind().equals(ElementKind.CLASS)){
-            res = " extends ";
-        }
-
-        // if smt translated
-        if (!res.isEmpty()){
-            // get the name of what's 'enclosed' the element
-            res += element.getEnclosingElement().getSimpleName();
-        }
-        return res;
+    default String getInheritance(Element element) {
+        PumlInheritance inheritance = new PumlInheritance();
+        return inheritance.get(element);
     }
 
     /**

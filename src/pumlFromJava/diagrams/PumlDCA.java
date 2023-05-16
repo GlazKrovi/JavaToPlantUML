@@ -6,6 +6,9 @@ import pumlFromJava.translators.pumlObjects.*;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
+import java.lang.reflect.Type;
 
 public class PumlDCA implements IPumlDiagram {
     public PumlDCA() {
