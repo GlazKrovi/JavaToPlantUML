@@ -17,7 +17,6 @@ public class PumlDCA implements IPumlDiagram {
      * @param environment a java environment
      * @return Returns string representing a .puml file's content, for a ACD
      */
-    @Override
     public String getScheme(DocletEnvironment environment) {
         Marker marker = new Marker();
         StringBuilder res = new StringBuilder();
@@ -41,6 +40,7 @@ public class PumlDCA implements IPumlDiagram {
                 packageOpened = true;
             } else if (elm.getKind() == ElementKind.CLASS) {
                 res.append(pumlNonVisibleClass.getName(elm));
+                res.append(pumlNonVisibleClass.getInheritance(elm));
                 res.append(pumlNonVisibleClass.open());
                 res.append(pumlpackage.getLineBreaker());
                 res.append(pumlNonVisibleClass.getFields(elm));

@@ -14,7 +14,7 @@ package pumlFromJava {
     package diagrams {
 
         interface IPumlDiagram {
-            getScheme(environment : DocletEnvironment) : String
+            + getScheme(environment : DocletEnvironment) : String
         }
 
         class PumlBasis implements IPumlDiagram { /' week 1 '/
@@ -24,7 +24,7 @@ package pumlFromJava {
 
         class PumlDCA implements IPumlDiagram {
             + <<Create>> PumlDCA()
-            getScheme(environment : DocletEnvironment) : String
+            + getScheme(environment : DocletEnvironment) : String
         }
 
         class PumlDCC implements IPumlDiagram {
@@ -39,38 +39,38 @@ package pumlFromJava {
         package options {
 
             class OutOption implements jdk.javadoc.doclet.Doclet_Option {
-                NameFile : String
+                - NameFile : String
                 + <<Create>> OutOption()
-                getArgumentCount() : Integer
-                getDescription() : String
-                getFileName() : String
-                getKind() : String
-                getNames() : String[*]
-                getParameters() : String
-                process(String, String[*]) : boolean
+                + getArgumentCount() : Integer
+                + getDescription() : String
+                + getFileName() : String
+                + getKind() : String
+                + getNames() : String[*]
+                + getParameters() : String
+                + process(String, String[*]) : boolean
             }
 
             class PathOption implements jdk.javadoc.doclet.Doclet_Option {
-                path : String
+                - path : String
                 + <<Create>> PathOption()
-                getPath() : Integer
-                getArgumentCount() : Integer
-                getDescription() : String
-                getKind() : String
-                getNames() : String[*]
-                getParameters() : String
-                process(String, String[*]) : boolean
+                + getPath() : Integer
+                + getArgumentCount() : Integer
+                + getDescription() : String
+                + getKind() : String
+                + getNames() : String[*]
+                + getParameters() : String
+                + process(String, String[*]) : boolean
             }
 
             class TypeOption implements jdk.javadoc.doclet.Doclet_Option {
-                type : String
+                - type : String
                 + <<Create>> TypeOption()
-                getType() : String
-                getArgumentCount() : Integer
-                getDescription() : String
-                getNames() : String[*]
-                getParameters() : String
-                process(String, String[*]) : boolean
+                + getType() : String
+                + getArgumentCount() : Integer
+                + getDescription() : String
+                + getNames() : String[*]
+                + getParameters() : String
+                + process(String, String[*]) : boolean
             }
         }
 
@@ -87,7 +87,7 @@ package pumlFromJava {
            - oOout : OutOption
            - oPath : OutPath
            - oType : TypeOption
-           + + <<Create>> PumlDoclet()
+           + <<Create>> PumlDoclet()
            + getName(element : Element)
            + getSupportedOptions() : Options[*]
            + getSupportedSourceVersion() : SourceVersion
@@ -224,6 +224,10 @@ package pumlFromJava {
         }
     }
 }
+
+FirstDoclet -- PumlBasis : <<Use>>
+PumlDoclet -- PumlDCA : <<Use>>
+PumlDoclet -- PumlDCC : <<Use>>
 
 @enduml
 

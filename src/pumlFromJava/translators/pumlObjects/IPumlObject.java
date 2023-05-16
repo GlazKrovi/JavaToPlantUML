@@ -1,6 +1,8 @@
 package pumlFromJava.translators.pumlObjects;
 
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
 /**
@@ -20,10 +22,42 @@ public interface IPumlObject {
     /**
      * Translate what is inside the Element (like attributes, constants or method)
      *
-     * @param element an enclosed element from class, enum or interface
+     * @param element an element like class, enum or interface
      * @return Puml equivalents of each attribute, constants or method from specified Element
      */
     String getContent(Element element);
+
+    /**
+     * Translates what the element inherits from (implementation or extension)
+     *
+     * @param element an element like class, enum or interface
+     * @return Puml equivalents for smt extends/inherit Asmt/Ismt
+     */
+    default String getInheritance(Type element){ // Todo
+        String res = "";
+        // 'enclosed' into an interface
+        if(element.enclo().getKind().equals(ElementKind.INTERFACE)){
+            // is an interface who extends another interface?
+            if (element.getKind().equals(ElementKind.INTERFACE)){
+                res = " extends ";
+            }
+            // it's smt which implements her
+            else{
+                res = " implements ";
+            }
+        }
+        // 'enclosed' into an clas
+        else if (element.getEnclosingElement().getKind().equals(ElementKind.CLASS)){
+            res = " extends ";
+        }
+
+        // if smt translated
+        if (!res.isEmpty()){
+            // get the name of what's 'enclosed' the element
+            res += element.getEnclosingElement().getSimpleName();
+        }
+        return res;
+    }
 
     /**
      * Translate the name (like class, enum or interface)
@@ -32,14 +66,8 @@ public interface IPumlObject {
      * @param element an enclosed element from class, enum or interface
      * @return Puml equivalents of an entire object (like class fruit { -field, +method() }
      */
-    default String getTranslation(Element element) {
-        return getName(element) + // name
-                open() + // {
-                getLineBreaker() +
-                getContent(element) + // -field, +method
-                close() + // }
-                getLineBreaker();
-    }
+    String getTranslation(Element element);
+
 
     /**
      * Gives an open bracket to open the element description

@@ -1,6 +1,5 @@
 package pumlFromJava.doclets;
 
-
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
@@ -11,7 +10,6 @@ import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.translators.pumlMarker.Marker;
 import pumlFromJava.writers.Writer;
-
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import java.util.Locale;

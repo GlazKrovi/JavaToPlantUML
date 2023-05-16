@@ -12,4 +12,13 @@ public abstract class APumlObject implements IPumlObject {
     public abstract String getName(Element element);
 
     public abstract String getContent(Element element);
+    public String getTranslation(Element element){
+        return getName(element) + // name
+                getInheritance(element) + // implements/extends smt
+                open() + // {
+                getLineBreaker() +
+                getContent(element) + // -field, +method
+                close() + // }
+                getLineBreaker();
+    }
 }
