@@ -1,8 +1,6 @@
 package pumlFromJava.translators.pumlObjects;
 
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.*;
 
 /**
  * Represents a Puml translator for java class
@@ -30,14 +28,15 @@ public class PumlClass extends PumlClasses {
         return res.toString();
     }
 
-    protected String translate_methods(Element enclosedElement) {
+    protected String translate_methods(Element enclosedElement) { // TODO
         StringBuilder res = new StringBuilder();
+        PumlMethod pumlMethod = new PumlMethod();
         if (enclosedElement.getKind() == ElementKind.METHOD) {
             for (AnnotationMirror annotation : enclosedElement.getAnnotationMirrors()) {
                 res.append(visibilityViewer.getVisibility(annotation));
             }
-            res.append(enclosedElement.getSimpleName());
-            res.append("()");
+            // translate current method
+            res.append(pumlMethod.getTranslation(enclosedElement));
         }
         return res.toString();
     }

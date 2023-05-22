@@ -1,1 +1,170 @@
+@startuml
+!theme reddress-darkgreen
+skinparam style strictuml
+
+package western {
+class Barman extends western.Personnage {
+nomDuBar
+getPseudo() : String
+dire(texte : String)
+sePresenter()
+servir(client : Personnage)
+
+}
+class Boisson {
+of(nom : Stringgenre : Genre, ) : Boisson
+getNom() : String
+getGenre() : Genre
+getNomAvecArticleIndefini() : String
+getNomAvecArticlePartitif() : String
+getNomAvecArticleDefini() : String
+getNomAvecPreposition(preposition : String) : String
+
+}
+class Brigand extends western.Personnage implements western.HorsLaLoi {
+LOOK_PAR_DEFAUT
+look
+recompense
+estLibre
+getLook() : String
+getRecompense() : int
+estLibre() : boolean
+kidnapper(dame : Dame)
+getCaptives() : Dame>
+seFaireCapturer(cowBoy : Cowboy)
+seFaireTirerDessus(cowBoy : Cowboy)
+getPseudo() : String
+sePresenter()
+getBoissonParDefaut() : Boisson
+setBoissonParDefaut(boisson : Boisson)
+
+}
+class Cowboy extends western.Personnage {
+gains
+getPseudo() : String
+liberer(dame : Dame)
+liberer(captives : Dame>)
+capturer(horsLaLoi : HorsLaLoi)
+tirerSur(brigand : HorsLaLoi)
+sePresenter()
+getBoissonParDefaut() : Boisson
+setBoissonParDefaut(boisson : Boisson)
+
+}
+class Dame extends western.Personnage {
+estLibre
+getPseudo() : String
+seFaireKidnapper(horsLaLoi : HorsLaLoi)
+seFaireLiberer(cowBoy : Cowboy)
+estLibre() : boolean
+sePresenter()
+getBoissonParDefaut() : Boisson
+setBoissonParDefaut(boisson : Boisson)
+getRavisseur() : HorsLaLoi
+
+}
+enum Genre <<enumeration>> {
+FEMININ
+MASCULIN
+
+}
+class Histoire4 {
+main(args : String[])
+
+}
+class Histoire5 {
+main(args : String[])
+
+}
+interface HorsLaLoi <<interface>> {
+estLibre()
+getRecompense()
+kidnapper()
+seFaireCapturer()
+seFaireTirerDessus()
+getLook()
+getCaptives()
+
+}
+class Narrateur extends western.Personnage {
+dire(texte : String)
+boire(boisson : Boisson)
+boire()
+getPseudo() : String
+
+}
+interface Nommable <<interface>> {
+getNom()
+getPseudo()
+
+}
+class Personnage implements western.Nommable {
+nom
+dire(texte : String)
+sePresenter()
+boire(boisson : Boisson)
+boire()
+getNom() : String
+getBoisson() : Boisson
+getPseudos(personnages : Nommable>) : String
+getBoissonParDefaut() : Boisson
+
+}
+class Ripou extends western.Cowboy implements western.HorsLaLoi {
+getLook() : String
+estLibre() : boolean
+getRecompense() : int
+kidnapper(dame : Dame)
+getCaptives() : Dame>
+seFaireCapturer(cowBoy : Cowboy)
+seFaireTirerDessus(cowBoy : Cowboy)
+getPseudo() : String
+sePresenter()
+liberer(dame : Dame)
+
+}
+class Sherif extends western.Cowboy {
+getNom() : String
+getWanted() : HorsLaLoi>
+sePresenter()
+capturer(horsLaLoi : HorsLaLoi)
+rechercher(horsLaLoi : HorsLaLoi)
+isWanted(horsLaLoi : HorsLaLoi) : boolean
+
+}
+class Substantif {
+nom
+getNom() : String
+getGenre() : Genre
+toString() : String
+isVowel(c : char) : boolean
+startsWithVowel(s : String) : boolean
+getArticleIndefini() : String
+avecArticleIndefini() : String
+getArticleDefini(genre : Genre) : String
+getArticleDefini() : String
+avecArticleDefini() : String
+faireElision(article : String) : String
+elision() : boolean
+getArticlePartitif() : String
+avecArticlePartitif() : String
+avecElision(article : String) : String
+avecPreposition(preposition : String) : String
+
+}
+western.Boisson -- Barman
+western.Substantif -- Boisson
+western.Boisson -- Boisson
+western.Cowboy -- Brigand
+western.Boisson -- Brigand
+western.Boisson -- Cowboy
+western.Cowboy -- Dame
+western.HorsLaLoi -- Dame
+western.Boisson -- Dame
+western.Boisson -- Personnage
+western.Boisson -- Personnage
+western.Brigand -- Ripou
+western.Genre -- Substantif
+
+@enduml
 

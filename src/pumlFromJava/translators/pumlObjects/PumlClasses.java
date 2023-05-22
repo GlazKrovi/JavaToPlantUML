@@ -1,6 +1,9 @@
 package pumlFromJava.translators.pumlObjects;
 
-import javax.lang.model.element.*;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
@@ -18,6 +21,17 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
             res = "class " + element.getSimpleName().toString();
         }
         return res;
+    }
+
+    @Override
+    public String getTranslation(Element element) {
+        return getName(element) + // name
+                getInheritance(element) + // implements/extends smt
+                open() + // {
+                getLineBreaker() +
+                getContent(element) + // -field, +method
+                close() + // }
+                getLineBreaker();
     }
 
     public String getInheritance(Element element) {
@@ -94,21 +108,6 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
      * @return Returns string like Hamburger -- Steak 'or' Hamburger -- MealType.FOOD
      */
     protected String getMethodsUsage(Element element) { // todo
-        /*
-        for (Element enclosedElement : element.getEnclosedElements()) {
-            // get the class' methods
-            if (enclosedElement.getKind() == ElementKind.METHOD) {
-                ExecutableElement executableElement = (ExecutableElement) enclosedElement;
-                System.out.println(enclosedElement.getSimpleName()); // test
-                // get the types of parameters
-                for (TypeParameterElement typeParameter : executableElement.getTypeParameters()) {
-                    System.out.println(typeParameter.getGenericElement());
-                }
-            }
-        }
-        return "";
-
-         */
         return "";
     }
 
@@ -126,7 +125,7 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
                 if (enclosedElement.asType().getKind() == TypeKind.DECLARED &&
                         !isPrimitiveType(enclosedElement.asType()) &&
                         isNotFromJava(enclosedElement.asType())) {
-                    // get the name of the class of enclosedElement
+                    // get the name of the class or interface of enclosedElement
                     String className = enclosedElement.asType().toString();
                     // add the class name
                     res.append(className);

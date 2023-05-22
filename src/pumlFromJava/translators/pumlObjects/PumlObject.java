@@ -14,7 +14,6 @@ public abstract class PumlObject implements PumlObjectSpecies {
 
     public String getTranslation(Element element) {
         return getName(element) + // name
-                // getInheritance(element) + // implements/extends smt
                 open() + // {
                 getLineBreaker() +
                 getContent(element) + // -field, +method
