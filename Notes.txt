@@ -1,0 +1,3 @@
+Modifier l'interface IpumlObject pour garder que les fonctions nécessaire
+Modifier les publiques 'inutile' pour le reste du code -- en les passant en protected -- de l'abstarct
+PumlObject

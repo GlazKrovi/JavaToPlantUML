@@ -3,7 +3,7 @@ package pumlFromJava.translators.pumlObjects;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public class PumlNonVisibleClass extends APumlClass {
+public class PumlNonVisibleClass extends PumlClasses {
     public PumlNonVisibleClass() {
     }
 
@@ -37,8 +37,8 @@ public class PumlNonVisibleClass extends APumlClass {
             // search inside
             for (Element enclosedElement : element.getEnclosedElements()) {
                 if (enclosedElement.getKind() == ElementKind.FIELD
-                        && is_primitive(enclosedElement.asType())) {
-                    res.append(translate_field(enclosedElement));
+                        && isPrimitiveType(enclosedElement.asType())) {
+                    res.append(this.translate_fields(enclosedElement));
                     res.append(getLineBreaker());
                 }
             }
@@ -59,7 +59,7 @@ public class PumlNonVisibleClass extends APumlClass {
             // search inside
             for (Element enclosedElement : element.getEnclosedElements()) {
                 if (enclosedElement.getKind() == ElementKind.METHOD) {
-                    res.append(translate_method(enclosedElement));
+                    res.append(translate_methods(enclosedElement));
                     res.append(getLineBreaker());
                 }
             }
@@ -74,7 +74,7 @@ public class PumlNonVisibleClass extends APumlClass {
      * @param enclosedElement an enclosed element from class, enum or interface
      * @return Returns translated string
      */
-    private String translate_field(Element enclosedElement) {
+    protected String translate_fields(Element enclosedElement) {
         return enclosedElement.getSimpleName().toString();
     }
 
@@ -85,7 +85,7 @@ public class PumlNonVisibleClass extends APumlClass {
      * @param enclosedElement an enclosed element from class, enum or interface
      * @return Returns translated string
      */
-    private String translate_method(Element enclosedElement) {
+    protected String translate_methods(Element enclosedElement) {
         return enclosedElement.getSimpleName() + "()";
     }
 }

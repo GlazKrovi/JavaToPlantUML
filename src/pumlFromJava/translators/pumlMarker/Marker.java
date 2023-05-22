@@ -11,5 +11,12 @@ public class Marker implements IPumlMarker {
     public String umlStart() {
         return ("@startuml\n!theme reddress-darkgreen\n");
     }
+
+    /**
+     * Returns 'skinparam style strictuml'
+     */
+    public String option_strictUml() {
+        return "skinparam style strictuml\n";
+    }
 }
 

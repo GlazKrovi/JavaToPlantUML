@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class Writer implements IWriter {
+public class Writer implements WriterSpecies {
     private final String filepath;
     private PrintWriter pw;
 
@@ -17,29 +17,16 @@ public class Writer implements IWriter {
         this.filepath = filename;
     }
 
-    /**
-     * Opens a file to write to (and create if it does not exist).
-     * If the file is not closed, the changes will be left in a buffer,
-     * and the file will not be edited
-     */
     public void open() {
         createFile();
         links();
     }
 
-    /**
-     * Closes the current file (necessary to open another one!)
-     */
     public void close() {
         // close file
         if (pw != null) pw.close();
     }
 
-    /**
-     * Write the specified text into the opened file
-     *
-     * @param text any text
-     */
     public void write(String text) {
         if (pw != null) {
             pw.println(text);

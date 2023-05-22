@@ -2,13 +2,13 @@ package pumlFromJava.diagrams;
 
 import jdk.javadoc.doclet.DocletEnvironment;
 import pumlFromJava.translators.pumlMarker.Marker;
-import pumlFromJava.translators.pumlObjects.*;
+import pumlFromJava.translators.pumlObjects.PumlEnum;
+import pumlFromJava.translators.pumlObjects.PumlInterface;
+import pumlFromJava.translators.pumlObjects.PumlNonVisibleClass;
+import pumlFromJava.translators.pumlObjects.PumlPackage;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
-import java.lang.reflect.Type;
 
 public class PumlDCA implements IPumlDiagram {
     public PumlDCA() {
@@ -18,7 +18,7 @@ public class PumlDCA implements IPumlDiagram {
      * Design a full Puml Analyze Class Diagram scheme
      *
      * @param environment a java environment
-     * @return Returns string representing a .puml file's content, for a ACD
+     * @return Returns string representing a .puml file's content, for an ACD
      */
     public String getScheme(DocletEnvironment environment) {
         Marker marker = new Marker();
@@ -45,15 +45,22 @@ public class PumlDCA implements IPumlDiagram {
                 res.append(pumlNonVisibleClass.getName(elm));
                 res.append(pumlNonVisibleClass.getInheritance(elm));
                 res.append(pumlNonVisibleClass.open());
-                res.append(pumlpackage.getLineBreaker());
+                res.append(pumlNonVisibleClass.getLineBreaker());
                 res.append(pumlNonVisibleClass.getFields(elm));
                 res.append(pumlNonVisibleClass.close());
-                res.append(pumlpackage.getLineBreaker());
+                res.append(pumlNonVisibleClass.getLineBreaker());
             } else if (elm.getKind() == ElementKind.ENUM) {
                 res.append(pumlenum.getTranslation(elm));
             } else if (elm.getKind() == ElementKind.INTERFACE) {
                 res.append(pumlinterface.getName(elm));
-                res.append(pumlpackage.getLineBreaker());
+                res.append(pumlinterface.getInheritance(elm));
+                res.append(pumlinterface.getLineBreaker());
+            }
+        }
+        // get the "defined use" relations (class stored in global variables)
+        for (Element elm : environment.getIncludedElements()) {
+            if (elm.getKind() == ElementKind.CLASS) {
+                res.append(pumlNonVisibleClass.getUses(elm));
             }
         }
         // close package if any is opened

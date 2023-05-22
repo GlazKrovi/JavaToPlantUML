@@ -9,13 +9,6 @@ public interface IPumlMarker {
     }
 
     /**
-     * Returns 'skinparam style strictuml'
-     */
-    default String option_strictUml() {
-        return "skinparam style strictuml\n";
-    }
-
-    /**
      * Returns '@enduml'
      */
     default String umlEnd() {
