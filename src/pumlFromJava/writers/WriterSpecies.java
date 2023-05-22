@@ -1,6 +1,6 @@
 package pumlFromJava.writers;
 
-public interface IWriter {
+public interface WriterSpecies {
     /**
      * Opens a file to write to (and create if it does not exist).
      * If the file is not closed, the changes will be left in a buffer,

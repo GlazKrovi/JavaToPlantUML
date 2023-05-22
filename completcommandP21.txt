@@ -1,12 +1,1 @@
--private
--sourcepath
-src
--doclet
-pumlFromJava.doclets.PumlDoclet
--d
-generates/pumls/
--g
-both
--out
-ox.puml
-western
+-private -sourcepath src -doclet pumlFromJava.doclets.PumlDoclet -d generates/pumls/ -g both -out exemple.puml western

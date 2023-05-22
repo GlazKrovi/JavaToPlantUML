@@ -4,12 +4,15 @@ skinparam style strictuml
 
 package western {
 class Barman extends western.Personnage {
+nomDuBar
 
 }
 class Boisson {
 
 }
-class Brigand extends western.Personnage {
+class Brigand extends western.Personnage implements western.HorsLaLoi {
+LOOK_PAR_DEFAUT
+look
 recompense
 estLibre
 
@@ -33,23 +36,38 @@ class Histoire4 {
 class Histoire5 {
 
 }
-interface HorsLaLoi <<interface>>
+interface HorsLaLoi <<interface>> extends western.Nommable
 class Narrateur extends western.Personnage {
 
 }
 interface Nommable <<interface>>
-class Personnage {
+class Personnage implements western.Nommable {
+nom
 
 }
-class Ripou extends western.Cowboy {
+class Ripou extends western.Cowboy implements western.HorsLaLoi {
 
 }
 class Sherif extends western.Cowboy {
 
 }
 class Substantif {
+nom
 
 }
+western.Boisson -- Barman
+western.Substantif -- Boisson
+western.Boisson -- Boisson
+western.Cowboy -- Brigand
+western.Boisson -- Brigand
+western.Boisson -- Cowboy
+western.Cowboy -- Dame
+western.HorsLaLoi -- Dame
+western.Boisson -- Dame
+western.Boisson -- Personnage
+western.Boisson -- Personnage
+western.Brigand -- Ripou
+western.Genre -- Substantif
 
 @enduml
 

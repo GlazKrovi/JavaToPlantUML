@@ -1,12 +1,7 @@
 @startuml
 !theme reddress-darkgreen
 
-package jdk.javadoc.doclet {
-    interface Doclet
-    interface Doclet_Option
-}
-
-
+frame "Class Conception Diagram of our API"{
 
 package pumlFromJava {
 
@@ -111,7 +106,6 @@ package pumlFromJava {
         package pumlMarker {
 
             interface IPumlMarker{
-               +options_strictUml() : String
                +umlStart() : String
                +umlEnd() : String
             }
@@ -127,72 +121,75 @@ package pumlFromJava {
 
         package pumlObjects {
 
-            interface IPumlObject{
+            interface PumlObjectSpecies{
                 + getName(element : Element) : String
                 + getContent(element : Element) : String
-                + getLineBreaker() : String
-                + getTranslation() : String
-                + is_primitive(typeMirror : TypeMirror) : boolean
+                + getTranslation(element : Element) : String
                 + open()
                 + close()
             }
 
-            abstract APumlObject implements IPumlObject{
+            interface InheritableObject{
+                + getInheritance(element : Element) : String
+            }
+
+            abstract PumlObject implements PumlObjectSpecies{
                 + {abstract} getName(element : Element) : String
                 + {abstract} getContent(element : Element) : String
-                + getLineBreaker() : String
-                + getTranslation() : String
-                + is_primitive(typeMirror : TypeMirror) : boolean
+                + {abstract} getTranslation(element : Element) : String
                 + open()
                 + close()
+                + getLineBreaker() : String
+                # isNotFromJava(typeMirror : TypeMirror) : Boolean
+                # isPrimitiveType(typeMirror : TypeMirror) : boolean
             }
 
-            abstract APumlClass extends APumlObject {
-                 + getName(element : Element) : String
-                 + getContent(element : Element) : String
+            abstract PumlClasses extends PumlObject implements InheritableObject {
+                 + {abstract} ^getContent(element : Element) : String
+                 + ^getName(element : Element) : String
+                 + ^getTranslation(element : Element) : String
+                 + getInheritance(element : Element) : String
+                 + getUses(element : Element) : String
+                 # {abstract} translate_fields(element : Element) : String
+                 # {abstract} translate_methods(element : Element) : String
+                 # getExtends(typeElement : TypeElement) : String
+                 # getImplements(typeElement : TypeElement) : String
+                 # getMethodsUsage(typeElement : TypeElement) : String
+                 # getAggregationsCompositions(typeElement : TypeElement) : String
             }
 
-            class PumlClass extends APumlClass {
+            class PumlClass extends PumlClasses {
                 - visibilityViewer : VisibilityViewer
                 + <<Create>> PumlClass()
-                + getName(element : Element) : String
-                + getContent(element : Element) : String
-                - translate_field(element : Element) : String
-                - translate_method(element : Element) : String
+                + ^getContent(element : Element) : String
+                # ^translate_fields(element : Element) : String
+                # ^translate_methods(element : Element) : String
             }
 
-            class PumlEnum extends APumlObject {
-                + <<Create>> PumlEnum()
-                + getName(element : Element) : String
-                + getContent(element : Element) : String
-            }
-
-            class PumlInterface extends APumlObject {
-                 + <<Create>> PumlInterface()
-                 + getName(element : Element) : String
-                 + getContent(element : Element) : String
-            }
-
-            class PumlNonVisibleClass extends APumlClass{
+             class PumlNonVisibleClass extends PumlClasses{
                 + <<Create>> PumlInterface()
-                + getName(element : Element) : String
-                + getContent(element : Element) : String
-                - translate_field(element : Element) : String
-                - translate_method(element : Element) : String
+                + ^getContent(element : Element) : String
+                # ^translate_fields(element : Element) : String
+                # ^translate_methods(element : Element) : String
             }
 
-            class PumlPackage extends APumlObject {
+            class PumlEnum extends PumlObject {
+                + <<Create>> PumlEnum()
+                + ^getName(element : Element) : String
+                + ^getContent(element : Element) : String
+            }
+
+            class PumlInterface extends PumlObject implements InheritableObject {
+                 + <<Create>> PumlInterface()
+                 + ^getName(element : Element) : String
+                 + ^getContent(element : Element) : String
+                 + getInheritance(element : Element) : String
+            }
+
+            class PumlPackage extends PumlObject {
                 + <<Create>> PumlPackage()
-                + getName(element : Element) : String
-                + getContent(element : Element) : String
-            }
-        }
-
-
-        package visibilityViewer {
-
-            interface IVisibilityViewer{
-                + getVisibility(annotationMirror : AnnotationMirror) : String
+                + ^getName(element : Element) : String
+                + ^getContent(element : Element) : String
             }
 
             class VisibilityViewer implements IVisibilityViewer {
@@ -204,13 +201,13 @@ package pumlFromJava {
 
     package writers {
 
-        interface IWriter{
+        interface WriterSpecies{
             + open()
             + write(text : String)
             + close()
         }
 
-        class Write implements IWriter{
+        class Writer implements WriterSpecies{
             - filepath : String
             - pw : PrintWriter
             + <<Create>> Writer(filename : String)
@@ -225,9 +222,27 @@ package pumlFromJava {
     }
 }
 
-FirstDoclet -- PumlBasis : <<Use>>
-PumlDoclet -- PumlDCA : <<Use>>
-PumlDoclet -- PumlDCC : <<Use>>
+FirstDoclet <-d- PumlBasis : <<Use>>
+PumlDoclet <-d- PumlDCA : <<Use>>
+PumlDoclet <-d- PumlDCC : <<Use>>
+PumlDoclet <-d- PathOption : <<Use>>
+PumlDoclet <-d- TypeOption : <<Use>>
+PumlDoclet <-d- OutOption : <<Use>>
+PumlDoclet <-d- Marker : <<Use>>
+Java2Puml <-d- PumlDoclet : <<Use>>
+PumlDCA <-d- Marker : <<Use>>
+PumlDCA <-d- PumlPackage : <<Use>>
+PumlDCA <-d- PumlInterface : <<Use>>
+PumlDCA <-d- PumlEnum : <<Use>>
+PumlDCA <-d- PumlNonVisibleClass : <<Use>>
+PumlDCC <-d- Marker : <<Use>>
+PumlDCC <-d- PumlPackage : <<Use>>
+PumlDCC <-d- PumlInterface : <<Use>>
+PumlDCC <-d- PumlEnum : <<Use>>
+PumlDCC <-d- PumlClass : <<Use>>
+VisibilityViewer <-d- PumlClass : <<Use>>
+Writer <-d- java.io.PrintWriter : <<Use>>
+
 
 @enduml
 

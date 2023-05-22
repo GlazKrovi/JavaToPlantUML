@@ -8,16 +8,14 @@ import pumlFromJava.diagrams.PumlDCC;
 import pumlFromJava.doclets.options.TypeOption;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
-import pumlFromJava.translators.pumlMarker.Marker;
 import pumlFromJava.writers.Writer;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.Element;
 import java.util.Locale;
 import java.util.Set;
 
 /* Directories management is not yet complete
  * A command line which work:
- * -private -sourcepath .\src -doclet pumlFromJava.PumlDoclet western -out Western.puml -d .\tests\
+ * -private -sourcepath src -doclet pumlFromJava.doclets.PumlDoclet -d generates/pumls/ -g both -out exemple.puml western
  * */
 
 public class PumlDoclet implements Doclet {
@@ -67,15 +65,14 @@ public class PumlDoclet implements Doclet {
         return true;
     }
 
-
+    /**
+     * Generate a file containing a DCA scheme in Puml language
+     * @param environment A correct javadoc environment
+     */
     private void generateDCA(DocletEnvironment environment) {
-        Marker translater = new Marker();
-        Element[] elements = environment.getIncludedElements().toArray(new Element[0]);
         PumlDCA diagram = new PumlDCA();
         Writer writer;
-        // options
-        // specific path and file name
-        // just specific file name
+        // specific file's path and/or name
         if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().equals("")) {
             writer = new Writer(oPath.getPath(), "DCA_" + oOut.getFileName());
         } else if (oOut.getFileName() != null && !oOut.getNames().isEmpty()) {
@@ -85,20 +82,20 @@ public class PumlDoclet implements Doclet {
         }
         // open file
         writer.open();
-        // WRITING WHAT YOU WANT HERE
+        // writing what we want (a dca)
         writer.write(diagram.getScheme(environment));
         // close file
         writer.close();
     }
 
+    /**
+     * Generate a file containing a DCC scheme in Puml language
+     * @param environment A correct javadoc environment
+     */
     private void generateDCC(DocletEnvironment environment) {
-        Marker translater = new Marker();
-        Element[] elements = environment.getIncludedElements().toArray(new Element[0]);
         PumlDCC diagram = new PumlDCC();
         Writer writer;
-        // options
-        // specific path and file name
-        // just specific file name
+        // specific file's path and/or name
         if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().isEmpty()) {
             writer = new Writer(oPath.getPath(), "DCC_" + oOut.getFileName());
         } else if (oOut.getFileName() != null && !oOut.getNames().isEmpty()) {
@@ -108,7 +105,7 @@ public class PumlDoclet implements Doclet {
         }
         // open file
         writer.open();
-        // WRITING WHAT YOU WANT HERE
+        // writing what we want (a dcc)
         writer.write(diagram.getScheme(environment));
         // close file
         writer.close();

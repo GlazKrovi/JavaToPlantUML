@@ -1,23 +1,16 @@
 package pumlFromJava.translators.pumlObjects;
 
-import pumlFromJava.translators.visibilityViewer.VisibilityViewer;
-
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 
-public class PumlInterface extends APumlObject {
+public class PumlInterface extends PumlObject implements InheritableObject {
 
     public PumlInterface() {
     }
 
-    /**
-     * Translate interface Java file into his Puml equivalent,
-     *
-     * @param element an interface
-     * @return Returns string of type "file-type name" for Uml
-     * if and only if the specified element is of the correct type, returns an empty string otherwise
-     */
     public String getName(Element element) {
         String res = "";
         if (element.getKind() == ElementKind.INTERFACE) {
@@ -26,12 +19,6 @@ public class PumlInterface extends APumlObject {
         return res;
     }
 
-    /**
-     * Translate what is inside the Element (like attributes, constants or method)
-     *
-     * @param element an enclosed element from class, enum or interface
-     * @return Puml equivalents of each attribute, constants or method from specified Element
-     */
     public String getContent(Element element) {
         StringBuilder res = new StringBuilder();
         VisibilityViewer visibilityViewer = new VisibilityViewer();
@@ -48,5 +35,32 @@ public class PumlInterface extends APumlObject {
             }
         }
         return res.toString();
+    }
+
+    public String getInheritance(Element element) {
+        String res = "";
+        StringBuilder infos = new StringBuilder();
+        TypeElement typeElement = (TypeElement) element;
+        int nbImplements = 0; // number of implement who will be written
+        boolean written = false; // specifies if 'implements' word is needed
+        // implements smt?
+        if (typeElement.getInterfaces().size() > 0) {
+            for (TypeMirror implementedInterface : typeElement.getInterfaces()) {
+                // is it a 'personal' interface?
+                if (isNotFromJava(implementedInterface)) {
+                    // so 'implements' word needed
+                    written = true;
+                    // 1 more impl
+                    nbImplements++;
+                    // get name of implemented interface
+                    infos.append(implementedInterface);
+                    // finally, comma needed?
+                    if (nbImplements > 1) infos.append(", ");
+                }
+            }
+        }
+        // have to be written?
+        if (written) res = " extends " + infos;
+        return res;
     }
 }
