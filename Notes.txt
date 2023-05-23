@@ -2,3 +2,5 @@ Pour les classes, afficher le nom complet (western.qqch)
 et supprimer le pumlpackage : il ne servira plus
 
 Commenter code de PumlMethod
+
+Remplacer identifyCollection (pumlMethod) avec quelque chose de plus legit

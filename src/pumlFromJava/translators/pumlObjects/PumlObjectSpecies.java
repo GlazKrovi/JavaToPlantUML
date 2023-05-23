@@ -38,16 +38,12 @@ public interface PumlObjectSpecies {
      *
      * @return " {"
      */
-    default String open() {
-        return " {";
-    }
+    String open();
 
     /**
      * Gives a line break and a closing bracket to close the element description
      *
      * @return Returns the string "\n}"
      */
-    default String close() {
-        return "\n}";
-    }
+    String close();
 }

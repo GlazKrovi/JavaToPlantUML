@@ -28,6 +28,8 @@ public class PumlClass extends PumlClasses {
         return res.toString();
     }
 
+    // todo
+    // visibility doesn't work for now
     protected String translate_methods(Element enclosedElement) { // TODO
         StringBuilder res = new StringBuilder();
         PumlMethod pumlMethod = new PumlMethod();
@@ -41,6 +43,8 @@ public class PumlClass extends PumlClasses {
         return res.toString();
     }
 
+    // todo
+    // visibility doesn't work for now, and type of field isn't printed
     /**
      * Translate a class' field in his Puml equivalent
      *

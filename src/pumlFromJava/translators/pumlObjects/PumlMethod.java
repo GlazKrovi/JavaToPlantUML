@@ -5,30 +5,8 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 
-public class PumlMethod implements PumlObjectSpecies {
+public class PumlMethod extends PumlObject {
     public PumlMethod() {
-    }
-
-    public String getParameters(ExecutableElement methodElement) {
-        StringBuilder res = new StringBuilder();
-        int nbType = 0;
-        for (VariableElement parameter : methodElement.getParameters()) {
-            res.append(cutPackage(parameter.getSimpleName().toString()));
-            res.append(" : ");
-            res.append(cutPackage(parameter.asType().toString()));
-            nbType++;
-            // is comma necessary?
-            if (nbType > 1) res.append(", ");
-        }
-        return res.toString();
-    }
-
-    public String getReturnType(ExecutableElement methodElement) {
-        String res = "";
-        if (!methodElement.getReturnType().toString().equals("void")) {
-            res = cutPackage(methodElement.getReturnType().toString());
-        }
-        return res;
     }
 
     public String getName(Element element) {
@@ -60,6 +38,13 @@ public class PumlMethod implements PumlObjectSpecies {
         return res.toString();
     }
 
+    /**
+     * Translate the name (like class, enum or interface)
+     * and what is inside the method element (like parameters, their type and method's returned type)
+     *
+     * @param element a method element
+     * @return String like 'openFile(path : String, mode : Mode) : Boolean
+     */
     public String getTranslation(Element element) {
         return this.getName(element) + this.getContent(element);
     }
@@ -81,19 +66,59 @@ public class PumlMethod implements PumlObjectSpecies {
         return name.substring(starting);
     }
 
-    // As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name. This makes it easy to identify them!
-    // Go test!!
-    // todo
+    /**
+     * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
+     * This makes it easy to identify them! So that replace '>' with '[*]'
+     *
+     * @param parameterName String representing a parameter name
+     * @return Returns string like 'parameterName[*]' if it's a collection,
+     * 'parameterName' else
+     */ // to improve !! // todo
     private String identifyCollection(String parameterName){
         String res = parameterName;
         boolean flag = false;
-        for (int i = 0; i < parameterName.length() && !flag; i++) {
+        for (int i = 0; i < parameterName.length(); i++) {
             if (parameterName.charAt(i) == '>') {
                 flag = true;
+                break;
             }
         }
         if (flag){
             res = parameterName.substring(0, parameterName.length() - 2) + "[*]";
+        }
+        return res;
+    }
+
+    /**
+     * Gives puml equivalent for parameters of specified class' method
+     *
+     * @param methodElement A cast element representing a method
+     * @return String like 'parameter1 : parameterType1, parameter2 : parameterType2'
+     */
+    private String getParameters(ExecutableElement methodElement) {
+        StringBuilder res = new StringBuilder();
+        int nbType = 0;
+        for (VariableElement parameter : methodElement.getParameters()) {
+            res.append(identifyCollection(cutPackage(parameter.getSimpleName().toString())));
+            res.append(" : ");
+            res.append(identifyCollection(cutPackage(parameter.asType().toString())));
+            nbType++;
+            // is comma necessary?
+            if (nbType > 1) res.append(", ");
+        }
+        return res.toString();
+    }
+
+    /**
+     * Gives puml equivalent for returned type of specified class' method
+     *
+     * @param methodElement A cast element representing a method
+     * @return String like ' : returnedType'
+     */
+    private String getReturnType(ExecutableElement methodElement) {
+        String res = "";
+        if (!methodElement.getReturnType().toString().equals("void")) {
+            res = identifyCollection(cutPackage(methodElement.getReturnType().toString()));
         }
         return res;
     }

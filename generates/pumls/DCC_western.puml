@@ -30,7 +30,7 @@ getLook() : String
 getRecompense() : int
 estLibre() : boolean
 kidnapper(dame : Dame)
-getCaptives() : Dame>
+getCaptives() : Dam[*]
 seFaireCapturer(cowBoy : Cowboy)
 seFaireTirerDessus(cowBoy : Cowboy)
 getPseudo() : String
@@ -43,7 +43,7 @@ class Cowboy extends western.Personnage {
 gains
 getPseudo() : String
 liberer(dame : Dame)
-liberer(captives : Dame>)
+liberer(captives : Dam[*])
 capturer(horsLaLoi : HorsLaLoi)
 tirerSur(brigand : HorsLaLoi)
 sePresenter()
@@ -106,7 +106,7 @@ boire(boisson : Boisson)
 boire()
 getNom() : String
 getBoisson() : Boisson
-getPseudos(personnages : Nommable>) : String
+getPseudos(personnages : Nommabl[*]) : String
 getBoissonParDefaut() : Boisson
 
 }
@@ -115,7 +115,7 @@ getLook() : String
 estLibre() : boolean
 getRecompense() : int
 kidnapper(dame : Dame)
-getCaptives() : Dame>
+getCaptives() : Dam[*]
 seFaireCapturer(cowBoy : Cowboy)
 seFaireTirerDessus(cowBoy : Cowboy)
 getPseudo() : String
@@ -125,7 +125,7 @@ liberer(dame : Dame)
 }
 class Sherif extends western.Cowboy {
 getNom() : String
-getWanted() : HorsLaLoi>
+getWanted() : HorsLaLo[*]
 sePresenter()
 capturer(horsLaLoi : HorsLaLoi)
 rechercher(horsLaLoi : HorsLaLoi)

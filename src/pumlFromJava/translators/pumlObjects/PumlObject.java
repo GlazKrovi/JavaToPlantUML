@@ -21,6 +21,10 @@ public abstract class PumlObject implements PumlObjectSpecies {
                 getLineBreaker();
     }
 
+    public String open(){ return " {"; }
+
+    public String close() { return "\n}"; }
+
     /**
      * Indicates if the element comes from the java language or not
      *
