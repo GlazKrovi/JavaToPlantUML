@@ -4,3 +4,10 @@ et supprimer le pumlpackage : il ne servira plus
 Commenter code de PumlMethod
 
 Remplacer identifyCollection (pumlMethod) avec quelque chose de plus legit
+
+
+// 2) else if pour les <<create>> pour constructeur
+                // 5) voir pk virgule n'est pas bien : of(nom : Stringgenre : Genre, ) : Boisson
+                // 6) Rapport, DCC API, DCC doc,
+
+Coder les trucs noter de "TODO"

@@ -107,7 +107,7 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
      * @param element a class element
      * @return Returns string like Hamburger -- Steak 'or' Hamburger -- MealType.FOOD
      */
-    protected String getMethodsUsage(Element element) { // todo
+    protected String getMethodsUsage(Element element) { // TODO
         return "";
     }
 

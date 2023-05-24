@@ -14,6 +14,9 @@ public class PumlMethod extends PumlObject {
         if (element.getKind() == ElementKind.METHOD) {
             res = element.getSimpleName().toString();
         }
+        else if (element.getKind() == ElementKind.CONSTRUCTOR){
+            res = element.getEnclosingElement().getSimpleName().toString();
+        }
         return res;
     }
 
@@ -35,6 +38,12 @@ public class PumlMethod extends PumlObject {
                 res.append(this.getReturnType(executableElement));
             }
         }
+        else if(element.getKind() == ElementKind.CONSTRUCTOR){
+            ExecutableElement executableElement = (ExecutableElement) element;
+            res.append("(");
+            res.append(this.getParameters(executableElement));
+            res.append(")");
+        }
         return res.toString();
     }
 
@@ -47,46 +56,6 @@ public class PumlMethod extends PumlObject {
      */
     public String getTranslation(Element element) {
         return this.getName(element) + this.getContent(element);
-    }
-
-    /**
-     * Cut the eventual packages names to save only the strict name of
-     * an element
-     *
-     * @param name String like food.meal.rice, representing a element's name
-     * @return Returns string like rice (cut from the complete specified name)
-     */
-    private String cutPackage(String name) {
-        int starting = 0;
-        for (int i = 0; i < name.length(); i++) {
-            if (name.charAt(i) == '.') {
-                starting = i + 1;
-            }
-        }
-        return name.substring(starting);
-    }
-
-    /**
-     * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
-     * This makes it easy to identify them! So that replace '>' with '[*]'
-     *
-     * @param parameterName String representing a parameter name
-     * @return Returns string like 'parameterName[*]' if it's a collection,
-     * 'parameterName' else
-     */ // to improve !! // todo
-    private String identifyCollection(String parameterName){
-        String res = parameterName;
-        boolean flag = false;
-        for (int i = 0; i < parameterName.length(); i++) {
-            if (parameterName.charAt(i) == '>') {
-                flag = true;
-                break;
-            }
-        }
-        if (flag){
-            res = parameterName.substring(0, parameterName.length() - 2) + "[*]";
-        }
-        return res;
     }
 
     /**
@@ -104,7 +73,7 @@ public class PumlMethod extends PumlObject {
             res.append(identifyCollection(cutPackage(parameter.asType().toString())));
             nbType++;
             // is comma necessary?
-            if (nbType > 1) res.append(", ");
+            if (nbType >= 1 && nbType<methodElement.getParameters().size()) res.append(", ");
         }
         return res.toString();
     }

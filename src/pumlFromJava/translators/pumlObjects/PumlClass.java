@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class PumlClass extends PumlClasses {
     private final VisibilityViewer visibilityViewer = new VisibilityViewer();
-    private final Modificateurs modificateurs = new Modificateurs();
+    private final ModifiersViewer modifiersViewer = new ModifiersViewer();
 
     public PumlClass() {
     }
@@ -24,36 +24,30 @@ public class PumlClass extends PumlClasses {
                     res.append(translate_fields(enclosedElement));
                     res.append(getLineBreaker());
                 }
-                // TODO
-                // 2) else if pour les <<create>> pour constructeur
-                // 1) faire un :  res.append(pumlMethod.getTranslation(enclosedElement)); pour les FIELD afin qu'il renvoie : " -nom : String " par exemple et pas seulement : "-nom"
-                // 5) voir pk virgule n'est pas bien : of(nom : Stringgenre : Genre, ) : Boisson
-                // 3) Faire le FINAL
-                // 4) truc prof (multiplicité...)
-                // 6) Rapport, DCC API, DCC doc,
+                else if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
+                    res.append(translate_constructor(enclosedElement));
+                    res.append(getLineBreaker());
+                }
             }
         }
         return res.toString();
     }
 
-    // todo
-    // visibility doesn't work for now
-    protected String translate_methods(Element enclosedElement) { // TODO
+    protected String translate_methods(Element enclosedElement) {
         StringBuilder res = new StringBuilder();
         PumlMethod pumlMethod = new PumlMethod();
         if (enclosedElement.getKind() == ElementKind.METHOD) {
             Set<Modifier> visibility = enclosedElement.getModifiers();
             res.append(visibilityViewer.getVisibility(visibility));
-            res.append(modificateurs.getStatic(visibility));
-            res.append(modificateurs.getAbstract(visibility));
-           // res.append(modificateurs.getFinal(visibility));
+            res.append(modifiersViewer.getStatic(visibility));
+            res.append(modifiersViewer.getAbstract(visibility));
+            res.append(modifiersViewer.getFinal(visibility));
+            res.append(pumlMethod.getTranslation(enclosedElement));
         }
-        res.append(pumlMethod.getTranslation(enclosedElement));
+
         return res.toString();
     }
 
-    // todo
-    // visibility doesn't work for now, and type of field isn't printed
     /**
      * Translate a class' field in his Puml equivalent
      *
@@ -65,10 +59,26 @@ public class PumlClass extends PumlClasses {
         if (enclosedElement.getKind() == ElementKind.FIELD) {
             Set<Modifier> visibility = enclosedElement.getModifiers();
             res.append(visibilityViewer.getVisibility(visibility));
-            res.append(modificateurs.getStatic(visibility));
-            res.append(modificateurs.getAbstract(visibility));
+            res.append(modifiersViewer.getStatic(visibility));
+            res.append(modifiersViewer.getAbstract(visibility));
+            res.append(modifiersViewer.getFinal(visibility));
+            res.append(enclosedElement.getSimpleName());
+            res.append(" : ");
+            res.append(identifyCollection(cutPackage(enclosedElement.asType().toString())));
         }
-        res.append(enclosedElement.getSimpleName());
+        return res.toString();
+    }
+
+    protected String translate_constructor(Element enclosedElement) {
+        StringBuilder res = new StringBuilder();
+        PumlMethod pumlMethod = new PumlMethod();
+        if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
+            Set<Modifier> visibility = enclosedElement.getModifiers();
+            res.append(visibilityViewer.getVisibility(visibility));
+            res.append(" <<create>> ");
+            res.append(pumlMethod.getTranslation(enclosedElement));
+        }
+
         return res.toString();
     }
 }
