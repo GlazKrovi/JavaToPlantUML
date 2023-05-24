@@ -10,7 +10,7 @@ public class PumlPackage extends PumlObject {
     public String getName(Element element) {
         StringBuilder res = new StringBuilder();
         if (element.getKind() == ElementKind.PACKAGE) {
-            res.append("package ").append(element.getSimpleName().toString());
+            res.append("package ").append(element);
         }
         return res.toString();
     }
