@@ -1,24 +1,25 @@
 package pumlFromJava.translators.pumlObjects;
 
-import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.Modifier;
+import java.util.Set;
 
 public class VisibilityViewer {
 
     /**
      * Translate a annotation into Puml equivalent
-     * @param annotation any annotationMirror from a class' attribute or method
+     * @param visibility any annotationMirror from a class' attribute or method
      * @return + for public, - for private, ~ for protected
      */
-    public String getVisibility(AnnotationMirror annotation){
+    public String getVisibility(Set<Modifier> visibility){
         String res = "";
-        if (annotation.getAnnotationType().toString().equals("public")){
+        if (visibility.contains(Modifier.PUBLIC)){
             res = "+";
         }
-        else if (annotation.getAnnotationType().toString().equals("private")){
+        else if (visibility.contains(Modifier.PRIVATE)){
             res = "-";
         }
-        else if (annotation.getAnnotationType().toString().equals("protected")){
-            res = "~";
+        else if (visibility.contains(Modifier.PROTECTED)){
+            res = "#";
         }
         return res;
     }

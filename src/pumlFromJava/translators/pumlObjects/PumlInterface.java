@@ -1,10 +1,8 @@
 package pumlFromJava.translators.pumlObjects;
 
-import javax.lang.model.element.AnnotationMirror;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.*;
 import javax.lang.model.type.TypeMirror;
+import java.util.Set;
 
 public class PumlInterface extends PumlObject implements InheritableObject {
 
@@ -25,9 +23,8 @@ public class PumlInterface extends PumlObject implements InheritableObject {
         if (element.getKind() == ElementKind.INTERFACE) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 if (enclosedElement.getKind() == ElementKind.METHOD) {
-                    for (AnnotationMirror annotation : enclosedElement.getAnnotationMirrors()) {
-                        res.append(visibilityViewer.getVisibility(annotation));
-                    }
+                    Set<Modifier> visibility = enclosedElement.getModifiers();
+                    res.append(visibilityViewer.getVisibility(visibility));
                     res.append(enclosedElement.getSimpleName());
                     res.append("()");
                     res.append(this.getLineBreaker());
