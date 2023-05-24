@@ -24,6 +24,10 @@ public class PumlClass extends PumlClasses {
                     res.append(translate_fields(enclosedElement));
                     res.append(getLineBreaker());
                 }
+                else if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
+                    res.append(translate_constructor(enclosedElement));
+                    res.append(getLineBreaker());
+                }
             }
         }
         return res.toString();
@@ -62,6 +66,18 @@ public class PumlClass extends PumlClasses {
             res.append(enclosedElement.getSimpleName());
             res.append(" : ");
             res.append(pumlType.getTranslation(enclosedElement));
+        }
+        return res.toString();
+    }
+
+    protected String translate_constructor(Element enclosedElement) {
+        StringBuilder res = new StringBuilder();
+        PumlMethod pumlMethod = new PumlMethod();
+        if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
+            Set<Modifier> visibility = enclosedElement.getModifiers();
+            res.append(visibilityViewer.getVisibility(visibility));
+            res.append(" <<create>> ");
+            res.append(pumlMethod.getTranslation(enclosedElement));
         }
 
         return res.toString();

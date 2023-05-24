@@ -7,8 +7,10 @@ class Barman extends western.Personnage {
 -clientele : clientele
 -nomDuBar : nomDuBar
 -boissonParDefaut : boissonParDefaut
++ <<create>> Barman(nom : String)
++ <<create>> Barman(nom : String, nomDuBar : String)
 +getPseudo() : String
-+dire()
++dire(texte : String)
 +sePresenter()
 +servir(client : Personnage)
 
@@ -17,13 +19,14 @@ class Boisson {
 -substantif : substantif
 + {static} EAU : EAU
 - {static} boissons : boissons
-+ {static} of(genre : Genre) : Boisson
++ {static} of(nom : String, genre : Genre) : Boisson
+- <<create>> Boisson(nom : String, genre : Genre)
 +getNom() : String
 +getGenre() : Genre
 +getNomAvecArticleIndefini() : String
 +getNomAvecArticlePartitif() : String
 +getNomAvecArticleDefini() : String
-+getNomAvecPreposition() : String
++getNomAvecPreposition(preposition : String) : String
 
 }
 class Brigand extends western.Personnage implements western.HorsLaLoi {
@@ -33,6 +36,9 @@ class Brigand extends western.Personnage implements western.HorsLaLoi {
 -estLibre : estLibre
 -captives : captives
 -gardien : gardien
++ <<create>> Brigand(nom : String)
++ <<create>> Brigand(nom : String, boisson : Boisson)
++ <<create>> Brigand(nom : String, boisson : Boisson, look : String)
 +getLook() : String
 +getRecompense() : Integer
 +estLibre() : Boolean
@@ -50,9 +56,11 @@ class Brigand extends western.Personnage implements western.HorsLaLoi {
 class Cowboy extends western.Personnage {
 -gains : gains
 -captures : captures
++ <<create>> Cowboy(nom : String)
++ <<create>> Cowboy(nom : String, boisson : Boisson)
 +getPseudo() : String
 +liberer(dame : Dame)
-+liberer()
++liberer(captives : Dame[*])
 +capturer(horsLaLoi : HorsLaLoi)
 +tirerSur(brigand : HorsLaLoi)
 +sePresenter()
@@ -65,6 +73,8 @@ class Dame extends western.Personnage {
 -estLibre : estLibre
 -sauveur : sauveur
 -ravisseur : ravisseur
++ <<create>> Dame(nom : String)
++ <<create>> Dame(nom : String, boisson : Boisson)
 +getPseudo() : String
 +seFaireKidnapper(horsLaLoi : HorsLaLoi)
 +seFaireLiberer(cowBoy : Cowboy)
@@ -82,11 +92,13 @@ MASCULIN
 
 }
 class Histoire4 {
-+ {static} main()
++ <<create>> Histoire4()
++ {static} main(args : String[])
 
 }
 class Histoire5 {
-+ {static} main()
++ <<create>> Histoire5()
++ {static} main(args : String[])
 
 }
 interface HorsLaLoi <<interface>> {
@@ -100,7 +112,9 @@ interface HorsLaLoi <<interface>> {
 
 }
 class Narrateur extends western.Personnage {
-+dire()
++ <<create>> Narrateur()
++ <<create>> Narrateur(nom : String)
++dire(texte : String)
 +boire(boisson : Boisson)
 +boire()
 +getPseudo() : String
@@ -115,18 +129,23 @@ class Personnage implements western.Nommable {
 - {static} BOISSON_PAR_DEFAUT : BOISSON_PAR_DEFAUT
 -nom : nom
 -boisson : boisson
-+dire()
++ <<create>> Personnage(nom : String)
++ <<create>> Personnage(nom : String, boisson : Boisson)
++dire(texte : String)
 +sePresenter()
 +boire(boisson : Boisson)
 +boire()
 +getNom() : String
 +getBoisson() : Boisson
-+ {static} getPseudos() : String
++ {static} getPseudos(personnages : Nommable[*]) : String
 + {static} getBoissonParDefaut() : Boisson
 
 }
 class Ripou extends western.Cowboy implements western.HorsLaLoi {
 -brigand : brigand
++ <<create>> Ripou(nom : String)
++ <<create>> Ripou(nom : String, boisson : Boisson)
++ <<create>> Ripou(nom : String, boisson : Boisson, look : String)
 +getLook() : String
 +estLibre() : Boolean
 +getRecompense() : Integer
@@ -141,6 +160,8 @@ class Ripou extends western.Cowboy implements western.HorsLaLoi {
 }
 class Sherif extends western.Cowboy {
 -wanted : wanted
++ <<create>> Sherif(nom : String)
++ <<create>> Sherif(nom : String, boisson : Boisson)
 +getNom() : String
 +getWanted() : HorsLaLoi[*]
 +sePresenter()
@@ -152,22 +173,23 @@ class Sherif extends western.Cowboy {
 class Substantif {
 -nom : nom
 -genre : genre
++ <<create>> Substantif(nom : String, genre : Genre)
 +getNom() : String
 +getGenre() : Genre
 +toString() : String
 + {static} isVowel(c : Char) : Boolean
-+ {static} startsWithVowel() : Boolean
++ {static} startsWithVowel(s : String) : Boolean
 +getArticleIndefini() : String
 +avecArticleIndefini() : String
 + {static} getArticleDefini(genre : Genre) : String
 +getArticleDefini() : String
 +avecArticleDefini() : String
-+ {static} faireElision() : String
++ {static} faireElision(article : String) : String
 +elision() : Boolean
 +getArticlePartitif() : String
 +avecArticlePartitif() : String
-+avecElision() : String
-+avecPreposition() : String
++avecElision(article : String) : String
++avecPreposition(preposition : String) : String
 
 }
 western.Boisson -- Barman

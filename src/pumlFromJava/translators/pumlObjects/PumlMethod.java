@@ -14,6 +14,9 @@ public class PumlMethod extends PumlObject {
         if (element.getKind() == ElementKind.METHOD) {
             res = element.getSimpleName().toString();
         }
+        else if (element.getKind() == ElementKind.CONSTRUCTOR){
+            res = element.getEnclosingElement().getSimpleName().toString();
+        }
         return res;
     }
 
@@ -34,6 +37,12 @@ public class PumlMethod extends PumlObject {
                 res.append(" : ");
                 res.append(this.getReturnType(executableElement));
             }
+        }
+        else if(element.getKind() == ElementKind.CONSTRUCTOR){
+            ExecutableElement executableElement = (ExecutableElement) element;
+            res.append("(");
+            res.append(this.getParameters(executableElement));
+            res.append(")");
         }
         return res.toString();
     }
@@ -59,14 +68,12 @@ public class PumlMethod extends PumlObject {
         StringBuilder res = new StringBuilder();
         int nbType = 0;
         for (VariableElement parameter : methodElement.getParameters()) {
-            if (isNotFromJava(parameter.asType())) {
-                res.append(parameter);
-                res.append(" : ");
-                res.append(PumlType.reformat(parameter.asType().toString()));
-                nbType++;
-                // is comma necessary?
-                if (nbType > 1) res.append(", ");
-            }
+            res.append(PumlType.reformat(parameter.getSimpleName().toString()));
+            res.append(" : ");
+            res.append(PumlType.reformat(parameter.asType().toString()));
+            nbType++;
+            // is comma necessary?
+            if (nbType >= 1 && nbType<methodElement.getParameters().size()) res.append(", ");
         }
         return res.toString();
     }
