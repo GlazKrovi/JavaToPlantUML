@@ -11,3 +11,5 @@ Remplacer identifyCollection (pumlMethod) avec quelque chose de plus legit
                 // 6) Rapport, DCC API, DCC doc,
 
 Coder les trucs noter de "TODO"
+
+pour les collections de collections, enlever tout les '>' en trop

@@ -26,6 +26,15 @@ public abstract class PumlObject implements PumlObjectSpecies {
     public String close() { return "\n}"; }
 
     /**
+     * Gives a line break
+     *
+     * @return Returns "\n"
+     */
+    public String getLineBreaker() {
+        return "\n";
+    }
+
+    /**
      * Indicates if the element comes from the java language or not
      *
      * @param typeMirror The type of any element
@@ -54,58 +63,4 @@ public abstract class PumlObject implements PumlObjectSpecies {
     protected boolean isPrimitiveType(TypeMirror type) {
         return type.getKind().isPrimitive() || type.toString().equals("java.lang.String");
     }
-
-    /**
-     * Gives a line break
-     *
-     * @return Returns "\n"
-     */
-    public String getLineBreaker() {
-        return "\n";
-    }
-
-    /**
-     * Cut the eventual packages names to save only the strict name of
-     * an element
-     *
-     * @param name String like food.meal.rice, representing a element's name
-     * @return Returns string like rice (cut from the complete specified name)
-     */
-    protected String cutPackage(String name) {
-        int starting = 0;
-        for (int i = 0; i < name.length(); i++) {
-            if (name.charAt(i) == '.') {
-                starting = i + 1;
-            }
-        }
-        return name.substring(starting);
-    }
-    // todo
-    // a ajouter au plantuml
-
-
-    /**
-     * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
-     * This makes it easy to identify them! So that replace '>' with '[*]'
-     *
-     * @param parameterName String representing a parameter name
-     * @return Returns string like 'parameterName[*]' if it's a collection,
-     * 'parameterName' else
-     */ // to improve !! // todo
-    protected String identifyCollection(String parameterName){
-        String res = parameterName;
-        boolean flag = false;
-        for (int i = 0; i < parameterName.length(); i++) {
-            if (parameterName.charAt(i) == '>') {
-                flag = true;
-                break;
-            }
-        }
-        if (flag){
-            res = parameterName.substring(0, parameterName.length() - 1) + "[*]";
-        }
-        return res;
-    }
-    // todo
-    // a ajouter au plantuml
 }

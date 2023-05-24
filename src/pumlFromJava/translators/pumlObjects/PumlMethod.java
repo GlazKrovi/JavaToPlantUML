@@ -28,7 +28,7 @@ public class PumlMethod extends PumlObject {
         if (element.getKind() == ElementKind.METHOD) {
             ExecutableElement executableElement = (ExecutableElement) element;
             res.append("(");
-            res.append(this.getParameters(executableElement));
+            res.append(PumlType.reformat(this.getParameters(executableElement)));
             res.append(")");
             if (!this.getReturnType(executableElement).isEmpty()) {
                 res.append(" : ");
@@ -59,12 +59,14 @@ public class PumlMethod extends PumlObject {
         StringBuilder res = new StringBuilder();
         int nbType = 0;
         for (VariableElement parameter : methodElement.getParameters()) {
-            res.append(identifyCollection(cutPackage(parameter.getSimpleName().toString())));
-            res.append(" : ");
-            res.append(identifyCollection(cutPackage(parameter.asType().toString())));
-            nbType++;
-            // is comma necessary?
-            if (nbType > 1) res.append(", ");
+            if (isNotFromJava(parameter.asType())) {
+                res.append(parameter);
+                res.append(" : ");
+                res.append(PumlType.reformat(parameter.asType().toString()));
+                nbType++;
+                // is comma necessary?
+                if (nbType > 1) res.append(", ");
+            }
         }
         return res.toString();
     }
@@ -78,7 +80,7 @@ public class PumlMethod extends PumlObject {
     private String getReturnType(ExecutableElement methodElement) {
         String res = "";
         if (!methodElement.getReturnType().toString().equals("void")) {
-            res = identifyCollection(cutPackage(methodElement.getReturnType().toString()));
+            res = PumlType.reformat(methodElement.getReturnType().toString());
         }
         return res;
     }

@@ -52,6 +52,7 @@ public class PumlClass extends PumlClasses {
      */
     protected String translate_fields(Element enclosedElement) {
         StringBuilder res = new StringBuilder();
+        PumlType pumlType = new PumlType();
         if (enclosedElement.getKind() == ElementKind.FIELD) {
             Set<Modifier> visibility = enclosedElement.getModifiers();
             res.append(visibilityViewer.getVisibility(visibility));
@@ -60,7 +61,7 @@ public class PumlClass extends PumlClasses {
             res.append(modifiersViewer.getFinal(visibility));
             res.append(enclosedElement.getSimpleName());
             res.append(" : ");
-            res.append(identifyCollection(cutPackage(enclosedElement.asType().toString())));
+            res.append(pumlType.getTranslation(enclosedElement));
         }
 
         return res.toString();
