@@ -15,8 +15,8 @@ class Barman extends western.Personnage {
 }
 class Boisson {
 -substantif
-+EAU
--boissons
++ {static} EAU
+- {static} boissons
 + {static} of(nom : Stringgenre : Genre, ) : Boisson
 +getNom() : String
 +getGenre() : Genre
@@ -27,7 +27,7 @@ class Boisson {
 
 }
 class Brigand extends western.Personnage implements western.HorsLaLoi {
-#LOOK_PAR_DEFAUT
+# {static} LOOK_PAR_DEFAUT
 -look
 -recompense
 -estLibre
@@ -42,7 +42,7 @@ class Brigand extends western.Personnage implements western.HorsLaLoi {
 +seFaireTirerDessus(cowBoy : Cowboy)
 +getPseudo() : String
 +sePresenter()
--boissonParDefaut
+- {static} boissonParDefaut
 + {static} getBoissonParDefaut() : Boisson
 + {static} setBoissonParDefaut(boisson : Boisson)
 
@@ -56,7 +56,7 @@ class Cowboy extends western.Personnage {
 +capturer(horsLaLoi : HorsLaLoi)
 +tirerSur(brigand : HorsLaLoi)
 +sePresenter()
--boissonParDefaut
+- {static} boissonParDefaut
 + {static} getBoissonParDefaut() : Boisson
 + {static} setBoissonParDefaut(boisson : Boisson)
 
@@ -70,7 +70,7 @@ class Dame extends western.Personnage {
 +seFaireLiberer(cowBoy : Cowboy)
 +estLibre() : boolean
 +sePresenter()
--boissonParDefaut
+- {static} boissonParDefaut
 + {static} getBoissonParDefaut() : Boisson
 + {static} setBoissonParDefaut(boisson : Boisson)
 +getRavisseur() : HorsLaLoi
@@ -112,7 +112,7 @@ interface Nommable <<interface>> {
 
 }
 class Personnage implements western.Nommable {
--BOISSON_PAR_DEFAUT
+- {static} BOISSON_PAR_DEFAUT
 -nom
 -boisson
 +dire(texte : String)

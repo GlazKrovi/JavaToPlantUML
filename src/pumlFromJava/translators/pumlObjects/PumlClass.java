@@ -65,6 +65,8 @@ public class PumlClass extends PumlClasses {
         if (enclosedElement.getKind() == ElementKind.FIELD) {
             Set<Modifier> visibility = enclosedElement.getModifiers();
             res.append(visibilityViewer.getVisibility(visibility));
+            res.append(modificateurs.getStatic(visibility));
+            res.append(modificateurs.getAbstract(visibility));
         }
         res.append(enclosedElement.getSimpleName());
         return res.toString();
