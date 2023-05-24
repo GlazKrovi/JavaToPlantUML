@@ -1,8 +1,11 @@
-package pumlFromJava.translators.pumlObjects;
+package pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject;
+
+import pumlFromJava.translators.pumlEntities.VisibilityViewer;
+import pumlFromJava.translators.pumlEntities.pumlObjects.PumlObject;
+import pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject.InheritableObject;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeMirror;
-import java.util.Set;
 
 public class PumlInterface extends PumlObject implements InheritableObject {
 
@@ -23,8 +26,7 @@ public class PumlInterface extends PumlObject implements InheritableObject {
         if (element.getKind() == ElementKind.INTERFACE) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 if (enclosedElement.getKind() == ElementKind.METHOD) {
-                    Set<Modifier> visibility = enclosedElement.getModifiers();
-                    res.append(visibilityViewer.getVisibility(visibility));
+                    res.append(visibilityViewer.getTranslation(enclosedElement));
                     res.append(enclosedElement.getSimpleName());
                     res.append("()");
                     res.append(this.getLineBreaker());

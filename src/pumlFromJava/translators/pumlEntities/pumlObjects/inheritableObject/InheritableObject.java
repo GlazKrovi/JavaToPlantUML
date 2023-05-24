@@ -1,4 +1,4 @@
-package pumlFromJava.translators.pumlObjects;
+package pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject;
 
 import javax.lang.model.element.Element;
 

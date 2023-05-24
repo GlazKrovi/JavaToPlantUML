@@ -1,16 +1,10 @@
-package pumlFromJava.translators.pumlObjects;
+package pumlFromJava.translators.pumlEntities;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.type.TypeMirror;
 
 // a ajouter au plantuml // todo
 public class PumlType implements PumlEntity {
     public PumlType() {
-    }
-
-    public String getTranslation(Element element) {
-        return translateType(identifyCollection(cutPackage(element.getSimpleName().toString())));
     }
 
     private static String translateType(String type) {
@@ -20,17 +14,14 @@ public class PumlType implements PumlEntity {
             case "float" -> res = "Float";
             case "boolean" -> res = "Boolean";
             case "char" -> res = "Char";
-            default -> { res = type; }
+            default -> {
+                res = type;
+            }
         }
         return res;
     }
 
-    public String getName(Element element) {
-        return element.getSimpleName().toString();
-    }
-
-
-    public static String reformat(String name){
+    public static String reformat(String name) {
         return translateType(identifyCollection(cutPackage(name)));
     }
 
@@ -50,8 +41,6 @@ public class PumlType implements PumlEntity {
         }
         return name.substring(starting);
     }
-    // a ajouter au plantuml // todo
-
 
     /**
      * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
@@ -61,7 +50,7 @@ public class PumlType implements PumlEntity {
      * @return Returns string like 'parameterName[*]' if it's a collection,
      * 'parameterName' else
      */ // to improve !! // todo
-    public static String identifyCollection(String parameterName){
+    public static String identifyCollection(String parameterName) {
         String res = parameterName;
         boolean flag = false;
         for (int i = 0; i < parameterName.length(); i++) {
@@ -70,10 +59,19 @@ public class PumlType implements PumlEntity {
                 break;
             }
         }
-        if (flag){
+        if (flag) {
             res = parameterName.substring(0, parameterName.length() - 1) + "[*]";
         }
         return res;
+    }
+
+    public String getTranslation(Element element) {
+        return translateType(identifyCollection(cutPackage(element.getSimpleName().toString())));
+    }
+    // a ajouter au plantuml // todo
+
+    public String getName(Element element) {
+        return element.getSimpleName().toString();
     }
     // a ajouter au plantuml // todo
 }

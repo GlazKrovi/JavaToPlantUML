@@ -1,4 +1,6 @@
-package pumlFromJava.translators.pumlObjects;
+package pumlFromJava.translators.pumlEntities.pumlObjects;
+
+import pumlFromJava.translators.pumlEntities.PumlEntity;
 
 import javax.lang.model.element.Element;
 

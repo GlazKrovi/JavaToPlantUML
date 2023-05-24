@@ -1,4 +1,9 @@
-package pumlFromJava.translators.pumlObjects;
+package pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject.pumlClasses;
+
+import pumlFromJava.translators.pumlEntities.PumlType;
+import pumlFromJava.translators.pumlEntities.VisibilityViewer;
+import pumlFromJava.translators.pumlEntities.pumlObjects.ModifiersViewer;
+import pumlFromJava.translators.pumlEntities.pumlObjects.PumlMethod;
 
 import javax.lang.model.element.*;
 import java.util.Set;
