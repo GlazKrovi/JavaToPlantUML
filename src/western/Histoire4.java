@@ -7,8 +7,15 @@ package western;
 //
 //
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.List;
+
 public class Histoire4
 {
+    // test
+    private List<Integer> somethings = new ArrayList<>();
+
     public static void main(String[] args)
     {
         Cowboy luke = new Cowboy("Luke");

@@ -5,7 +5,9 @@ import pumlFromJava.translators.pumlEntities.VisibilityViewer;
 import pumlFromJava.translators.pumlEntities.pumlObjects.ModifiersViewer;
 import pumlFromJava.translators.pumlEntities.pumlObjects.PumlMethod;
 
-import javax.lang.model.element.*;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.Modifier;
 import java.util.Set;
 
 /**
@@ -28,8 +30,7 @@ public class PumlClass extends PumlClasses {
                 } else if (enclosedElement.getKind() == ElementKind.FIELD) {
                     res.append(translate_fields(enclosedElement));
                     res.append(getLineBreaker());
-                }
-                else if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
+                } else if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
                     res.append(translate_constructor(enclosedElement));
                     res.append(getLineBreaker());
                 }
@@ -61,7 +62,6 @@ public class PumlClass extends PumlClasses {
      */
     protected String translate_fields(Element enclosedElement) {
         StringBuilder res = new StringBuilder();
-        PumlType pumlType = new PumlType();
         if (enclosedElement.getKind() == ElementKind.FIELD) {
             Set<Modifier> visibility = enclosedElement.getModifiers();
             res.append(visibilityViewer.getVisibility(visibility));
@@ -70,7 +70,7 @@ public class PumlClass extends PumlClasses {
             res.append(modifiersViewer.getFinal(visibility));
             res.append(enclosedElement.getSimpleName());
             res.append(" : ");
-            res.append(pumlType.getTranslation(enclosedElement));
+            res.append(PumlType.reformat(enclosedElement.asType().toString()));
         }
         return res.toString();
     }

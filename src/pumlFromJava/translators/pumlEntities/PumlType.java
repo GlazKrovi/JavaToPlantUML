@@ -3,7 +3,7 @@ package pumlFromJava.translators.pumlEntities;
 import javax.lang.model.element.Element;
 
 // a ajouter au plantuml // todo
-public class PumlType implements PumlEntity {
+public class PumlType {
     public PumlType() {
     }
 
@@ -43,35 +43,26 @@ public class PumlType implements PumlEntity {
     }
 
     /**
-     * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
-     * This makes it easy to identify them! So that replace '>' with '[*]'
+     * Adds the collection symbol (i.e. [*]) if the specified name is a collection
      *
      * @param parameterName String representing a parameter name
-     * @return Returns string like 'parameterName[*]' if it's a collection,
-     * 'parameterName' else
-     */ // to improve !! // todo
+     * @return Returns the passed name, plus the collection symbol (i.e. [*]) if the specified name is a collection,
+     * or just the passed name otherwise
+     */
     public static String identifyCollection(String parameterName) {
+        /* * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
+        * This makes it easy to identify them! So that replace '>' and '|' with '[*]' */
         String res = parameterName;
-        boolean flag = false;
+        int end = 0;
         for (int i = 0; i < parameterName.length(); i++) {
-            if (parameterName.charAt(i) == '>') {
-                flag = true;
+            if (parameterName.charAt(i) == '>' || parameterName.charAt(i) == '[' ) {
+                end = i;
                 break;
             }
         }
-        if (flag) {
-            res = parameterName.substring(0, parameterName.length() - 1) + "[*]";
+        if (end > 0) {
+            res = parameterName.substring(0, end) + "[*]";
         }
         return res;
     }
-
-    public String getTranslation(Element element) {
-        return translateType(identifyCollection(cutPackage(element.getSimpleName().toString())));
-    }
-    // a ajouter au plantuml // todo
-
-    public String getName(Element element) {
-        return element.getSimpleName().toString();
-    }
-    // a ajouter au plantuml // todo
 }
