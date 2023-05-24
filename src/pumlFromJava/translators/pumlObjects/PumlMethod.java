@@ -50,46 +50,6 @@ public class PumlMethod extends PumlObject {
     }
 
     /**
-     * Cut the eventual packages names to save only the strict name of
-     * an element
-     *
-     * @param name String like food.meal.rice, representing a element's name
-     * @return Returns string like rice (cut from the complete specified name)
-     */
-    private String cutPackage(String name) {
-        int starting = 0;
-        for (int i = 0; i < name.length(); i++) {
-            if (name.charAt(i) == '.') {
-                starting = i + 1;
-            }
-        }
-        return name.substring(starting);
-    }
-
-    /**
-     * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
-     * This makes it easy to identify them! So that replace '>' with '[*]'
-     *
-     * @param parameterName String representing a parameter name
-     * @return Returns string like 'parameterName[*]' if it's a collection,
-     * 'parameterName' else
-     */ // to improve !! // todo
-    private String identifyCollection(String parameterName){
-        String res = parameterName;
-        boolean flag = false;
-        for (int i = 0; i < parameterName.length(); i++) {
-            if (parameterName.charAt(i) == '>') {
-                flag = true;
-                break;
-            }
-        }
-        if (flag){
-            res = parameterName.substring(0, parameterName.length() - 2) + "[*]";
-        }
-        return res;
-    }
-
-    /**
      * Gives puml equivalent for parameters of specified class' method
      *
      * @param methodElement A cast element representing a method

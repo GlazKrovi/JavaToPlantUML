@@ -3,7 +3,7 @@ package pumlFromJava.translators.pumlObjects;
 import javax.lang.model.element.Modifier;
 import java.util.Set;
 
-public class Modificateurs {
+public class ModifiersViewer {
 
     /**
      * Translate a annotation into Puml equivalent
@@ -29,7 +29,7 @@ public class Modificateurs {
     public String getFinal(Set<Modifier> visibility){
         String res = "";
         if (visibility.contains(Modifier.PROTECTED)){
-            res = " {final} ";
+            res = " {readonly} ";
         }
         return res;
     }

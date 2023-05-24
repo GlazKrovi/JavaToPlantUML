@@ -18,5 +18,4 @@ public class PumlPackage extends PumlObject {
     // todo
     // returns the name of each element into
     public String getContent(Element element) { return ""; }
-
 }
