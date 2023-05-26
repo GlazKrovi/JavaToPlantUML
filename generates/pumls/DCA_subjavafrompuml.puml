@@ -1,0 +1,75 @@
+@startuml
+!theme reddress-darkgreen
+
+class pumlFromJava.doclets.FirstDoclet
+
+class pumlFromJava.doclets.PumlDoclet
+
+class pumlFromJava.doclets.options.OutOption {
+NameFile
+
+}
+
+class pumlFromJava.doclets.options.PathOption {
+path
+
+}
+
+class pumlFromJava.doclets.options.TypeOption {
+type
+
+}
+
+class pumlFromJava.generators.Java2Puml
+
+interface pumlFromJava.translators.diagrams.IPumlDiagram
+class pumlFromJava.translators.diagrams.PumlBasis implements pumlFromJava.translators.diagrams.IPumlDiagram
+
+class pumlFromJava.translators.diagrams.PumlDCA implements pumlFromJava.translators.diagrams.IPumlDiagram
+
+class pumlFromJava.translators.diagrams.PumlDCC implements pumlFromJava.translators.diagrams.IPumlDiagram
+
+interface pumlFromJava.translators.pumlElements.ElementTranslator
+interface pumlFromJava.translators.pumlElements.Nameable
+class pumlFromJava.translators.pumlElements.PumlMethod implements pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable
+
+class pumlFromJava.translators.pumlElements.PumlType implements pumlFromJava.translators.pumlElements.ElementTranslator
+
+interface pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject
+interface pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator extends pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable
+abstract pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator
+
+interface pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses
+
+abstract pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject, pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject
+
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses
+
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlEnum extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject
+
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlInterface extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject
+
+class pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer implements pumlFromJava.translators.pumlElements.ElementTranslator
+
+class pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer implements pumlFromJava.translators.pumlElements.ElementTranslator
+
+interface pumlFromJava.translators.pumlMarker.IPumlMarker
+class pumlFromJava.translators.pumlMarker.Marker implements pumlFromJava.translators.pumlMarker.IPumlMarker
+
+class pumlFromJava.translators.TranslatorTools
+
+class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies {
+filepath
+
+}
+
+interface pumlFromJava.writers.WriterSpecies
+pumlFromJava.doclets.options.PathOption <-- PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.OutOption <-- PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.TypeOption <-- PumlDoclet : <<Use>>
+pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer <-- PumlClass : <<Use>>
+pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer <-- PumlClasses : <<Use>>
+
+@enduml
+

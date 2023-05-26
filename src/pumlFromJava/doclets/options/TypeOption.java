@@ -44,7 +44,7 @@ public class TypeOption implements Doclet.Option {
 
     public String getType() {
         String res = "";
-        if (type != null && !type.equals("")){
+        if (type != null && !type.equals("")) {
             res = type;
         }
         return res;

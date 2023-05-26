@@ -1,9 +1,9 @@
-package pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject;
+package pumlFromJava.translators.pumlElements.pumlObjects;
 
 import javax.lang.model.element.Element;
 
 /**
- * Represent an object that can implement interfaces and extends a super-class
+ * Represent an object that can implement interfaces and/or extends a super-class
  */
 public interface InheritableObject {
     /**
@@ -12,5 +12,5 @@ public interface InheritableObject {
      * @param element an element like class, enum or interface
      * @return Puml equivalents for smt extends/inherit Asmt/Ismt
      */
-    String getInheritance(Element element);
+    String inheritanceTranslate(Element element);
 }

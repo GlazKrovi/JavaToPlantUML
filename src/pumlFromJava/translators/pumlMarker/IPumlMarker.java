@@ -4,14 +4,10 @@ public interface IPumlMarker {
     /**
      * Returns '@startUml'
      */
-    default String umlStart() {
-        return ("@startuml\n");
-    }
+    String umlStart();
 
     /**
      * Returns '@enduml'
      */
-    default String umlEnd() {
-        return ("\n@enduml\n");
-    }
+    String umlEnd();
 }

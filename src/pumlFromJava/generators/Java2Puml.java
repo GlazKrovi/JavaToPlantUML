@@ -7,11 +7,9 @@ import java.util.spi.ToolProvider;
       <package> ... <fichiers>
 */
 
-public class Java2Puml
-{
+public class Java2Puml {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         ToolProvider toolProvider = ToolProvider.findFirst("javadoc").get();
         System.out.println(toolProvider.name());
         toolProvider.run(System.out, System.err, args);

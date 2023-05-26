@@ -1,11 +1,10 @@
-package pumlFromJava.diagrams;
+package pumlFromJava.translators.diagrams;
 
 import jdk.javadoc.doclet.DocletEnvironment;
+import pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlEnum;
+import pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlInterface;
+import pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClass;
 import pumlFromJava.translators.pumlMarker.Marker;
-import pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject.pumlClasses.PumlClass;
-import pumlFromJava.translators.pumlEntities.pumlObjects.PumlEnum;
-import pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject.PumlInterface;
-import pumlFromJava.translators.pumlEntities.pumlObjects.PumlPackage;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -21,42 +20,33 @@ public class PumlDCC implements IPumlDiagram {
      * @return Returns string representing a .puml file's content, for a CCD
      */
     public String getScheme(DocletEnvironment environment) {
+        // tools and return
         Marker marker = new Marker();
         StringBuilder res = new StringBuilder();
         // puml objects
         PumlClass pumlClass = new PumlClass();
         PumlEnum pumlenum = new PumlEnum();
         PumlInterface pumlinterface = new PumlInterface();
-        PumlPackage pumlpackage = new PumlPackage();
-        // package is open?
-        boolean packageOpened = false;
+
         // start uml
         res.append(marker.umlStart());
-        res.append(marker.option_strictUml());
         res.append("\n");
         // translate every "big" elements (class, enum, interface)
         for (Element elm : environment.getIncludedElements()) {
-            if (elm.getKind() == ElementKind.PACKAGE) {
-                res.append(pumlpackage.getName(elm));
-                res.append(pumlpackage.open());
-                res.append(pumlpackage.getLineBreaker());
-                packageOpened = true;
-            } else if (elm.getKind() == ElementKind.CLASS) {
-                res.append(pumlClass.getTranslation(elm));
+            if (elm.getKind() == ElementKind.CLASS) {
+                res.append(pumlClass.selfTranslate(elm));
             } else if (elm.getKind() == ElementKind.ENUM) {
-                res.append(pumlenum.getTranslation(elm));
+                res.append(pumlenum.selfTranslate(elm));
             } else if (elm.getKind() == ElementKind.INTERFACE) {
-                res.append(pumlinterface.getTranslation(elm));
+                res.append(pumlinterface.selfTranslate(elm));
             }
         }
         // get the "defined use" relations (class stored in global variables)
         for (Element elm : environment.getIncludedElements()) {
             if (elm.getKind() == ElementKind.CLASS) {
-                res.append(pumlClass.getUses(elm));
+                res.append(pumlClass.relationsTranslate(elm));
             }
         }
-        // close package if any is opened
-        if (packageOpened) pumlpackage.close();
         // end uml
         res.append(marker.umlEnd());
         return res.toString();

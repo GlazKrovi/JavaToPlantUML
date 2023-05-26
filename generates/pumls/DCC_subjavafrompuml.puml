@@ -1,0 +1,242 @@
+@startuml
+!theme reddress-darkgreen
+
+class pumlFromJava.doclets.FirstDoclet {
++ <<create>> FirstDoclet()
++init(locale : Locale, reporter : Reporter)
++getName() : String
++getSupportedOptions() : Option[*]
++getSupportedSourceVersion() : SourceVersion
++run(environment : DocletEnvironment) : boolean
+-dumpElement(element : Element)
+
+}
+class pumlFromJava.doclets.PumlDoclet {
++ <<create>> PumlDoclet()
+-oPath : PathOption
+-oOut : OutOption
+-oType : TypeOption
++init(locale : Locale, reporter : Reporter)
++getName() : String
++getSupportedOptions() : Option[*]
++getSupportedSourceVersion() : SourceVersion
++run(environment : DocletEnvironment) : boolean
+-generateDCA(environment : DocletEnvironment)
+-generateDCC(environment : DocletEnvironment)
+
+}
+class pumlFromJava.doclets.options.OutOption {
+-NameFile : String
++ <<create>> OutOption()
++getArgumentCount() : int
++getDescription() : String
++getKind() : Kind
++getNames() : String[*]
++getParameters() : String
++process(option : String, arguments : String[*]) : boolean
++getFileName() : String
+
+}
+class pumlFromJava.doclets.options.PathOption {
+-path : String
++ <<create>> PathOption()
++getArgumentCount() : int
++getDescription() : String
++getKind() : Kind
++getNames() : String[*]
++getParameters() : String
++process(option : String, arguments : String[*]) : boolean
++getPath() : String
+
+}
+class pumlFromJava.doclets.options.TypeOption {
+-type : String
++ <<create>> TypeOption()
++getArgumentCount() : int
++getDescription() : String
++getKind() : Kind
++getNames() : String[*]
++getParameters() : String
++process(option : String, arguments : String[*]) : boolean
++getType() : String
+
+}
+class pumlFromJava.generators.Java2Puml {
++ <<create>> Java2Puml()
++ {static} main(args : String[*])
+
+}
+interface pumlFromJava.translators.diagrams.IPumlDiagram {
++getScheme()
+
+}
+class pumlFromJava.translators.diagrams.PumlBasis implements pumlFromJava.translators.diagrams.IPumlDiagram {
++ <<create>> PumlBasis()
++getScheme(environment : DocletEnvironment) : String
+
+}
+class pumlFromJava.translators.diagrams.PumlDCA implements pumlFromJava.translators.diagrams.IPumlDiagram {
++ <<create>> PumlDCA()
++getScheme(environment : DocletEnvironment) : String
+
+}
+class pumlFromJava.translators.diagrams.PumlDCC implements pumlFromJava.translators.diagrams.IPumlDiagram {
++ <<create>> PumlDCC()
++getScheme(environment : DocletEnvironment) : String
+
+}
+interface pumlFromJava.translators.pumlElements.ElementTranslator {
++selfTranslate()
+
+}
+interface pumlFromJava.translators.pumlElements.Nameable {
++getFullName()
++getSimplifiedName()
+
+}
+class pumlFromJava.translators.pumlElements.PumlMethod implements pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable {
++ <<create>> PumlMethod()
++selfTranslate(element : Element) : String
++getFullName(element : Element) : String
++getSimplifiedName(element : Element) : String
+-getParameters(methodElement : ExecutableElement) : String
+-getReturnType(methodElement : ExecutableElement) : String
+
+}
+class pumlFromJava.translators.pumlElements.PumlType implements pumlFromJava.translators.pumlElements.ElementTranslator {
++ <<create>> PumlType()
++selfTranslate(element : Element) : String
+
+}
+interface pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject {
++inheritanceTranslate()
+
+}
+interface pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator extends pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable {
++contentTranslate()
++open()
++close()
+
+}
+abstract pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator {
++ <<create>> PumlObject()
++ {abstract} selfTranslate(element : Element) : String
++getFullName(element : Element) : String
++getSimplifiedName(element : Element) : String
++ {abstract} contentTranslate(element : Element) : String
++open() : String
++close() : String
+
+}
+interface pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject {
++relationsTranslate()
+
+}
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses {
++ <<create>> PumlClass()
+-visibilityViewer : VisibilityViewer
++relationsTranslate(element : Element) : String
++selfTranslate(element : Element) : String
++contentTranslate(element : Element) : String
+-methodsTranslate(element : Element) : String
+-fieldsTranslate(element : Element) : String
+-constructorsTranslate(element : Element) : String
+-getUses(element : Element) : String
+
+}
+abstract pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject, pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject {
++ <<create>> PumlClasses()
+# {readonly} modifiersViewer : ModifiersViewer
++ {abstract} selfTranslate(element : Element) : String
++inheritanceTranslate(element : Element) : String
++ {abstract} contentTranslate(element : Element) : String
++ {abstract} relationsTranslate(element : Element) : String
+-getExtends(typeElement : TypeElement) : String
+-getImplements(typeElement : TypeElement) : String
+# {readonly} getAggregationsCompositions(element : Element) : String
+
+}
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses {
++ <<create>> PumlLiteClass()
++selfTranslate(element : Element) : String
++relationsTranslate(element : Element) : String
++contentTranslate(element : Element) : String
+-fieldsTranslate(element : Element) : String
+-countPrimitivesFields(element : Element) : int
+
+}
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlEnum extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject {
++ <<create>> PumlEnum()
++selfTranslate(element : Element) : String
++contentTranslate(element : Element) : String
+
+}
+class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlInterface extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject {
++ <<create>> PumlInterface()
++selfTranslate(element : Element) : String
++inheritanceTranslate(element : Element) : String
++contentTranslate(element : Element) : String
+
+}
+class pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer implements pumlFromJava.translators.pumlElements.ElementTranslator {
++ <<create>> ModifiersViewer()
++selfTranslate(element : Element) : String
+-getStatic(modifiers : Modifier[*]) : String
+-getAbstract(modifiers : Modifier[*]) : String
+-getFinal(modifiers : Modifier[*]) : String
+
+}
+class pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer implements pumlFromJava.translators.pumlElements.ElementTranslator {
++ <<create>> VisibilityViewer()
++selfTranslate(element : Element) : String
+
+}
+interface pumlFromJava.translators.pumlMarker.IPumlMarker {
++umlStart()
++umlEnd()
+
+}
+class pumlFromJava.translators.pumlMarker.Marker implements pumlFromJava.translators.pumlMarker.IPumlMarker {
++ <<create>> Marker()
++umlStart() : String
++option_strictUml() : String
++umlEnd() : String
+
+}
+class pumlFromJava.translators.TranslatorTools {
++ <<create>> TranslatorTools()
++ {static} reformatName(name : String) : String
++ {static} cutPackage(name : String) : String
++ {static} identifyCollection(parameterName : String) : String
++ {static} isNotFromJava(typeMirror : TypeMirror) : boolean
++ {static} isPrimitiveType(type : TypeMirror) : boolean
++ {static} obtainPackage(fullName : String) : String
+
+}
+class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies {
+-filepath : String
+-pw : PrintWriter
++ <<create>> Writer(filepath : String, filename : String)
++ <<create>> Writer(filename : String)
++open()
++close()
++write(text : String)
+-createFile()
+-links()
+-createDirectoriesPath(path : String)
+
+}
+interface pumlFromJava.writers.WriterSpecies {
++open()
++close()
++write()
+
+}
+pumlFromJava.doclets.options.PathOption <-- PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.OutOption <-- PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.TypeOption <-- PumlDoclet : <<Use>>
+pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer <-- PumlClass : <<Use>>
+pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer <-- PumlClasses : <<Use>>
+
+@enduml
+

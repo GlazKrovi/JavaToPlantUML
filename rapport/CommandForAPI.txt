@@ -1,0 +1,13 @@
+-private
+-sourcepath
+src
+-doclet
+pumlFromJava.doclets.PumlDoclet
+-d
+generates/pumls/
+-g
+both
+-out
+subjavafrompuml.puml
+-subpackages
+pumlFromJava

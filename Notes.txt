@@ -1,15 +1,14 @@
-Pour les classes, afficher le nom complet (western.qqch)
-et supprimer le pumlpackage : il ne servira plus
 
-Commenter code de PumlMethod
+Inserer des overide partout où une méthode abstraite et/ou d'une inteface est implementé !! (oui oui,
+meme là)
 
-Remplacer identifyCollection (pumlMethod) avec quelque chose de plus legit
+Rapport, DCC API, DCC doc semaine 4
 
+Changer les DCA en ACD ; et DCC en CCD (version anglaise)
 
-// 2) else if pour les <<create>> pour constructeur
-                // 5) voir pk virgule n'est pas bien : of(nom : Stringgenre : Genre, ) : Boisson
-                // 6) Rapport, DCC API, DCC doc,
+Ajouter des @Nonnull pour les paramètres et des lancement d'exception quand
+l'element passé en paramètre n'est pas du bon type (+voir pour d'autres erreurs personalisée)
 
-Coder les trucs noter de "TODO"
+Class pour supprimer les relations <<use>> en doubles, trier
 
-pour les collections de collections, enlever tout les '>' en trop
+Ajouter les " : use" à la fin des relations

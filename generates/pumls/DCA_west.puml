@@ -1,0 +1,71 @@
+@startuml
+!theme reddress-darkgreen
+
+class western.Barman extends western.Personnage {
+nomDuBar
+
+}
+
+class western.Boisson
+
+class western.Brigand extends western.Personnage implements western.HorsLaLoi {
+LOOK_PAR_DEFAUT
+look
+recompense
+estLibre
+
+}
+
+class western.Cowboy extends western.Personnage {
+gains
+
+}
+
+class western.Dame extends western.Personnage {
+estLibre
+
+}
+
+enum western.Genre {
+FEMININ
+MASCULIN
+
+}
+class western.Histoire4
+
+class western.Histoire5
+
+interface western.HorsLaLoi extends western.Nommable
+class western.Narrateur extends western.Personnage
+
+interface western.Nommable
+abstract western.Personnage implements western.Nommable {
+nom
+
+}
+
+class western.Ripou extends western.Cowboy implements western.HorsLaLoi
+
+class western.Sherif extends western.Cowboy
+
+class western.Substantif {
+nom
+
+}
+
+western.Boisson <-- Barman : <<Use>>
+western.Substantif <-- Boisson : <<Use>>
+western.Boisson <-- Boisson : <<Use>>
+western.Cowboy <-- Brigand : <<Use>>
+western.Boisson <-- Brigand : <<Use>>
+western.Boisson <-- Cowboy : <<Use>>
+western.Cowboy <-- Dame : <<Use>>
+western.HorsLaLoi <-- Dame : <<Use>>
+western.Boisson <-- Dame : <<Use>>
+western.Boisson <-- Personnage : <<Use>>
+western.Boisson <-- Personnage : <<Use>>
+western.Brigand <-- Ripou : <<Use>>
+western.Genre <-- Substantif : <<Use>>
+
+@enduml
+

@@ -1,4 +1,4 @@
-package pumlFromJava.diagrams;
+package pumlFromJava.translators.diagrams;
 
 import jdk.javadoc.doclet.DocletEnvironment;
 

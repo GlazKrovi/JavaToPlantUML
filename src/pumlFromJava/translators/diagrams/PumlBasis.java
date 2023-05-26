@@ -1,10 +1,10 @@
-package pumlFromJava.diagrams;
+package pumlFromJava.translators.diagrams;
 
 import jdk.javadoc.doclet.DocletEnvironment;
+import pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlEnum;
+import pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlInterface;
+import pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClass;
 import pumlFromJava.translators.pumlMarker.Marker;
-import pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject.pumlClasses.PumlClass;
-import pumlFromJava.translators.pumlEntities.pumlObjects.PumlEnum;
-import pumlFromJava.translators.pumlEntities.pumlObjects.inheritableObject.PumlInterface;
 
 import javax.lang.model.element.Element;
 
@@ -31,9 +31,9 @@ public class PumlBasis implements IPumlDiagram {
         res.append(marker.umlStart());
         // translate every "big" elements (class, enum, interface)
         for (Element elm : environment.getIncludedElements()) {
-            res.append(pumlclass.getName(elm));
-            res.append(pumlenum.getName(elm));
-            res.append(pumlinterface.getName(elm));
+            res.append(pumlclass.getFullName(elm));
+            res.append(pumlenum.getFullName(elm));
+            res.append(pumlinterface.getFullName(elm));
             res.append("\n");
         }
         // end uml scheme

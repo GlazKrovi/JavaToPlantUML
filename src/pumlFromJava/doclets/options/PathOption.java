@@ -44,7 +44,7 @@ public class PathOption implements Doclet.Option {
 
     public String getPath() {
         String res = "./";
-        if (path != null && !path.equals("")){
+        if (path != null && !path.equals("")) {
             res = path;
         }
         return res;
