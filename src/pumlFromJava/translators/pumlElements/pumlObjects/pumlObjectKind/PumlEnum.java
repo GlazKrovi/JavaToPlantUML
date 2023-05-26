@@ -1,4 +1,6 @@
-package pumlFromJava.translators.pumlEntities.pumlObjects;
+package pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind;
+
+import pumlFromJava.translators.pumlElements.pumlObjects.PumlObject;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -8,24 +10,24 @@ import javax.lang.model.element.ElementKind;
  */
 public class PumlEnum extends PumlObject {
 
-    public PumlEnum() {
+    @Override
+    public String selfTranslate(Element element) {
+        return  "enum " +
+                getFullName(element) +
+                open() + // {
+                "\n" +
+                contentTranslate(element) + // -field, +method
+                close() + // }
+                "\n";
     }
 
-    public String getName(Element element) {
-        String res = "";
-        if (element.getKind() == ElementKind.ENUM) {
-            res = "enum " + element.getSimpleName().toString() + " <<enumeration>>";
-        }
-        return res;
-    }
-
-    public String getContent(Element element) {
+    public String contentTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         if (element.getKind() == ElementKind.ENUM) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 if (enclosedElement.getKind() == ElementKind.ENUM_CONSTANT) {
                     res.append(enclosedElement.getSimpleName());
-                    res.append(getLineBreaker());
+                    res.append("\n");
                 }
             }
         }

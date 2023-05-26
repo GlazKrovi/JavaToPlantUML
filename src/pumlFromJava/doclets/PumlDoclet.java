@@ -3,12 +3,13 @@ package pumlFromJava.doclets;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
-import pumlFromJava.diagrams.PumlDCA;
-import pumlFromJava.diagrams.PumlDCC;
-import pumlFromJava.doclets.options.TypeOption;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
+import pumlFromJava.doclets.options.TypeOption;
+import pumlFromJava.translators.diagrams.PumlDCA;
+import pumlFromJava.translators.diagrams.PumlDCC;
 import pumlFromJava.writers.Writer;
+
 import javax.lang.model.SourceVersion;
 import java.util.Locale;
 import java.util.Set;
@@ -67,6 +68,7 @@ public class PumlDoclet implements Doclet {
 
     /**
      * Generate a file containing a DCA scheme in Puml language
+     *
      * @param environment A correct javadoc environment
      */
     private void generateDCA(DocletEnvironment environment) {
@@ -90,6 +92,7 @@ public class PumlDoclet implements Doclet {
 
     /**
      * Generate a file containing a DCC scheme in Puml language
+     *
      * @param environment A correct javadoc environment
      */
     private void generateDCC(DocletEnvironment environment) {

@@ -1,47 +1,35 @@
-package pumlFromJava.translators.pumlEntities.pumlObjects;
+package pumlFromJava.translators.pumlElements;
 
-import pumlFromJava.translators.pumlEntities.PumlType;
+import pumlFromJava.translators.TranslatorTools;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 
-public class PumlMethod extends PumlObject {
-    public PumlMethod() {
-    }
 
-    public String getName(Element element) {
-        String res = "";
-        if (element.getKind() == ElementKind.METHOD) {
-            res = element.getSimpleName().toString();
-        }
-        else if (element.getKind() == ElementKind.CONSTRUCTOR){
-            res = element.getEnclosingElement().getSimpleName().toString();
-        }
-        return res;
-    }
-
+public class PumlMethod implements ElementTranslator, Nameable {
     /**
      * Translate what is inside the method Element (parameters and returned value type)
      *
      * @param element a method element
      * @return String like (paramName1 : paramType1, paramName2 : paramType2) : returnedValueType
      */
-    public String getContent(Element element) {
+    public String selfTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         if (element.getKind() == ElementKind.METHOD) {
             ExecutableElement executableElement = (ExecutableElement) element;
+            res.append(this.getSimplifiedName(element));
             res.append("(");
-            res.append(PumlType.reformat(this.getParameters(executableElement)));
+            res.append(TranslatorTools.reformatName(this.getParameters(executableElement)));
             res.append(")");
             if (!this.getReturnType(executableElement).isEmpty()) {
                 res.append(" : ");
                 res.append(this.getReturnType(executableElement));
             }
-        }
-        else if(element.getKind() == ElementKind.CONSTRUCTOR){
+        } else if (element.getKind() == ElementKind.CONSTRUCTOR) {
             ExecutableElement executableElement = (ExecutableElement) element;
+            res.append(TranslatorTools.cutPackage(element.getEnclosingElement().toString()));
             res.append("(");
             res.append(this.getParameters(executableElement));
             res.append(")");
@@ -49,15 +37,18 @@ public class PumlMethod extends PumlObject {
         return res.toString();
     }
 
-    /**
-     * Translate the name (like class, enum or interface)
-     * and what is inside the method element (like parameters, their type and method's returned type)
-     *
-     * @param element a method element
-     * @return String like 'openFile(path : String, mode : Mode) : Boolean
-     */
-    public String getTranslation(Element element) {
-        return this.getName(element) + this.getContent(element);
+    public String getFullName(Element element) {
+        String res = "";
+        if (element.getKind() == ElementKind.METHOD) {
+            res = element.getSimpleName().toString();
+        } else if (element.getKind() == ElementKind.CONSTRUCTOR) {
+            res = element.getEnclosingElement().getSimpleName().toString();
+        }
+        return res;
+    }
+
+    public String getSimplifiedName(Element element) {
+        return TranslatorTools.cutPackage(getFullName(element));
     }
 
     /**
@@ -70,12 +61,13 @@ public class PumlMethod extends PumlObject {
         StringBuilder res = new StringBuilder();
         int nbType = 0;
         for (VariableElement parameter : methodElement.getParameters()) {
-            res.append(PumlType.reformat(parameter.getSimpleName().toString()));
+            // managing classes used by another
+            res.append(TranslatorTools.reformatName(parameter.getSimpleName().toString()));
             res.append(" : ");
-            res.append(PumlType.reformat(parameter.asType().toString()));
+            res.append(TranslatorTools.reformatName(parameter.asType().toString()));
             nbType++;
             // is comma necessary?
-            if (nbType >= 1 && nbType<methodElement.getParameters().size()) res.append(", ");
+            if (nbType >= 1 && nbType < methodElement.getParameters().size()) res.append(", ");
         }
         return res.toString();
     }
@@ -89,7 +81,7 @@ public class PumlMethod extends PumlObject {
     private String getReturnType(ExecutableElement methodElement) {
         String res = "";
         if (!methodElement.getReturnType().toString().equals("void")) {
-            res = PumlType.reformat(methodElement.getReturnType().toString());
+            res = TranslatorTools.reformatName(methodElement.getReturnType().toString());
         }
         return res;
     }

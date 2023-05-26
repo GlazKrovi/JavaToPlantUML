@@ -18,5 +18,12 @@ public class Marker implements IPumlMarker {
     public String option_strictUml() {
         return "skinparam style strictuml\n";
     }
+
+    /**
+     * Returns '@enduml'
+     */
+    public String umlEnd() {
+        return ("\n@enduml\n");
+    }
 }
 

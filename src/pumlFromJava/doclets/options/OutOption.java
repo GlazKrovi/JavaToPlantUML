@@ -44,7 +44,7 @@ public class OutOption implements Doclet.Option {
 
     public String getFileName() {
         String res = "autogenfile.puml";
-        if (NameFile != null && !NameFile.equals("")){
+        if (NameFile != null && !NameFile.equals("")) {
             res = NameFile;
         }
         return res;

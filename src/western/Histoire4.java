@@ -14,7 +14,7 @@ import java.util.List;
 public class Histoire4
 {
     // test
-    private List<Integer> somethings = new ArrayList<>();
+    private List<List<Integer>> somethings = new ArrayList<>();
 
     public static void main(String[] args)
     {
