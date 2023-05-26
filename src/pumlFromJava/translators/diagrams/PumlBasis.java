@@ -8,7 +8,7 @@ import pumlFromJava.translators.pumlMarker.Marker;
 
 import javax.lang.model.element.Element;
 
-public class PumlBasis implements IPumlDiagram {
+public class PumlBasis implements PumlDiagram {
 
     public PumlBasis() {
     }
@@ -20,7 +20,7 @@ public class PumlBasis implements IPumlDiagram {
      * @param environment a java environment
      * @return Returns Puml translated String
      */
-    public String getScheme(DocletEnvironment environment) {
+    public String translateToScheme(DocletEnvironment environment) {
         Marker marker = new Marker();
         StringBuilder res = new StringBuilder();
         // puml objects

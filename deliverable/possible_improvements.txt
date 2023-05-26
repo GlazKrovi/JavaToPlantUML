@@ -1,0 +1,4 @@
+Ajouter des lancement d'exception quand
+l'element passé en paramètre n'est pas du bon type (+voir pour d'autres erreurs personalisée)
+
+Class pour supprimer les relations <<use>> en doubles, trier

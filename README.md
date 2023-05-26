@@ -44,7 +44,7 @@ les éléments sélectionnés.
           
 ###### Exemple de diagramme généré pour le package western
 
-![Diagramme western_s1](img/western_s1.svg)
+![Diagramme western_s1](deliverable/img/western_s1.svg)
   
 ###### Rendus :
   - DS `Doclet`, DCA et DCC des classes `Doclet`
@@ -83,7 +83,7 @@ Le doclet a accès aux éléments à travers son environnement (`DocletEnvironme
 
 ###### Exemple de diagramme généré à ce stade pour le package western
 
-![Diagramme western_s2](img/western_s2.svg)
+![Diagramme western_s2](deliverable/img/western_s2.svg)
 
 ###### Rendus:
 - DCC de Java Language API
@@ -108,7 +108,7 @@ Les relations de dépendance ne seront traitées qu'en semaine 5.
 
 ###### Exemple de diagramme généré à ce stade pour le package western
 
-![Diagramme western_s3](img/western_s3.svg)
+![Diagramme western_s3](deliverable/img/western_s3.svg)
 
 ###### En savoir plus :
 
@@ -137,7 +137,7 @@ Le DCC produit doit :
 
 ###### Exemple de diagramme généré à ce stade pour le package western
 
-![Diagramme western_s4](img/western_s4.svg)
+![Diagramme western_s4](deliverable/img/western_s4.svg)
 
 ###### En savoir plus :
 

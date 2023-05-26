@@ -9,14 +9,14 @@ import pumlFromJava.translators.pumlMarker.Marker;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public class PumlDCA implements IPumlDiagram {
+public class PumlACD implements PumlDiagram {
     /**
      * Design a full Puml Analyze Class Diagram scheme
      *
      * @param environment a java environment
      * @return Returns string representing a .puml file's content, for an ACD
      */
-    public String getScheme(DocletEnvironment environment) {
+    public String translateToScheme(DocletEnvironment environment) {
         // tools and return
         Marker marker = new Marker();
         StringBuilder res = new StringBuilder();

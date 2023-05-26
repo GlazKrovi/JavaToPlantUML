@@ -6,8 +6,8 @@ import jdk.javadoc.doclet.Reporter;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.doclets.options.TypeOption;
-import pumlFromJava.translators.diagrams.PumlDCA;
-import pumlFromJava.translators.diagrams.PumlDCC;
+import pumlFromJava.translators.diagrams.PumlACD;
+import pumlFromJava.translators.diagrams.PumlCCD;
 import pumlFromJava.writers.Writer;
 
 import javax.lang.model.SourceVersion;
@@ -51,14 +51,14 @@ public class PumlDoclet implements Doclet {
     public boolean run(DocletEnvironment environment) {
         try {
             if (oType.getType().equalsIgnoreCase("both")) {
-                generateDCA(environment);
-                generateDCC(environment);
-            } else if (oType.getType().equalsIgnoreCase("dcc")) {
-                generateDCC(environment);
-            } else if (oType.getType().equalsIgnoreCase("dca")) {
-                generateDCA(environment);
+                generateACD(environment);
+                generateCCD(environment);
+            } else if (oType.getType().equalsIgnoreCase("ccd")) {
+                generateCCD(environment);
+            } else if (oType.getType().equalsIgnoreCase("acd")) {
+                generateACD(environment);
             } else {
-                throw new IllegalArgumentException("Please specify if you want 'both', 'dca' or 'dcc' scheme");
+                throw new IllegalArgumentException("Please specify if you want 'both', 'acd' or 'dcc' scheme");
             }
         } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
@@ -67,49 +67,49 @@ public class PumlDoclet implements Doclet {
     }
 
     /**
-     * Generate a file containing a DCA scheme in Puml language
+     * Generate a file containing a CCD scheme in Puml language
      *
      * @param environment A correct javadoc environment
      */
-    private void generateDCA(DocletEnvironment environment) {
-        PumlDCA diagram = new PumlDCA();
+    private void generateACD(DocletEnvironment environment) {
+        PumlACD diagram = new PumlACD();
         Writer writer;
         // specific file's path and/or name
         if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().equals("")) {
-            writer = new Writer(oPath.getPath(), "DCA_" + oOut.getFileName());
+            writer = new Writer(oPath.getPath(), "ACD_" + oOut.getFileName());
         } else if (oOut.getFileName() != null && !oOut.getNames().isEmpty()) {
-            writer = new Writer("DCA_" + oOut.getFileName());
+            writer = new Writer("ACD_" + oOut.getFileName());
         } else {
-            writer = new Writer("DCA_gen.puml");
+            writer = new Writer("ACD_gen.puml");
         }
         // open file
         writer.open();
-        // writing what we want (a dca)
-        writer.write(diagram.getScheme(environment));
+        // writing what we want (a acd)
+        writer.write(diagram.translateToScheme(environment));
         // close file
         writer.close();
     }
 
     /**
-     * Generate a file containing a DCC scheme in Puml language
+     * Generate a file containing a CCD scheme in Puml language
      *
      * @param environment A correct javadoc environment
      */
-    private void generateDCC(DocletEnvironment environment) {
-        PumlDCC diagram = new PumlDCC();
+    private void generateCCD(DocletEnvironment environment) {
+        PumlCCD diagram = new PumlCCD();
         Writer writer;
         // specific file's path and/or name
         if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().isEmpty()) {
-            writer = new Writer(oPath.getPath(), "DCC_" + oOut.getFileName());
+            writer = new Writer(oPath.getPath(), "CCD_" + oOut.getFileName());
         } else if (oOut.getFileName() != null && !oOut.getNames().isEmpty()) {
-            writer = new Writer("DCC_" + oOut.getFileName());
+            writer = new Writer("CCD_" + oOut.getFileName());
         } else {
-            writer = new Writer("DCC_gen.puml");
+            writer = new Writer("CCD_gen.puml");
         }
         // open file
         writer.open();
         // writing what we want (a dcc)
-        writer.write(diagram.getScheme(environment));
+        writer.write(diagram.translateToScheme(environment));
         // close file
         writer.close();
     }

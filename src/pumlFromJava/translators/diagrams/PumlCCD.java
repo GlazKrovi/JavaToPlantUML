@@ -9,8 +9,8 @@ import pumlFromJava.translators.pumlMarker.Marker;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
-public class PumlDCC implements IPumlDiagram {
-    public PumlDCC() {
+public class PumlCCD implements PumlDiagram {
+    public PumlCCD() {
     }
 
     /**
@@ -19,7 +19,7 @@ public class PumlDCC implements IPumlDiagram {
      * @param environment a java environment
      * @return Returns string representing a .puml file's content, for a CCD
      */
-    public String getScheme(DocletEnvironment environment) {
+    public String translateToScheme(DocletEnvironment environment) {
         // tools and return
         Marker marker = new Marker();
         StringBuilder res = new StringBuilder();

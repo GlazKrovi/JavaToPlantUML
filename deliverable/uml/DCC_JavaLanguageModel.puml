@@ -1,5 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
+!theme reddress-darkgreen
+
 package javax.lang.model.element{
 interface Element <<interface>> {
 +asType() : TypeMirror
