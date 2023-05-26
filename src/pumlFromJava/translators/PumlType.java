@@ -1,6 +1,4 @@
-package pumlFromJava.translators.pumlElements;
-
-import pumlFromJava.translators.TranslatorTools;
+package pumlFromJava.translators;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -9,7 +7,7 @@ import javax.lang.model.element.ElementKind;
  * Represents puml equivalent for a java type (integer, string, etc.)
  */
 public class PumlType implements ElementTranslator {
-
+    @Override
     public String selfTranslate(Element element) {
         String res = "";
         if (element.getKind() == ElementKind.PARAMETER) {

@@ -1,9 +1,8 @@
-package pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses;
+package pumlFromJava.translators.pumlObjects.pumlClasses;
 
-import pumlFromJava.translators.pumlElements.PumlMethod;
+import pumlFromJava.translators.PumlMethod;
 import pumlFromJava.translators.TranslatorTools;
-import pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer;
-import pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer;
+import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 
 import javax.lang.model.element.*;
 

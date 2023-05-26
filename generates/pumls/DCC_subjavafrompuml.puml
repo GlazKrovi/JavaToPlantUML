@@ -85,16 +85,16 @@ class pumlFromJava.translators.diagrams.PumlDCC implements pumlFromJava.translat
 +getScheme(environment : DocletEnvironment) : String
 
 }
-interface pumlFromJava.translators.pumlElements.ElementTranslator {
+interface pumlFromJava.translators.ElementTranslator {
 +selfTranslate()
 
 }
-interface pumlFromJava.translators.pumlElements.Nameable {
+interface pumlFromJava.translators.Nameable {
 +getFullName()
 +getSimplifiedName()
 
 }
-class pumlFromJava.translators.pumlElements.PumlMethod implements pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable {
+class pumlFromJava.translators.PumlMethod implements pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable {
 + <<create>> PumlMethod()
 +selfTranslate(element : Element) : String
 +getFullName(element : Element) : String
@@ -103,22 +103,39 @@ class pumlFromJava.translators.pumlElements.PumlMethod implements pumlFromJava.t
 -getReturnType(methodElement : ExecutableElement) : String
 
 }
-class pumlFromJava.translators.pumlElements.PumlType implements pumlFromJava.translators.pumlElements.ElementTranslator {
+class pumlFromJava.translators.PumlType implements pumlFromJava.translators.ElementTranslator {
 + <<create>> PumlType()
 +selfTranslate(element : Element) : String
 
 }
-interface pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject {
+class pumlFromJava.translators.TranslatorTools {
++ <<create>> TranslatorTools()
++ {static} reformatName(name : String) : String
++ {static} cutPackage(name : String) : String
++ {static} identifyCollection(parameterName : String) : String
++ {static} isNotFromJava(typeMirror : TypeMirror) : boolean
++ {static} isPrimitiveType(type : TypeMirror) : boolean
++ {static} obtainPackage(fullName : String) : String
+
+}
+class pumlFromJava.translators.pumlMarker.Marker {
++ <<create>> Marker()
++umlStart() : String
++option_strictUml() : String
++umlEnd() : String
+
+}
+interface pumlFromJava.translators.pumlObjects.InheritableObject {
 +inheritanceTranslate()
 
 }
-interface pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator extends pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable {
+interface pumlFromJava.translators.pumlObjects.ObjectTranslator extends pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable {
 +contentTranslate()
 +open()
 +close()
 
 }
-abstract pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator {
+abstract pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.ObjectTranslator {
 + <<create>> PumlObject()
 + {abstract} selfTranslate(element : Element) : String
 +getFullName(element : Element) : String
@@ -128,11 +145,11 @@ abstract pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements
 +close() : String
 
 }
-interface pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject {
+interface pumlFromJava.translators.pumlObjects.RelationableObject {
 +relationsTranslate()
 
 }
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses {
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses {
 + <<create>> PumlClass()
 -visibilityViewer : VisibilityViewer
 +relationsTranslate(element : Element) : String
@@ -144,7 +161,7 @@ class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClass
 -getUses(element : Element) : String
 
 }
-abstract pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject, pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject {
+abstract pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject, pumlFromJava.translators.pumlObjects.RelationableObject {
 + <<create>> PumlClasses()
 # {readonly} modifiersViewer : ModifiersViewer
 + {abstract} selfTranslate(element : Element) : String
@@ -156,7 +173,20 @@ abstract pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlCl
 # {readonly} getAggregationsCompositions(element : Element) : String
 
 }
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses {
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject {
++ <<create>> PumlEnum()
++selfTranslate(element : Element) : String
++contentTranslate(element : Element) : String
+
+}
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlInterface extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject {
++ <<create>> PumlInterface()
++selfTranslate(element : Element) : String
++inheritanceTranslate(element : Element) : String
++contentTranslate(element : Element) : String
+
+}
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses {
 + <<create>> PumlLiteClass()
 +selfTranslate(element : Element) : String
 +relationsTranslate(element : Element) : String
@@ -165,20 +195,7 @@ class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClass
 -countPrimitivesFields(element : Element) : int
 
 }
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlEnum extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject {
-+ <<create>> PumlEnum()
-+selfTranslate(element : Element) : String
-+contentTranslate(element : Element) : String
-
-}
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlInterface extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject {
-+ <<create>> PumlInterface()
-+selfTranslate(element : Element) : String
-+inheritanceTranslate(element : Element) : String
-+contentTranslate(element : Element) : String
-
-}
-class pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer implements pumlFromJava.translators.pumlElements.ElementTranslator {
+class pumlFromJava.translators.pumlViewers.ModifiersViewer implements pumlFromJava.translators.ElementTranslator {
 + <<create>> ModifiersViewer()
 +selfTranslate(element : Element) : String
 -getStatic(modifiers : Modifier[*]) : String
@@ -186,31 +203,9 @@ class pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer implemen
 -getFinal(modifiers : Modifier[*]) : String
 
 }
-class pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer implements pumlFromJava.translators.pumlElements.ElementTranslator {
+class pumlFromJava.translators.pumlViewers.VisibilityViewer implements pumlFromJava.translators.ElementTranslator {
 + <<create>> VisibilityViewer()
 +selfTranslate(element : Element) : String
-
-}
-interface pumlFromJava.translators.pumlMarker.IPumlMarker {
-+umlStart()
-+umlEnd()
-
-}
-class pumlFromJava.translators.pumlMarker.Marker implements pumlFromJava.translators.pumlMarker.IPumlMarker {
-+ <<create>> Marker()
-+umlStart() : String
-+option_strictUml() : String
-+umlEnd() : String
-
-}
-class pumlFromJava.translators.TranslatorTools {
-+ <<create>> TranslatorTools()
-+ {static} reformatName(name : String) : String
-+ {static} cutPackage(name : String) : String
-+ {static} identifyCollection(parameterName : String) : String
-+ {static} isNotFromJava(typeMirror : TypeMirror) : boolean
-+ {static} isPrimitiveType(type : TypeMirror) : boolean
-+ {static} obtainPackage(fullName : String) : String
 
 }
 class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies {
@@ -235,8 +230,8 @@ interface pumlFromJava.writers.WriterSpecies {
 pumlFromJava.doclets.options.PathOption <-- PumlDoclet : <<Use>>
 pumlFromJava.doclets.options.OutOption <-- PumlDoclet : <<Use>>
 pumlFromJava.doclets.options.TypeOption <-- PumlDoclet : <<Use>>
-pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer <-- PumlClass : <<Use>>
-pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer <-- PumlClasses : <<Use>>
+pumlFromJava.translators.pumlViewers.VisibilityViewer <-- PumlClass : <<Use>>
+pumlFromJava.translators.pumlViewers.ModifiersViewer <-- PumlClasses : <<Use>>
 
 @enduml
 

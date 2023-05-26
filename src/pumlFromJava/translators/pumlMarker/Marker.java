@@ -1,11 +1,10 @@
 package pumlFromJava.translators.pumlMarker;
 
-public class Marker implements IPumlMarker {
-
-    public Marker() {
-    }
-
-    /**
+/**
+ * This writes the basic lines for opening and closing a puml file, as well as a possible theme and/or option
+ */
+public class Marker {
+     /**
      * Returns '@startUml' and theme
      */
     public String umlStart() {

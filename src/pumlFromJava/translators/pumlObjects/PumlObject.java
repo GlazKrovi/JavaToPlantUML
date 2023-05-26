@@ -1,4 +1,4 @@
-package pumlFromJava.translators.pumlElements.pumlObjects;
+package pumlFromJava.translators.pumlObjects;
 
 import pumlFromJava.translators.TranslatorTools;
 
@@ -9,22 +9,27 @@ import javax.lang.model.element.Element;
  */
 public abstract class PumlObject implements ObjectTranslator {
 
+    @Override
     public abstract String selfTranslate(Element element) ;
 
+    @Override
     public String getFullName(Element element) {
         return element.toString();
     }
 
+    @Override
     public String getSimplifiedName(Element element) {
         return TranslatorTools.reformatName(this.getFullName(element));
     }
 
     public abstract String contentTranslate(Element element);
 
+    @Override
     public String open() {
         return " {";
     }
 
+    @Override
     public String close() {
         return "\n}";
     }

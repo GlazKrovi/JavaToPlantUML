@@ -1,6 +1,6 @@
-package pumlFromJava.translators.pumlElements.pumlViewers;
+package pumlFromJava.translators.pumlViewers;
 
-import pumlFromJava.translators.pumlElements.ElementTranslator;
+import pumlFromJava.translators.ElementTranslator;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -11,7 +11,7 @@ import java.util.Set;
  * like + for public, - for private, ~ for protected
  */
 public class VisibilityViewer implements ElementTranslator {
-
+    @Override
     public String selfTranslate(Element element) {
         String res = "";
         Set<Modifier> visibility = element.getModifiers();

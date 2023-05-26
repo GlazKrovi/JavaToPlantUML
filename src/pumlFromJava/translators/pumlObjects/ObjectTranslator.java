@@ -1,7 +1,7 @@
-package pumlFromJava.translators.pumlElements.pumlObjects;
+package pumlFromJava.translators.pumlObjects;
 
-import pumlFromJava.translators.pumlElements.ElementTranslator;
-import pumlFromJava.translators.pumlElements.Nameable;
+import pumlFromJava.translators.ElementTranslator;
+import pumlFromJava.translators.Nameable;
 
 import javax.lang.model.element.Element;
 

@@ -1,6 +1,4 @@
-package pumlFromJava.translators.pumlElements;
-
-import pumlFromJava.translators.TranslatorTools;
+package pumlFromJava.translators;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -15,6 +13,7 @@ public class PumlMethod implements ElementTranslator, Nameable {
      * @param element a method element
      * @return String like (paramName1 : paramType1, paramName2 : paramType2) : returnedValueType
      */
+    @Override
     public String selfTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         if (element.getKind() == ElementKind.METHOD) {
@@ -37,6 +36,7 @@ public class PumlMethod implements ElementTranslator, Nameable {
         return res.toString();
     }
 
+    @Override
     public String getFullName(Element element) {
         String res = "";
         if (element.getKind() == ElementKind.METHOD) {
@@ -47,6 +47,7 @@ public class PumlMethod implements ElementTranslator, Nameable {
         return res;
     }
 
+    @Override
     public String getSimplifiedName(Element element) {
         return TranslatorTools.cutPackage(getFullName(element));
     }

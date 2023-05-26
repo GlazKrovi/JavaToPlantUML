@@ -1,9 +1,9 @@
-package pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind;
+package pumlFromJava.translators.pumlObjects.pumlClasses;
 
 import pumlFromJava.translators.TranslatorTools;
-import pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject;
-import pumlFromJava.translators.pumlElements.pumlObjects.PumlObject;
-import pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer;
+import pumlFromJava.translators.pumlObjects.InheritableObject;
+import pumlFromJava.translators.pumlObjects.PumlObject;
+import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;

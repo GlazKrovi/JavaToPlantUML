@@ -29,35 +29,34 @@ class pumlFromJava.translators.diagrams.PumlDCA implements pumlFromJava.translat
 
 class pumlFromJava.translators.diagrams.PumlDCC implements pumlFromJava.translators.diagrams.IPumlDiagram
 
-interface pumlFromJava.translators.pumlElements.ElementTranslator
-interface pumlFromJava.translators.pumlElements.Nameable
-class pumlFromJava.translators.pumlElements.PumlMethod implements pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable
+interface pumlFromJava.translators.ElementTranslator
+interface pumlFromJava.translators.Nameable
+class pumlFromJava.translators.PumlMethod implements pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable
 
-class pumlFromJava.translators.pumlElements.PumlType implements pumlFromJava.translators.pumlElements.ElementTranslator
-
-interface pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject
-interface pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator extends pumlFromJava.translators.pumlElements.ElementTranslator, pumlFromJava.translators.pumlElements.Nameable
-abstract pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.ObjectTranslator
-
-interface pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses
-
-abstract pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject, pumlFromJava.translators.pumlElements.pumlObjects.RelationableObject
-
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.pumlClasses.PumlClasses
-
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlEnum extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject
-
-class pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind.PumlInterface extends pumlFromJava.translators.pumlElements.pumlObjects.PumlObject implements pumlFromJava.translators.pumlElements.pumlObjects.InheritableObject
-
-class pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer implements pumlFromJava.translators.pumlElements.ElementTranslator
-
-class pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer implements pumlFromJava.translators.pumlElements.ElementTranslator
-
-interface pumlFromJava.translators.pumlMarker.IPumlMarker
-class pumlFromJava.translators.pumlMarker.Marker implements pumlFromJava.translators.pumlMarker.IPumlMarker
+class pumlFromJava.translators.PumlType implements pumlFromJava.translators.ElementTranslator
 
 class pumlFromJava.translators.TranslatorTools
+
+class pumlFromJava.translators.pumlMarker.Marker
+
+interface pumlFromJava.translators.pumlObjects.InheritableObject
+interface pumlFromJava.translators.pumlObjects.ObjectTranslator extends pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable
+abstract pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.ObjectTranslator
+
+interface pumlFromJava.translators.pumlObjects.RelationableObject
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses
+
+abstract pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject, pumlFromJava.translators.pumlObjects.RelationableObject
+
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject
+
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlInterface extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject
+
+class pumlFromJava.translators.pumlObjects.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses
+
+class pumlFromJava.translators.pumlViewers.ModifiersViewer implements pumlFromJava.translators.ElementTranslator
+
+class pumlFromJava.translators.pumlViewers.VisibilityViewer implements pumlFromJava.translators.ElementTranslator
 
 class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies {
 filepath
@@ -68,8 +67,8 @@ interface pumlFromJava.writers.WriterSpecies
 pumlFromJava.doclets.options.PathOption <-- PumlDoclet : <<Use>>
 pumlFromJava.doclets.options.OutOption <-- PumlDoclet : <<Use>>
 pumlFromJava.doclets.options.TypeOption <-- PumlDoclet : <<Use>>
-pumlFromJava.translators.pumlElements.pumlViewers.VisibilityViewer <-- PumlClass : <<Use>>
-pumlFromJava.translators.pumlElements.pumlViewers.ModifiersViewer <-- PumlClasses : <<Use>>
+pumlFromJava.translators.pumlViewers.VisibilityViewer <-- PumlClass : <<Use>>
+pumlFromJava.translators.pumlViewers.ModifiersViewer <-- PumlClasses : <<Use>>
 
 @enduml
 

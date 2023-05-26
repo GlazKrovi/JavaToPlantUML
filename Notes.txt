@@ -10,5 +10,3 @@ Ajouter des @Nonnull pour les paramètres et des lancement d'exception quand
 l'element passé en paramètre n'est pas du bon type (+voir pour d'autres erreurs personalisée)
 
 Class pour supprimer les relations <<use>> en doubles, trier
-
-Ajouter les " : use" à la fin des relations

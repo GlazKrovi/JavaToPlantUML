@@ -1,6 +1,6 @@
-package pumlFromJava.translators.pumlElements.pumlViewers;
+package pumlFromJava.translators.pumlViewers;
 
-import pumlFromJava.translators.pumlElements.ElementTranslator;
+import pumlFromJava.translators.ElementTranslator;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;

@@ -1,6 +1,6 @@
-package pumlFromJava.translators.pumlElements.pumlObjects.pumlObjectKind;
+package pumlFromJava.translators.pumlObjects.pumlClasses;
 
-import pumlFromJava.translators.pumlElements.pumlObjects.PumlObject;
+import pumlFromJava.translators.pumlObjects.PumlObject;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -21,6 +21,7 @@ public class PumlEnum extends PumlObject {
                 "\n";
     }
 
+    @Override
     public String contentTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         if (element.getKind() == ElementKind.ENUM) {
