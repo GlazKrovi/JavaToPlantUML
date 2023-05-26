@@ -2,9 +2,8 @@ package pumlFromJava.translators.pumlObjects.pumlClasses;
 
 import pumlFromJava.translators.TranslatorTools;
 
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Modifier;
+import javax.lang.model.element.*;
+import javax.lang.model.type.TypeKind;
 
 /**
  * Represents a Puml translator for java class,
@@ -40,6 +39,55 @@ public class PumlLiteClass extends PumlClasses {
     @Override
     public String relationsTranslate(Element element) {
         return getAggregationsCompositions(element);
+    }
+
+    @Override
+    protected String getUses(Element element) {
+        StringBuilder res = new StringBuilder();
+        for (Element enclosedElement : element.getEnclosedElements()) {
+            if (enclosedElement.getKind() == ElementKind.METHOD) {
+                ExecutableElement executableElement = (ExecutableElement) enclosedElement;
+                for (VariableElement parameter : executableElement.getParameters()) {
+                    // managing classes used by another
+                    if (TranslatorTools.isNotFromJava(parameter.asType()) &&
+                            !TranslatorTools.isPrimitiveType(parameter.asType())) {
+                        res.append(this.getFullName(element));
+                        res.append(" -- ");
+                        res.append(parameter.asType());
+                        res.append(" : <<Use>>");
+                        res.append("\n");
+                    }
+                }
+            }
+        }
+        return res.toString();
+    }
+
+    @Override
+    protected String getAggregationsCompositions(Element element) {
+        StringBuilder res = new StringBuilder();
+        if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
+            for (Element enclosedElement : element.getEnclosedElements()) {
+                // is the field a class or enum? (non-primitive)
+                if (enclosedElement.asType().getKind() == TypeKind.DECLARED &&
+                        !TranslatorTools.isPrimitiveType(enclosedElement.asType()) &&
+                        TranslatorTools.isNotFromJava(enclosedElement.asType())) {
+                    // get the name of the class or interface of enclosedElement
+                    String className = enclosedElement.asType().toString();
+                    // add the class name
+                    res.append(className);
+                    // add arrow
+                    res.append(" <-- ");
+                    // get the defined class (aggregation or composition)
+                    res.append(element.getSimpleName().toString());
+                    // use
+                    res.append(" : <<Use>>");
+                    // line break
+                    res.append("\n");
+                }
+            }
+        }
+        return res.toString();
     }
 
     @Override

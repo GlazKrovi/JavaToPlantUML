@@ -1,10 +1,12 @@
 package pumlFromJava.translators.pumlObjects.pumlClasses;
 
+import pumlFromJava.translators.PumlType;
 import pumlFromJava.translators.TranslatorTools;
 import pumlFromJava.translators.pumlObjects.InheritableObject;
 import pumlFromJava.translators.pumlObjects.PumlObject;
 import pumlFromJava.translators.pumlObjects.RelationableObject;
 import pumlFromJava.translators.pumlViewers.ModifiersViewer;
+import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -92,29 +94,7 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
      * @param element a class
      * @return Returns string like Hamburger -- Steak
      */
-    protected String getAggregationsCompositions(Element element) {
-        StringBuilder res = new StringBuilder();
-        if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
-            for (Element enclosedElement : element.getEnclosedElements()) {
-                // is the field a class or enum? (non-primitive)
-                if (enclosedElement.asType().getKind() == TypeKind.DECLARED &&
-                        !TranslatorTools.isPrimitiveType(enclosedElement.asType()) &&
-                        TranslatorTools.isNotFromJava(enclosedElement.asType())) {
-                    // get the name of the class or interface of enclosedElement
-                    String className = enclosedElement.asType().toString();
-                    // add the class name
-                    res.append(className);
-                    // add arrow
-                    res.append(" <-- ");
-                    // get the defined class (aggregation or composition)
-                    res.append(element.getSimpleName().toString());
-                    // use
-                    res.append(" : <<Use>>");
-                    // line break
-                    res.append("\n");
-                }
-            }
-        }
-        return res.toString();
-    }
+    protected abstract String getAggregationsCompositions(Element element);
+
+    protected abstract String getUses(Element element);
 }

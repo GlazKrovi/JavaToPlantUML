@@ -1,10 +1,12 @@
 package pumlFromJava.translators.pumlObjects.pumlClasses;
 
 import pumlFromJava.translators.PumlMethod;
+import pumlFromJava.translators.PumlType;
 import pumlFromJava.translators.TranslatorTools;
 import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 
 import javax.lang.model.element.*;
+import javax.lang.model.type.TypeKind;
 
 /**
  * Represents a Puml translator for java class
@@ -18,6 +20,37 @@ public class PumlClass extends PumlClasses {
     public String relationsTranslate(Element element) {
         return this.getAggregationsCompositions(element) +
                 this.getUses(element);
+    }
+
+    @Override
+    protected String getAggregationsCompositions(Element element) {
+        StringBuilder res = new StringBuilder();
+        if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
+            VisibilityViewer visibilityViewer = new VisibilityViewer();
+            PumlType pumlType = new PumlType();
+            for (Element enclosedElement : element.getEnclosedElements()) {
+                // is the field a class or enum? (non-primitive)
+                if (enclosedElement.asType().getKind() == TypeKind.DECLARED &&
+                        !TranslatorTools.isPrimitiveType(enclosedElement.asType()) &&
+                        TranslatorTools.isNotFromJava(enclosedElement.asType())) {
+                    // get the name of the class or interface of enclosedElement
+                    String className = enclosedElement.asType().toString();
+                    // add the class name
+                    res.append(className);
+                    // add arrow
+                    res.append(" <--o ");
+                    // get the defined class (aggregation or composition)
+                    res.append(element.getSimpleName().toString());
+                    // visibility and name
+                    res.append(" : ");
+                    res.append(visibilityViewer.selfTranslate(enclosedElement));
+                    res.append(this.getSimplifiedName(enclosedElement));
+                    // line break
+                    res.append("\n");
+                }
+            }
+        }
+        return res.toString();
     }
 
     @Override
@@ -81,7 +114,7 @@ public class PumlClass extends PumlClasses {
      */
     private String fieldsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
-        if (element.getKind() == ElementKind.FIELD) {
+        if (element.getKind() == ElementKind.FIELD && TranslatorTools.isPrimitiveType(element.asType())) {
             res.append(visibilityViewer.selfTranslate(element));
             res.append(modifiersViewer.selfTranslate(element));
             res.append(element.getSimpleName());
@@ -108,7 +141,8 @@ public class PumlClass extends PumlClasses {
         return res.toString();
     }
 
-    private String getUses(Element element) { // todo
+    @Override
+    protected String getUses(Element element) {
         StringBuilder res = new StringBuilder();
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
@@ -118,8 +152,9 @@ public class PumlClass extends PumlClasses {
                     if (TranslatorTools.isNotFromJava(parameter.asType()) &&
                             !TranslatorTools.isPrimitiveType(parameter.asType())) {
                         res.append(this.getFullName(element));
-                        res.append(" <-- ");
-                        res.append(parameter.getKind());
+                        res.append(" --> ");
+                        res.append(parameter.asType());
+                        res.append(" : <<Use>>");
                         res.append("\n");
                     }
                 }
