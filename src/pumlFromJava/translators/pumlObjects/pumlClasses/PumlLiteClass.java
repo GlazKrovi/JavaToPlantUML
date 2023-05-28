@@ -52,7 +52,7 @@ public class PumlLiteClass extends PumlClasses {
                     if (TranslatorTools.isNotFromJava(parameter.asType()) &&
                             !TranslatorTools.isPrimitiveType(parameter.asType())) {
                         res.append(this.getFullName(element));
-                        res.append(" -- ");
+                        res.append(" .. ");
                         res.append(parameter.asType());
                         res.append(" : <<Use>>");
                         res.append("\n");

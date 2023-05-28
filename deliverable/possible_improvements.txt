@@ -1,7 +1,11 @@
-Ajouter des lancement d'exception quand
-l'element passé en paramètre n'est pas du bon type (+voir pour d'autres erreurs personalisée)
+PRIORITE:
+Class pour supprimer les relations <<use>> en doubles
 
-Class pour supprimer les relations <<use>> en doubles, trier ++ les fleches use sont en pointillés !!
 
+
+Ajouter des lancement d'exception quand l'element passé en paramètre n'est pas du bon type
+(+voir pour d'autres erreurs personalisée)
+
+Class pour trier (static avec static; private en dessous des public, etc=
 
 (apparement) pas besoin de chercher les classes instancié dans des méthodes

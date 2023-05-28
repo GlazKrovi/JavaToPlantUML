@@ -13,6 +13,8 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A puml equivalent for any type of class,
@@ -21,6 +23,8 @@ import javax.lang.model.type.TypeMirror;
 public abstract class PumlClasses extends PumlObject implements InheritableObject, RelationableObject {
 
     protected final ModifiersViewer modifiersViewer = new ModifiersViewer();
+    protected final List<TypeMirror> links = new ArrayList<>(); // buffer variable to store relationships and avoid unnecessary duplication
+
 
     @Override
     public abstract String selfTranslate(Element element) ;

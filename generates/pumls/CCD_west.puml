@@ -2,9 +2,7 @@
 !theme reddress-darkgreen
 
 class western.Barman extends western.Personnage {
-
 -nomDuBar : String
-
 + <<create>> Barman(nom : String)
 + <<create>> Barman(nom : String, nomDuBar : String)
 +getPseudo() : String
@@ -14,9 +12,6 @@ class western.Barman extends western.Personnage {
 
 }
 class western.Boisson {
-
-
-
 + {static} of(nom : String, genre : Genre) : Boisson
 - <<create>> Boisson(nom : String, genre : Genre)
 +getNom() : String
@@ -32,8 +27,6 @@ class western.Brigand extends western.Personnage implements western.HorsLaLoi {
 -look : String
 -recompense : int
 -estLibre : boolean
-
-
 + <<create>> Brigand(nom : String)
 + <<create>> Brigand(nom : String, boisson : Boisson)
 + <<create>> Brigand(nom : String, boisson : Boisson, look : String)
@@ -46,14 +39,12 @@ class western.Brigand extends western.Personnage implements western.HorsLaLoi {
 +seFaireTirerDessus(cowBoy : Cowboy)
 +getPseudo() : String
 +sePresenter()
-
 + {static} getBoissonParDefaut() : Boisson
 + {static} setBoissonParDefaut(boisson : Boisson)
 
 }
 class western.Cowboy extends western.Personnage {
 -gains : int
-
 + <<create>> Cowboy(nom : String)
 + <<create>> Cowboy(nom : String, boisson : Boisson)
 +getPseudo() : String
@@ -62,15 +53,12 @@ class western.Cowboy extends western.Personnage {
 +capturer(horsLaLoi : HorsLaLoi)
 +tirerSur(brigand : HorsLaLoi)
 +sePresenter()
-
 + {static} getBoissonParDefaut() : Boisson
 + {static} setBoissonParDefaut(boisson : Boisson)
 
 }
 class western.Dame extends western.Personnage {
 -estLibre : boolean
-
-
 + <<create>> Dame(nom : String)
 + <<create>> Dame(nom : String, boisson : Boisson)
 +getPseudo() : String
@@ -78,7 +66,6 @@ class western.Dame extends western.Personnage {
 +seFaireLiberer(cowBoy : Cowboy)
 +estLibre() : boolean
 +sePresenter()
-
 + {static} getBoissonParDefaut() : Boisson
 + {static} setBoissonParDefaut(boisson : Boisson)
 +getRavisseur() : HorsLaLoi
@@ -91,7 +78,6 @@ MASCULIN
 }
 class western.Histoire4 {
 + <<create>> Histoire4()
-
 + {static} main(args : String[*])
 
 }
@@ -125,9 +111,7 @@ interface western.Nommable {
 
 }
 abstract western.Personnage implements western.Nommable {
-
 -nom : String
-
 + <<create>> Personnage(nom : String)
 + <<create>> Personnage(nom : String, boisson : Boisson)
 +dire(texte : String)
@@ -141,7 +125,6 @@ abstract western.Personnage implements western.Nommable {
 
 }
 class western.Ripou extends western.Cowboy implements western.HorsLaLoi {
-
 + <<create>> Ripou(nom : String)
 + <<create>> Ripou(nom : String, boisson : Boisson)
 + <<create>> Ripou(nom : String, boisson : Boisson, look : String)
@@ -158,7 +141,6 @@ class western.Ripou extends western.Cowboy implements western.HorsLaLoi {
 
 }
 class western.Sherif extends western.Cowboy {
-
 + <<create>> Sherif(nom : String)
 + <<create>> Sherif(nom : String, boisson : Boisson)
 +getNom() : String
@@ -171,7 +153,6 @@ class western.Sherif extends western.Cowboy {
 }
 class western.Substantif {
 -nom : String
-
 + <<create>> Substantif(nom : String, genre : Genre)
 +getNom() : String
 +getGenre() : Genre
@@ -192,41 +173,26 @@ class western.Substantif {
 
 }
 western.Boisson <--o Barman : -boissonParDefaut
-western.Barman --> western.Personnage : <<Use>>
+western.Barman <.. western.Personnage : <<Use>>
 western.Substantif <--o Boisson : -substantif
 western.Boisson <--o Boisson : +EAU
-western.Boisson --> western.Genre : <<Use>>
+western.Boisson <.. western.Genre : <<Use>>
 western.Cowboy <--o Brigand : -gardien
 western.Boisson <--o Brigand : -boissonParDefaut
-western.Brigand --> western.Dame : <<Use>>
-western.Brigand --> western.Cowboy : <<Use>>
-western.Brigand --> western.Cowboy : <<Use>>
-western.Brigand --> western.Boisson : <<Use>>
+western.Brigand <.. western.Dame : <<Use>>
 western.Boisson <--o Cowboy : -boissonParDefaut
-western.Cowboy --> western.Dame : <<Use>>
-western.Cowboy --> western.HorsLaLoi : <<Use>>
-western.Cowboy --> western.HorsLaLoi : <<Use>>
-western.Cowboy --> western.Boisson : <<Use>>
+western.Cowboy <.. western.Dame : <<Use>>
+western.Cowboy <.. western.HorsLaLoi : <<Use>>
 western.Cowboy <--o Dame : -sauveur
 western.HorsLaLoi <--o Dame : -ravisseur
 western.Boisson <--o Dame : -boissonParDefaut
-western.Dame --> western.HorsLaLoi : <<Use>>
-western.Dame --> western.Cowboy : <<Use>>
-western.Dame --> western.Boisson : <<Use>>
-western.Narrateur --> western.Boisson : <<Use>>
+western.Narrateur <.. western.Boisson : <<Use>>
 western.Boisson <--o Personnage : -BOISSON_PAR_DEFAUT
-western.Boisson <--o Personnage : -boisson
-western.Personnage --> western.Boisson : <<Use>>
 western.Brigand <--o Ripou : -brigand
-western.Ripou --> western.Dame : <<Use>>
-western.Ripou --> western.Cowboy : <<Use>>
-western.Ripou --> western.Cowboy : <<Use>>
-western.Ripou --> western.Dame : <<Use>>
-western.Sherif --> western.HorsLaLoi : <<Use>>
-western.Sherif --> western.HorsLaLoi : <<Use>>
-western.Sherif --> western.HorsLaLoi : <<Use>>
+western.Ripou <.. western.Dame : <<Use>>
+western.Ripou <.. western.Cowboy : <<Use>>
+western.Sherif <.. western.HorsLaLoi : <<Use>>
 western.Genre <--o Substantif : -genre
-western.Substantif --> western.Genre : <<Use>>
 
 @enduml
 

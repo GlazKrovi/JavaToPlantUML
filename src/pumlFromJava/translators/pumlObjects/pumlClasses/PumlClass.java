@@ -1,10 +1,8 @@
 package pumlFromJava.translators.pumlObjects.pumlClasses;
 
 import pumlFromJava.translators.PumlMethod;
-import pumlFromJava.translators.PumlType;
 import pumlFromJava.translators.TranslatorTools;
 import pumlFromJava.translators.pumlViewers.VisibilityViewer;
-
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
 
@@ -18,8 +16,11 @@ public class PumlClass extends PumlClasses {
 
     @Override
     public String relationsTranslate(Element element) {
-        return this.getAggregationsCompositions(element) +
+        String res =  this.getAggregationsCompositions(element) +
                 this.getUses(element);
+        // reset relations for next element process
+        links.clear();
+        return res;
     }
 
     @Override
@@ -27,12 +28,12 @@ public class PumlClass extends PumlClasses {
         StringBuilder res = new StringBuilder();
         if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
             VisibilityViewer visibilityViewer = new VisibilityViewer();
-            PumlType pumlType = new PumlType();
             for (Element enclosedElement : element.getEnclosedElements()) {
                 // is the field a class or enum? (non-primitive)
                 if (enclosedElement.asType().getKind() == TypeKind.DECLARED &&
                         !TranslatorTools.isPrimitiveType(enclosedElement.asType()) &&
-                        TranslatorTools.isNotFromJava(enclosedElement.asType())) {
+                        TranslatorTools.isNotFromJava(enclosedElement.asType()) &&
+                        !links.contains(enclosedElement.asType())) {
                     // get the name of the class or interface of enclosedElement
                     String className = enclosedElement.asType().toString();
                     // add the class name
@@ -47,6 +48,9 @@ public class PumlClass extends PumlClasses {
                     res.append(this.getSimplifiedName(enclosedElement));
                     // line break
                     res.append("\n");
+
+                    // save the relation
+                    links.add(enclosedElement.asType());
                 }
             }
         }
@@ -71,17 +75,20 @@ public class PumlClass extends PumlClasses {
     @Override
     public String contentTranslate(Element element) {
         StringBuilder res = new StringBuilder();
+        String temporary = "";
         if (element.getKind() == ElementKind.CLASS) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 if (enclosedElement.getKind() == ElementKind.METHOD) {
-                    res.append(methodsTranslate(enclosedElement));
-                    res.append("\n");
+                    temporary = methodsTranslate(enclosedElement);
                 } else if (enclosedElement.getKind() == ElementKind.FIELD) {
-                    res.append(fieldsTranslate(enclosedElement));
-                    res.append("\n");
+                    temporary = fieldsTranslate(enclosedElement);
                 } else if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
-                    res.append(constructorsTranslate(enclosedElement));
-                    res.append("\n");
+                    temporary = constructorsTranslate(enclosedElement);
+                }
+                // is it correct?
+                if (!temporary.isEmpty()){
+                    res.append(temporary).append("\n");
+                    temporary = "";
                 }
             }
         }
@@ -150,12 +157,16 @@ public class PumlClass extends PumlClasses {
                 for (VariableElement parameter : executableElement.getParameters()) {
                     // managing classes used by another
                     if (TranslatorTools.isNotFromJava(parameter.asType()) &&
-                            !TranslatorTools.isPrimitiveType(parameter.asType())) {
+                            !TranslatorTools.isPrimitiveType(parameter.asType()) &&
+                            !links.contains(parameter.asType())) {
                         res.append(this.getFullName(element));
-                        res.append(" --> ");
+                        res.append(" <.. ");
                         res.append(parameter.asType());
                         res.append(" : <<Use>>");
                         res.append("\n");
+
+                        // save the relation
+                        links.add(parameter.asType());
                     }
                 }
             }
