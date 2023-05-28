@@ -13,9 +13,6 @@ class pumlFromJava.doclets.FirstDoclet {
 }
 class pumlFromJava.doclets.PumlDoclet {
 + <<create>> PumlDoclet()
-
-
-
 +init(locale : Locale, reporter : Reporter)
 +getName() : String
 +getSupportedOptions() : Option[*]
@@ -113,6 +110,7 @@ class pumlFromJava.translators.TranslatorTools {
 + {static} reformatName(name : String) : String
 + {static} cutPackage(name : String) : String
 + {static} identifyCollection(parameterName : String) : String
++ {static} isCollection(parameterName : String) : boolean
 + {static} isNotFromJava(typeMirror : TypeMirror) : boolean
 + {static} isPrimitiveType(type : TypeMirror) : boolean
 + {static} obtainPackage(fullName : String) : String
@@ -151,27 +149,26 @@ interface pumlFromJava.translators.pumlObjects.RelationableObject {
 }
 class pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses {
 + <<create>> PumlClass()
-
 +relationsTranslate(element : Element) : String
-# {readonly} getAggregationsCompositions(element : Element) : String
+# {readonly} AggregationsCompositionsTranslate(element : Element) : String
 +selfTranslate(element : Element) : String
 +contentTranslate(element : Element) : String
 -methodsTranslate(element : Element) : String
 -fieldsTranslate(element : Element) : String
 -constructorsTranslate(element : Element) : String
--getUses(element : Element) : String
+# {readonly} UsesTranslate(element : Element) : String
 
 }
 abstract pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject, pumlFromJava.translators.pumlObjects.RelationableObject {
 + <<create>> PumlClasses()
-
 + {abstract} selfTranslate(element : Element) : String
 +inheritanceTranslate(element : Element) : String
 + {abstract} contentTranslate(element : Element) : String
 + {abstract} relationsTranslate(element : Element) : String
 -getExtends(typeElement : TypeElement) : String
 -getImplements(typeElement : TypeElement) : String
-# {abstract}  {readonly} getAggregationsCompositions(element : Element) : String
+# {abstract}  {readonly} AggregationsCompositionsTranslate(element : Element) : String
+# {abstract}  {readonly} UsesTranslate(element : Element) : String
 
 }
 class pumlFromJava.translators.pumlObjects.pumlClasses.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject {
@@ -191,9 +188,10 @@ class pumlFromJava.translators.pumlObjects.pumlClasses.PumlLiteClass extends pum
 + <<create>> PumlLiteClass()
 +selfTranslate(element : Element) : String
 +relationsTranslate(element : Element) : String
-# {readonly} getAggregationsCompositions(element : Element) : String
+# {readonly} UsesTranslate(element : Element) : String
+# {readonly} AggregationsCompositionsTranslate(element : Element) : String
 +contentTranslate(element : Element) : String
--fieldsTranslate(element : Element) : String
+-primitiveFieldsTranslate(element : Element) : String
 -countPrimitivesFields(element : Element) : int
 
 }
@@ -212,7 +210,6 @@ class pumlFromJava.translators.pumlViewers.VisibilityViewer implements pumlFromJ
 }
 class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies {
 -filepath : String
-
 + <<create>> Writer(filepath : String, filename : String)
 + <<create>> Writer(filename : String)
 +open()
@@ -229,11 +226,11 @@ interface pumlFromJava.writers.WriterSpecies {
 +write()
 
 }
-pumlFromJava.doclets.options.PathOption <--o PumlDoclet : -oPath
-pumlFromJava.doclets.options.OutOption <--o PumlDoclet : -oOut
-pumlFromJava.doclets.options.TypeOption <--o PumlDoclet : -oType
-pumlFromJava.translators.pumlViewers.VisibilityViewer <--o PumlClass : -visibilityViewer
-pumlFromJava.translators.pumlViewers.ModifiersViewer <--o PumlClasses : #modifiersViewer
+pumlFromJava.doclets.options.PathOption"1" <--o "1"PumlDoclet : -oPath
+pumlFromJava.doclets.options.OutOption"1" <--o "1"PumlDoclet : -oOut
+pumlFromJava.doclets.options.TypeOption"1" <--o "1"PumlDoclet : -oType
+pumlFromJava.translators.pumlViewers.VisibilityViewer"1" <--o "1"PumlClass : -visibilityViewer
+pumlFromJava.translators.pumlViewers.ModifiersViewer"1" <--o "1"PumlClasses : #modifiersViewer
 
 @enduml
 

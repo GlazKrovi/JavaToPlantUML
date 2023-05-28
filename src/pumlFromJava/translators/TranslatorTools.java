@@ -62,6 +62,17 @@ public class TranslatorTools {
         return res;
     }
 
+    public static boolean isCollection(String parameterName){
+        boolean is = false;
+        for (int i = 0; i < parameterName.length(); i++) {
+            if (parameterName.charAt(i) == '>' || parameterName.charAt(i) == '[') {
+                is = true;
+                break;
+            }
+        }
+        return is;
+    }
+
     /**
      * Indicates if the element comes from the java language or not
      *

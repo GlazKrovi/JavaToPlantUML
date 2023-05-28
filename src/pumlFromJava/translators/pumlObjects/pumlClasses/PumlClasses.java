@@ -1,17 +1,13 @@
 package pumlFromJava.translators.pumlObjects.pumlClasses;
 
-import pumlFromJava.translators.PumlType;
 import pumlFromJava.translators.TranslatorTools;
 import pumlFromJava.translators.pumlObjects.InheritableObject;
 import pumlFromJava.translators.pumlObjects.PumlObject;
 import pumlFromJava.translators.pumlObjects.RelationableObject;
 import pumlFromJava.translators.pumlViewers.ModifiersViewer;
-import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +94,7 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
      * @param element a class
      * @return Returns string like Hamburger -- Steak
      */
-    protected abstract String getAggregationsCompositions(Element element);
+    protected abstract String AggregationsCompositionsTranslate(Element element);
 
-    protected abstract String getUses(Element element);
+    protected abstract String UsesTranslate(Element element);
 }

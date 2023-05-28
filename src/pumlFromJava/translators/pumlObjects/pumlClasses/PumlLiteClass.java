@@ -38,11 +38,15 @@ public class PumlLiteClass extends PumlClasses {
 
     @Override
     public String relationsTranslate(Element element) {
-        return getAggregationsCompositions(element);
+        String res =  this.AggregationsCompositionsTranslate(element) +
+                this.UsesTranslate(element);
+        // reset relations for next element process
+        links.clear();
+        return res;
     }
 
     @Override
-    protected String getUses(Element element) {
+    protected String UsesTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
@@ -50,12 +54,16 @@ public class PumlLiteClass extends PumlClasses {
                 for (VariableElement parameter : executableElement.getParameters()) {
                     // managing classes used by another
                     if (TranslatorTools.isNotFromJava(parameter.asType()) &&
-                            !TranslatorTools.isPrimitiveType(parameter.asType())) {
+                            !TranslatorTools.isPrimitiveType(parameter.asType()) &&
+                            !links.contains(parameter.asType())) {
                         res.append(this.getFullName(element));
                         res.append(" .. ");
                         res.append(parameter.asType());
                         res.append(" : <<Use>>");
                         res.append("\n");
+
+                        // save the relation
+                        links.add(parameter.asType());
                     }
                 }
             }
@@ -64,14 +72,15 @@ public class PumlLiteClass extends PumlClasses {
     }
 
     @Override
-    protected String getAggregationsCompositions(Element element) {
+    protected String AggregationsCompositionsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 // is the field a class or enum? (non-primitive)
                 if (enclosedElement.asType().getKind() == TypeKind.DECLARED &&
                         !TranslatorTools.isPrimitiveType(enclosedElement.asType()) &&
-                        TranslatorTools.isNotFromJava(enclosedElement.asType())) {
+                        TranslatorTools.isNotFromJava(enclosedElement.asType()) &&
+                        !links.contains(enclosedElement.asType())) {
                     // get the name of the class or interface of enclosedElement
                     String className = enclosedElement.asType().toString();
                     // add the class name
@@ -84,6 +93,9 @@ public class PumlLiteClass extends PumlClasses {
                     res.append(" : <<Use>>");
                     // line break
                     res.append("\n");
+
+                    // save the relation
+                    links.add(enclosedElement.asType());
                 }
             }
         }
@@ -95,7 +107,7 @@ public class PumlLiteClass extends PumlClasses {
         StringBuilder res = new StringBuilder();
         if (element.getKind() == ElementKind.CLASS) {
             // search inside
-            res.append(fieldsTranslate(element));
+            res.append(primitiveFieldsTranslate(element));
         }
         return res.toString();
     }
@@ -106,7 +118,7 @@ public class PumlLiteClass extends PumlClasses {
      * @param element an enclosed element from class
      * @return Returns translated string
      */
-    private String fieldsTranslate(Element element) {
+    private String primitiveFieldsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         if (element.getKind() == ElementKind.CLASS) {
             // search inside
@@ -121,7 +133,6 @@ public class PumlLiteClass extends PumlClasses {
         return res.toString();
     }
 
-    // todo
     private int countPrimitivesFields(Element element){
         int nbPrimitiveFields = 0;
         if (element.getKind() == ElementKind.CLASS) {

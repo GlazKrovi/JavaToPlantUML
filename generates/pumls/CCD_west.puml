@@ -172,27 +172,27 @@ class western.Substantif {
 +avecPreposition(preposition : String) : String
 
 }
-western.Boisson <--o Barman : -boissonParDefaut
-western.Barman <.. western.Personnage : <<Use>>
-western.Substantif <--o Boisson : -substantif
-western.Boisson <--o Boisson : +EAU
-western.Boisson <.. western.Genre : <<Use>>
-western.Cowboy <--o Brigand : -gardien
-western.Boisson <--o Brigand : -boissonParDefaut
-western.Brigand <.. western.Dame : <<Use>>
-western.Boisson <--o Cowboy : -boissonParDefaut
-western.Cowboy <.. western.Dame : <<Use>>
-western.Cowboy <.. western.HorsLaLoi : <<Use>>
-western.Cowboy <--o Dame : -sauveur
-western.HorsLaLoi <--o Dame : -ravisseur
-western.Boisson <--o Dame : -boissonParDefaut
-western.Narrateur <.. western.Boisson : <<Use>>
-western.Boisson <--o Personnage : -BOISSON_PAR_DEFAUT
-western.Brigand <--o Ripou : -brigand
-western.Ripou <.. western.Dame : <<Use>>
-western.Ripou <.. western.Cowboy : <<Use>>
-western.Sherif <.. western.HorsLaLoi : <<Use>>
-western.Genre <--o Substantif : -genre
+western.Boisson"1" <--o "1"Barman : -boissonParDefaut
+western.Barman"1" <.. "1"western.Personnage : <<Use>>
+western.Substantif"1" <--o "1"Boisson : -substantif
+western.Boisson"1" <--o "1"Boisson : +EAU
+western.Boisson"1" <.. "1"western.Genre : <<Use>>
+western.Cowboy"1" <--o "1"Brigand : -gardien
+western.Boisson"1" <--o "1"Brigand : -boissonParDefaut
+western.Brigand"1" <.. "1"western.Dame : <<Use>>
+western.Boisson"1" <--o "1"Cowboy : -boissonParDefaut
+western.Cowboy"1" <.. "1"western.Dame : <<Use>>
+western.Cowboy"1" <.. "1"western.HorsLaLoi : <<Use>>
+western.Cowboy"1" <--o "1"Dame : -sauveur
+western.HorsLaLoi"1" <--o "1"Dame : -ravisseur
+western.Boisson"1" <--o "1"Dame : -boissonParDefaut
+western.Narrateur"1" <.. "1"western.Boisson : <<Use>>
+western.Boisson"1" <--o "1"Personnage : -BOISSON_PAR_DEFAUT
+western.Brigand"1" <--o "1"Ripou : -brigand
+western.Ripou"1" <.. "1"western.Dame : <<Use>>
+western.Ripou"1" <.. "1"western.Cowboy : <<Use>>
+western.Sherif"1" <.. "1"western.HorsLaLoi : <<Use>>
+western.Genre"1" <--o "1"Substantif : -genre
 
 @enduml
 

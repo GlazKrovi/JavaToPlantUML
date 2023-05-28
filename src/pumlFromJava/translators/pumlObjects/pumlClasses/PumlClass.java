@@ -16,15 +16,15 @@ public class PumlClass extends PumlClasses {
 
     @Override
     public String relationsTranslate(Element element) {
-        String res =  this.getAggregationsCompositions(element) +
-                this.getUses(element);
+        String res =  this.AggregationsCompositionsTranslate(element) +
+                this.UsesTranslate(element);
         // reset relations for next element process
         links.clear();
         return res;
     }
 
     @Override
-    protected String getAggregationsCompositions(Element element) {
+    protected String AggregationsCompositionsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
             VisibilityViewer visibilityViewer = new VisibilityViewer();
@@ -38,8 +38,13 @@ public class PumlClass extends PumlClasses {
                     String className = enclosedElement.asType().toString();
                     // add the class name
                     res.append(className);
+                    // add first multiplicity
+                    res.append("\"1\"");
                     // add arrow
                     res.append(" <--o ");
+                    // add second multiplicity
+                    if (TranslatorTools.isCollection(element.getSimpleName().toString())) res.append("\"*\"");
+                    else res.append("\"1\"");
                     // get the defined class (aggregation or composition)
                     res.append(element.getSimpleName().toString());
                     // visibility and name
@@ -149,7 +154,7 @@ public class PumlClass extends PumlClasses {
     }
 
     @Override
-    protected String getUses(Element element) {
+    protected String UsesTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
@@ -160,7 +165,12 @@ public class PumlClass extends PumlClasses {
                             !TranslatorTools.isPrimitiveType(parameter.asType()) &&
                             !links.contains(parameter.asType())) {
                         res.append(this.getFullName(element));
+                        // add first multiplicity
+                        res.append("\"1\"");
                         res.append(" <.. ");
+                        // add second multiplicity
+                        if (TranslatorTools.isCollection(element.getSimpleName().toString())) res.append("\"*\"");
+                        else res.append("\"1\"");
                         res.append(parameter.asType());
                         res.append(" : <<Use>>");
                         res.append("\n");
