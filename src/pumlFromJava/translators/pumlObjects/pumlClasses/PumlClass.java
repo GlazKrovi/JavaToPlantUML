@@ -5,6 +5,7 @@ import pumlFromJava.translators.TranslatorTools;
 import pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrow;
 import pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrowLook;
 import pumlFromJava.translators.pumlViewers.VisibilityViewer;
+
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
 
@@ -18,7 +19,7 @@ public class PumlClass extends PumlClasses {
 
     @Override
     public String relationsTranslate(Element element) {
-        String res =  this.AggregationsCompositionsTranslate(element) +
+        String res = this.AggregationsCompositionsTranslate(element) +
                 this.usesTranslate(element);
         // reset relations for next element process
         links.clear();
@@ -69,7 +70,7 @@ public class PumlClass extends PumlClasses {
     public String selfTranslate(Element element) {
         String classType = "class ";
         if (element.getModifiers().contains(Modifier.ABSTRACT)) classType = "abstract ";
-        return  classType + // class (or abstract)
+        return classType + // class (or abstract)
                 modifiersViewer.selfTranslate(element) + // {abstract}
                 annotationsViewer.selfTranslate(element) + // {@myPersonalTag}
                 getFullName(element) + // name
@@ -95,7 +96,7 @@ public class PumlClass extends PumlClasses {
                     temporary = constructorsTranslate(enclosedElement);
                 }
                 // is it correct?
-                if (!temporary.isEmpty()){
+                if (!temporary.isEmpty()) {
                     res.append(temporary).append("\n");
                     temporary = "";
                 }

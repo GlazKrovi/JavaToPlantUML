@@ -1,8 +1,6 @@
 package pumlFromJava.translators.pumlObjects;
 
 import pumlFromJava.translators.TranslatorTools;
-import pumlFromJava.translators.pumlObjects.InheritableObject;
-import pumlFromJava.translators.pumlObjects.PumlObject;
 import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 
 import javax.lang.model.element.Element;
@@ -15,7 +13,7 @@ public class PumlInterface extends PumlObject implements InheritableObject {
 
     @Override
     public String selfTranslate(Element element) {
-        return  "interface " +
+        return "interface " +
                 getFullName(element) + // name
                 inheritanceTranslate(element) +
                 open() + // {
@@ -25,6 +23,7 @@ public class PumlInterface extends PumlObject implements InheritableObject {
                 "\n";
 
     }
+
     @Override
     public String inheritanceTranslate(Element element) {
         String res = "";
@@ -35,7 +34,7 @@ public class PumlInterface extends PumlObject implements InheritableObject {
         // implements smt?
         if (typeElement.getInterfaces().size() > 0) {
             List<? extends TypeMirror> implementedInterface = typeElement.getInterfaces();
-            for (int i=0 ; i < implementedInterface.size() ; i++) {
+            for (int i = 0; i < implementedInterface.size(); i++) {
                 // is it a 'personal' interface?
                 if (TranslatorTools.isNotFromJava(implementedInterface.get(i))) {
                     // so 'implements' word needed
@@ -45,7 +44,7 @@ public class PumlInterface extends PumlObject implements InheritableObject {
                     // get name of implemented interface
                     info.append(implementedInterface.get(i));
                     // finally, comma needed?
-                    if (nbImplements >= 1 && i < implementedInterface.size()-1) info.append(", ");
+                    if (nbImplements >= 1 && i < implementedInterface.size() - 1) info.append(", ");
                 }
             }
         }

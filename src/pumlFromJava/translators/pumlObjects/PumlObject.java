@@ -10,7 +10,7 @@ import javax.lang.model.element.Element;
 public abstract class PumlObject implements ObjectTranslator {
 
     @Override
-    public abstract String selfTranslate(Element element) ;
+    public abstract String selfTranslate(Element element);
 
     @Override
     public String getFullName(Element element) {

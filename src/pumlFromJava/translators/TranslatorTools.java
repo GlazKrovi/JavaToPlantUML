@@ -62,7 +62,7 @@ public class TranslatorTools {
         return res;
     }
 
-    public static boolean isCollection(String parameterName){
+    public static boolean isCollection(String parameterName) {
         boolean is = false;
         for (int i = 0; i < parameterName.length(); i++) {
             if (parameterName.charAt(i) == '>' || parameterName.charAt(i) == '[') {
@@ -110,7 +110,7 @@ public class TranslatorTools {
      * @param fullName String representing a parameter or field name
      * @return Returns string like 'food.ingredients.' (cut from the complete specified name)
      */
-    public static String obtainPackage(String fullName){
+    public static String obtainPackage(String fullName) {
         int ending = 0;
         for (int i = 0; i < fullName.length(); i++) {
             if (fullName.charAt(i) == '.') {

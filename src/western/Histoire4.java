@@ -8,16 +8,13 @@ package western;
 //
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 
-public class Histoire4
-{
+public class Histoire4 {
     // test
-    private List<List<Integer>> somethings = new ArrayList<>();
+    private final List<List<Integer>> somethings = new ArrayList<>();
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Cowboy luke = new Cowboy("Luke");
         Brigand averell = new Brigand("Averell", Boisson.of("whisky", Genre.MASCULIN), "le nigaud");
         Dame scarlett = new Dame("Scarlett");

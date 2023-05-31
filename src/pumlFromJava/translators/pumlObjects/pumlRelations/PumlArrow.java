@@ -29,8 +29,7 @@ public class PumlArrow {
         if (looks.containsKey(type)) {
             this.type = type;
             this.arrow = looks.get(type);
-        }
-        else{
+        } else {
             throw new IllegalArgumentException();
         }
     }

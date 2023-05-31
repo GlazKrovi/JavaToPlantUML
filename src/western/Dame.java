@@ -1,36 +1,39 @@
 package western;
 
-public class Dame extends Personnage
-{
+public class Dame extends Personnage {
+    private static Boisson boissonParDefaut = Boisson.of("thé", Genre.MASCULIN);
     private boolean estLibre = true;
     private Cowboy sauveur;
     private HorsLaLoi ravisseur;
 
-    public Dame(String nom)
-    {
+    public Dame(String nom) {
         super(nom, boissonParDefaut);
     }
 
-    public Dame(String nom, Boisson boisson)
-    {
+    public Dame(String nom, Boisson boisson) {
         super(nom, boisson);
     }
 
+    public static Boisson getBoissonParDefaut() {
+        return boissonParDefaut;
+    }
+
+    public static void setBoissonParDefaut(Boisson boisson) {
+        boissonParDefaut = boisson;
+    }
+
     @Override
-    public String getPseudo()
-    {
+    public String getPseudo() {
         return "Miss " + super.getNom();
     }
 
-    public void seFaireKidnapper(HorsLaLoi horsLaLoi)
-    {
+    public void seFaireKidnapper(HorsLaLoi horsLaLoi) {
         this.dire("Hiiii ! Au secours ! " + horsLaLoi.getPseudo() + " m'enlève !");
         this.estLibre = false;
         this.ravisseur = horsLaLoi;
     }
 
-    public void seFaireLiberer(Cowboy cowBoy)
-    {
+    public void seFaireLiberer(Cowboy cowBoy) {
         if (this.estLibre)
             throw new IllegalStateException("La dame est déjà libre");
         this.dire(String.format("Merci %s de m'avoir libérée.", cowBoy.getPseudo()));
@@ -38,45 +41,26 @@ public class Dame extends Personnage
         this.sauveur = cowBoy;
     }
 
-    public boolean estLibre()
-    {
+    public boolean estLibre() {
         return this.estLibre;
     }
 
     @Override
-    public void sePresenter()
-    {
+    public void sePresenter() {
         super.sePresenter();
         String texte;
-        if (this.estLibre)
-        {
+        if (this.estLibre) {
             texte = "Je suis libre";
-            if (this.sauveur != null)
-            {
+            if (this.sauveur != null) {
                 texte += " grace à " + sauveur.getPseudo();
             }
-        }
-        else
-        {
+        } else {
             texte = "Je suis captive de cet escroc de " + this.ravisseur.getPseudo();
         }
         this.dire(texte + ".");
     }
 
-    private static Boisson boissonParDefaut = Boisson.of("thé", Genre.MASCULIN);
-
-    public static Boisson getBoissonParDefaut()
-    {
-        return boissonParDefaut;
-    }
-
-    public static void setBoissonParDefaut(Boisson boisson)
-    {
-        boissonParDefaut = boisson;
-    }
-
-    public HorsLaLoi getRavisseur()
-    {
+    public HorsLaLoi getRavisseur() {
         return this.ravisseur;
     }
 }

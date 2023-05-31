@@ -3,19 +3,19 @@ package western;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Barman extends Personnage{
+public class Barman extends Personnage {
     /* VALUES */
     private final List<Personnage> clientele = new ArrayList<>();
-    private String nomDuBar; // on pourrait renommer le bar
     private final Boisson boissonParDefaut = this.getBoisson();
+    private final String nomDuBar; // on pourrait renommer le bar
 
     /* CREATE */
-    public Barman(String nom){
+    public Barman(String nom) {
         super(nom, Boisson.of("vin", Genre.MASCULIN));
         this.nomDuBar = "Chez " + nom;
     }
 
-    public Barman(String nom, String nomDuBar){
+    public Barman(String nom, String nomDuBar) {
         super(nom, Boisson.of("vin", Genre.MASCULIN));
         this.nomDuBar = nomDuBar;
     }
@@ -29,7 +29,7 @@ public class Barman extends Personnage{
     /* FUNCTIONS */
     @Override
     public void dire(String texte) {
-        System.out.println(String.format("%s - %s Coco.", this.getNom(), texte));
+        System.out.printf("%s - %s Coco.%n", this.getNom(), texte);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class Barman extends Personnage{
         super.sePresenter();
     }
 
-    public void servir(Personnage client){
-        this.dire("Et un p'tit verre de "+client.getBoisson().getNom()+" pour "+client.getPseudo()+" !");
+    public void servir(Personnage client) {
+        this.dire("Et un p'tit verre de " + client.getBoisson().getNom() + " pour " + client.getPseudo() + " !");
         // ajout a sa liste de connaissance/clients
         if (!this.clientele.contains(client)) this.clientele.add(client);
         // le client boit

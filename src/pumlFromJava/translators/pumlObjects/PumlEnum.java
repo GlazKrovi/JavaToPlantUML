@@ -1,7 +1,5 @@
 package pumlFromJava.translators.pumlObjects;
 
-import pumlFromJava.translators.pumlObjects.PumlObject;
-
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
@@ -12,7 +10,7 @@ public class PumlEnum extends PumlObject {
 
     @Override
     public String selfTranslate(Element element) {
-        return  "enum " +
+        return "enum " +
                 getFullName(element) +
                 open() + // {
                 "\n" +

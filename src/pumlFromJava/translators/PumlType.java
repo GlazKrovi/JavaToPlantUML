@@ -1,8 +1,6 @@
 package pumlFromJava.translators;
 
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.TypeElement;
 
 /**
  * Represents puml equivalent for a java type (integer, string, etc.)

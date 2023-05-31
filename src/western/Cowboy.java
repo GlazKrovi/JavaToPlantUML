@@ -5,46 +5,46 @@ import java.util.List;
 import java.util.Set;
 
 
-public class Cowboy extends Personnage
-{
+public class Cowboy extends Personnage {
+    private static Boisson boissonParDefaut = Boisson.of("bière", Genre.FEMININ);
     private int gains = 0;
+    private final Set<HorsLaLoi> captures = new HashSet<>();
 
-    private Set<HorsLaLoi> captures = new HashSet<>();
-
-    public Cowboy(String nom)
-    {
+    public Cowboy(String nom) {
         super(nom, boissonParDefaut);
     }
 
-    public Cowboy(String nom, Boisson boisson)
-    {
+    public Cowboy(String nom, Boisson boisson) {
         super(nom, boisson);
     }
 
+    public static Boisson getBoissonParDefaut() {
+        return boissonParDefaut;
+    }
+
+    public static void setBoissonParDefaut(Boisson boisson) {
+        boissonParDefaut = boisson;
+    }
+
     @Override
-    public String getPseudo()
-    {
+    public String getPseudo() {
         return this.getNom();
     }
 
-    public void liberer(Dame dame)
-    {
+    public void liberer(Dame dame) {
         if (dame.estLibre())
             throw new IllegalStateException("La dame est déjà libre");
         dire(String.format("Voilà %s, tu es libre maintenant !", dame.getPseudo()));
         dame.seFaireLiberer(this);
     }
 
-    public void liberer(List<Dame> captives)
-    {
-        for (Dame dame : captives)
-        {
+    public void liberer(List<Dame> captives) {
+        for (Dame dame : captives) {
             this.liberer(dame);
         }
     }
 
-    public void capturer(HorsLaLoi horsLaLoi)
-    {
+    public void capturer(HorsLaLoi horsLaLoi) {
         if (!horsLaLoi.estLibre())
             throw new IllegalStateException("Le brigand n'est pas libre");
         List<Dame> captives = horsLaLoi.getCaptives();
@@ -54,31 +54,17 @@ public class Cowboy extends Personnage
         this.captures.add(horsLaLoi);
     }
 
-    public void tirerSur(HorsLaLoi brigand)
-    {
+    public void tirerSur(HorsLaLoi brigand) {
         this.dire(String.format("PAN ! PAN ! Prend ça, chacal de %s !", brigand.getPseudo()));
         brigand.seFaireTirerDessus(this);
     }
 
     @Override
-    public void sePresenter()
-    {
+    public void sePresenter() {
         super.sePresenter();
         if (this.gains > 0)
             this.dire("J’ai déjà empoché " + this.gains + "$ en capturant "
                     + getPseudos(List.copyOf(this.captures)) + ".");
-    }
-
-    private static Boisson boissonParDefaut = Boisson.of("bière", Genre.FEMININ);
-
-    public static Boisson getBoissonParDefaut()
-    {
-        return boissonParDefaut;
-    }
-
-    public static void setBoissonParDefaut(Boisson boisson)
-    {
-        boissonParDefaut = boisson;
     }
 
 }

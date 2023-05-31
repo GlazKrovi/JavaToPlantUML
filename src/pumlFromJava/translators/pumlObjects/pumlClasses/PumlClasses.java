@@ -26,7 +26,7 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
 
 
     @Override
-    public abstract String selfTranslate(Element element) ;
+    public abstract String selfTranslate(Element element);
 
     @Override
     public String inheritanceTranslate(Element element) {
@@ -93,11 +93,12 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
 
     /**
      * Get the aggregations and compositions of the specified class.
-     * @pumlAggregation
-     * @pumlComposition
+     *
      * @param element a class
      * @return Returns string like Hamburger --o Steak 'or'
      * Hamburger --* Steak
+     * @pumlAggregation
+     * @pumlComposition
      */
     protected abstract String AggregationsCompositionsTranslate(Element element);
 

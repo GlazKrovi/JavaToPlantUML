@@ -22,12 +22,12 @@ public class PumlLiteClass extends PumlClasses {
         // opening
         if (element.getModifiers().contains(Modifier.ABSTRACT)) classType = "abstract ";
         res.append(classType) // class (or abstract)
-            .append(modifiersViewer.selfTranslate(element)) // {abstract}
-            .append(annotationsViewer.selfTranslate(element)) // {@myPersonalTag})
-            .append(getFullName(element)) // name
-            .append(inheritanceTranslate(element)); // extends something implements otherThing
+                .append(modifiersViewer.selfTranslate(element)) // {abstract}
+                .append(annotationsViewer.selfTranslate(element)) // {@myPersonalTag})
+                .append(getFullName(element)) // name
+                .append(inheritanceTranslate(element)); // extends something implements otherThing
         // content (open and closing)?
-        if (countPrimitivesFields(element) > 0){
+        if (countPrimitivesFields(element) > 0) {
             res.append(open()); // {
             res.append("\n");
             res.append(contentTranslate(element)); // -field, +method
@@ -41,7 +41,7 @@ public class PumlLiteClass extends PumlClasses {
 
     @Override
     public String relationsTranslate(Element element) {
-        String res =  this.AggregationsCompositionsTranslate(element) +
+        String res = this.AggregationsCompositionsTranslate(element) +
                 this.usesTranslate(element);
         // reset relations for next element process
         links.clear();
@@ -138,11 +138,11 @@ public class PumlLiteClass extends PumlClasses {
         return res.toString();
     }
 
-    private int countPrimitivesFields(Element element){
+    private int countPrimitivesFields(Element element) {
         int nbPrimitiveFields = 0;
         if (element.getKind() == ElementKind.CLASS) {
-            for (Element enclosedElement : element.getEnclosedElements()){
-                if (enclosedElement.getKind() == ElementKind.FIELD && TranslatorTools.isPrimitiveType(enclosedElement.asType())){
+            for (Element enclosedElement : element.getEnclosedElements()) {
+                if (enclosedElement.getKind() == ElementKind.FIELD && TranslatorTools.isPrimitiveType(enclosedElement.asType())) {
                     nbPrimitiveFields++;
                 }
             }

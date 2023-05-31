@@ -4,59 +4,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Brigand extends Personnage implements HorsLaLoi
-{
+public class Brigand extends Personnage implements HorsLaLoi {
     protected static String LOOK_PAR_DEFAUT = "le méchant";
+    private static Boisson boissonParDefaut = Boisson.of("tord-boyaux", Genre.MASCULIN);
     private String look = LOOK_PAR_DEFAUT;
     private int recompense = 100;
     private boolean estLibre = true;
-
-    private List<Dame> captives = new ArrayList<>();
+    private final List<Dame> captives = new ArrayList<>();
     private Cowboy gardien;
 
-    public Brigand(String nom)
-    {
+    public Brigand(String nom) {
         super(nom, boissonParDefaut);
     }
 
-    public Brigand(String nom, Boisson boisson)
-    {
+    public Brigand(String nom, Boisson boisson) {
         super(nom, boisson);
     }
 
-    public Brigand(String nom, Boisson boisson, String look)
-    {
+    public Brigand(String nom, Boisson boisson, String look) {
         super(nom, boisson);
         this.look = look;
     }
 
-    public String getLook()
-    {
+    public static Boisson getBoissonParDefaut() {
+        return boissonParDefaut;
+    }
+
+    public static void setBoissonParDefaut(Boisson boisson) {
+        boissonParDefaut = boisson;
+    }
+
+    public String getLook() {
         return this.look;
     }
 
-    public int getRecompense()
-    {
+    public int getRecompense() {
         return this.recompense;
     }
 
-    public boolean estLibre() { return this.estLibre; }
+    public boolean estLibre() {
+        return this.estLibre;
+    }
 
-    public void kidnapper(Dame dame)
-    {
+    public void kidnapper(Dame dame) {
         dame.seFaireKidnapper(this);
         dire(String.format("Ah ah ! %s tu es mienne désormais.", dame.getPseudo()));
         this.recompense += 50;
         captives.add(dame);
     }
 
-    public List<Dame> getCaptives()
-    {
+    public List<Dame> getCaptives() {
         return new ArrayList<>(this.captives);
     }
 
-    public void seFaireCapturer(Cowboy cowBoy)
-    {
+    public void seFaireCapturer(Cowboy cowBoy) {
         dire(String.format("Damned, je suis fait ! %s, tu m'as eu ! "
                 + "Tu n'emporteras pas les %s$ au paradis.", cowBoy.getPseudo(), this.recompense));
         this.estLibre = false;
@@ -64,46 +65,28 @@ public class Brigand extends Personnage implements HorsLaLoi
         this.captives.clear();
     }
 
-    public void seFaireTirerDessus(Cowboy cowBoy)
-    {
+    public void seFaireTirerDessus(Cowboy cowBoy) {
         dire(String.format("Tu n'es qu'un coyote, %s !", cowBoy.getPseudo()));
     }
 
     @Override
-    public String getPseudo()
-    {
+    public String getPseudo() {
         return super.getNom() + " " + this.look;
     }
 
     @Override
-    public void sePresenter()
-    {
+    public void sePresenter() {
         super.sePresenter();
         this.dire("Ma tête est mise à prix " + this.recompense + "$ !");
         String texte;
-        if (this.estLibre)
-        {
+        if (this.estLibre) {
             texte = "Je suis libre";
             if (!this.captives.isEmpty())
                 texte += " et en bonne compagnie avec " + getPseudos(this.captives);
-        }
-        else
-        {
+        } else {
             texte = "Je suis le prisonnier de " + this.gardien.getPseudo();
         }
         this.dire(texte + ".");
-    }
-
-    private static Boisson boissonParDefaut = Boisson.of("tord-boyaux", Genre.MASCULIN);
-
-    public static Boisson getBoissonParDefaut()
-    {
-        return boissonParDefaut;
-    }
-
-    public static void setBoissonParDefaut(Boisson boisson)
-    {
-        boissonParDefaut = boisson;
     }
 
 }

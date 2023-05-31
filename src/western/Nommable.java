@@ -1,7 +1,7 @@
 package western;
 
-public interface Nommable
-{
+public interface Nommable {
     String getNom();
+
     String getPseudo();
 }
