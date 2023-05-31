@@ -92,10 +92,12 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
     }
 
     /**
-     * Get the aggregations and compositions of the specified class
-     *
+     * Get the aggregations and compositions of the specified class.
+     * @pumlAggregation
+     * @pumlComposition
      * @param element a class
-     * @return Returns string like Hamburger -- Steak
+     * @return Returns string like Hamburger --o Steak 'or'
+     * Hamburger --* Steak
      */
     protected abstract String AggregationsCompositionsTranslate(Element element);
 

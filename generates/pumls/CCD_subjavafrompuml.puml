@@ -3,79 +3,79 @@
 
 class pumlFromJava.doclets.FirstDoclet {
 + <<create>> FirstDoclet()
-+init(locale : Locale, reporter : Reporter)
-+getName() : String
-+getSupportedOptions() : Option[*]
-+getSupportedSourceVersion() : SourceVersion
-+run(environment : DocletEnvironment) : boolean
--dumpElement(element : Element)
++ {Override} init(locale : Locale, reporter : Reporter)
++ {Override} getName() : String
++ {Override} getSupportedOptions() : Option[*]
++ {Override} getSupportedSourceVersion() : SourceVersion
++ {Override} run(environment : DocletEnvironment) : boolean
+-  dumpElement(element : Element)
 
 }
 class pumlFromJava.doclets.PumlDoclet {
 + <<create>> PumlDoclet()
-+init(locale : Locale, reporter : Reporter)
-+getName() : String
-+getSupportedOptions() : Option[*]
-+getSupportedSourceVersion() : SourceVersion
-+run(environment : DocletEnvironment) : boolean
--generateACD(environment : DocletEnvironment)
--generateCCD(environment : DocletEnvironment)
++ {Override} init(locale : Locale, reporter : Reporter)
++ {Override} getName() : String
++ {Override} getSupportedOptions() : Option[*]
++ {Override} getSupportedSourceVersion() : SourceVersion
++ {Override} run(environment : DocletEnvironment) : boolean
+-  generateACD(environment : DocletEnvironment)
+-  generateCCD(environment : DocletEnvironment)
 
 }
 class pumlFromJava.doclets.options.OutOption {
 -NameFile : String
 + <<create>> OutOption()
-+getArgumentCount() : int
-+getDescription() : String
-+getKind() : Kind
-+getNames() : String[*]
-+getParameters() : String
-+process(option : String, arguments : String[*]) : boolean
-+getFileName() : String
++ {Override} getArgumentCount() : int
++ {Override} getDescription() : String
++ {Override} getKind() : Kind
++ {Override} getNames() : String[*]
++ {Override} getParameters() : String
++ {Override} process(option : String, arguments : String[*]) : boolean
++  getFileName() : String
 
 }
 class pumlFromJava.doclets.options.PathOption {
 -path : String
 + <<create>> PathOption()
-+getArgumentCount() : int
-+getDescription() : String
-+getKind() : Kind
-+getNames() : String[*]
-+getParameters() : String
-+process(option : String, arguments : String[*]) : boolean
-+getPath() : String
++ {Override} getArgumentCount() : int
++ {Override} getDescription() : String
++ {Override} getKind() : Kind
++ {Override} getNames() : String[*]
++ {Override} getParameters() : String
++ {Override} process(option : String, arguments : String[*]) : boolean
++  getPath() : String
 
 }
 class pumlFromJava.doclets.options.TypeOption {
 -type : String
 + <<create>> TypeOption()
-+getArgumentCount() : int
-+getDescription() : String
-+getKind() : Kind
-+getNames() : String[*]
-+getParameters() : String
-+process(option : String, arguments : String[*]) : boolean
-+getType() : String
++ {Override} getArgumentCount() : int
++ {Override} getDescription() : String
++ {Override} getKind() : Kind
++ {Override} getNames() : String[*]
++ {Override} getParameters() : String
++ {Override} process(option : String, arguments : String[*]) : boolean
++  getType() : String
 
 }
 class pumlFromJava.generators.Java2Puml {
 + <<create>> Java2Puml()
-+ {static} main(args : String[*])
++ {static}   main(args : String[*])
 
 }
 class pumlFromJava.translators.diagrams.PumlACD implements pumlFromJava.translators.diagrams.PumlDiagram {
 + <<create>> PumlACD()
-+translateToScheme(environment : DocletEnvironment) : String
++  translateToScheme(environment : DocletEnvironment) : String
 
 }
 class pumlFromJava.translators.diagrams.PumlBasis implements pumlFromJava.translators.diagrams.PumlDiagram {
 + <<create>> PumlBasis()
-+translateToScheme(environment : DocletEnvironment) : String
++  translateToScheme(environment : DocletEnvironment) : String
 
 }
 class pumlFromJava.translators.diagrams.PumlCCD implements pumlFromJava.translators.diagrams.PumlDiagram {
 + <<create>> PumlCCD()
-+translateToScheme(environment : DocletEnvironment) : String
++  translateToScheme(environment : DocletEnvironment) : String
 
 }
 interface pumlFromJava.translators.diagrams.PumlDiagram {
@@ -93,34 +93,34 @@ interface pumlFromJava.translators.Nameable {
 }
 class pumlFromJava.translators.PumlMethod implements pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable {
 + <<create>> PumlMethod()
-+selfTranslate(element : Element) : String
-+getFullName(element : Element) : String
-+getSimplifiedName(element : Element) : String
--getParameters(methodElement : ExecutableElement) : String
--getReturnType(methodElement : ExecutableElement) : String
++ {Override} selfTranslate(element : Element) : String
++ {Override} getFullName(element : Element) : String
++ {Override} getSimplifiedName(element : Element) : String
+-  getParameters(methodElement : ExecutableElement) : String
+-  getReturnType(methodElement : ExecutableElement) : String
 
 }
 class pumlFromJava.translators.PumlType implements pumlFromJava.translators.ElementTranslator {
 + <<create>> PumlType()
-+selfTranslate(element : Element) : String
++ {Override} selfTranslate(element : Element) : String
 
 }
 class pumlFromJava.translators.TranslatorTools {
 + <<create>> TranslatorTools()
-+ {static} reformatName(name : String) : String
-+ {static} cutPackage(name : String) : String
-+ {static} identifyCollection(parameterName : String) : String
-+ {static} isCollection(parameterName : String) : boolean
-+ {static} isNotFromJava(typeMirror : TypeMirror) : boolean
-+ {static} isPrimitiveType(type : TypeMirror) : boolean
-+ {static} obtainPackage(fullName : String) : String
++ {static}   reformatName(name : String) : String
++ {static}   cutPackage(name : String) : String
++ {static}   identifyCollection(parameterName : String) : String
++ {static}   isCollection(parameterName : String) : boolean
++ {static}   isNotFromJava(typeMirror : TypeMirror) : boolean
++ {static}   isPrimitiveType(type : TypeMirror) : boolean
++ {static}   obtainPackage(fullName : String) : String
 
 }
 class pumlFromJava.translators.pumlMarker.Marker {
 + <<create>> Marker()
-+umlStart() : String
-+option_strictUml() : String
-+umlEnd() : String
++  umlStart() : String
++  option_strictUml() : String
++  umlEnd() : String
 
 }
 interface pumlFromJava.translators.pumlObjects.InheritableObject {
@@ -133,14 +133,27 @@ interface pumlFromJava.translators.pumlObjects.ObjectTranslator extends pumlFrom
 +close()
 
 }
+class pumlFromJava.translators.pumlObjects.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject {
++ <<create>> PumlEnum()
++ {Override} selfTranslate(element : Element) : String
++ {Override} contentTranslate(element : Element) : String
+
+}
+class pumlFromJava.translators.pumlObjects.PumlInterface extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject {
++ <<create>> PumlInterface()
++ {Override} selfTranslate(element : Element) : String
++ {Override} inheritanceTranslate(element : Element) : String
++ {Override} contentTranslate(element : Element) : String
+
+}
 abstract pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.ObjectTranslator {
 + <<create>> PumlObject()
-+ {abstract} selfTranslate(element : Element) : String
-+getFullName(element : Element) : String
-+getSimplifiedName(element : Element) : String
-+ {abstract} contentTranslate(element : Element) : String
-+open() : String
-+close() : String
++ {abstract}  {Override} selfTranslate(element : Element) : String
++ {Override} getFullName(element : Element) : String
++ {Override} getSimplifiedName(element : Element) : String
++ {abstract}   contentTranslate(element : Element) : String
++ {Override} open() : String
++ {Override} close() : String
 
 }
 interface pumlFromJava.translators.pumlObjects.RelationableObject {
@@ -149,75 +162,85 @@ interface pumlFromJava.translators.pumlObjects.RelationableObject {
 }
 class pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses {
 + <<create>> PumlClass()
-+relationsTranslate(element : Element) : String
-# {readonly} AggregationsCompositionsTranslate(element : Element) : String
-+selfTranslate(element : Element) : String
-+contentTranslate(element : Element) : String
--methodsTranslate(element : Element) : String
--fieldsTranslate(element : Element) : String
--constructorsTranslate(element : Element) : String
-# {readonly} UsesTranslate(element : Element) : String
++ {Override} relationsTranslate(element : Element) : String
+# {readonly}  {Override} AggregationsCompositionsTranslate(element : Element) : String
++ {Override} selfTranslate(element : Element) : String
++ {Override} contentTranslate(element : Element) : String
+-  methodsTranslate(element : Element) : String
+-  fieldsTranslate(element : Element) : String
+-  constructorsTranslate(element : Element) : String
+# {readonly}  {Override} usesTranslate(element : Element) : String
 
 }
 abstract pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject, pumlFromJava.translators.pumlObjects.RelationableObject {
 + <<create>> PumlClasses()
-+ {abstract} selfTranslate(element : Element) : String
-+inheritanceTranslate(element : Element) : String
-+ {abstract} contentTranslate(element : Element) : String
-+ {abstract} relationsTranslate(element : Element) : String
--getExtends(typeElement : TypeElement) : String
--getImplements(typeElement : TypeElement) : String
-# {abstract}  {readonly} AggregationsCompositionsTranslate(element : Element) : String
-# {abstract}  {readonly} UsesTranslate(element : Element) : String
-
-}
-class pumlFromJava.translators.pumlObjects.pumlClasses.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject {
-+ <<create>> PumlEnum()
-+selfTranslate(element : Element) : String
-+contentTranslate(element : Element) : String
-
-}
-class pumlFromJava.translators.pumlObjects.pumlClasses.PumlInterface extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject {
-+ <<create>> PumlInterface()
-+selfTranslate(element : Element) : String
-+inheritanceTranslate(element : Element) : String
-+contentTranslate(element : Element) : String
++ {abstract}  {Override} selfTranslate(element : Element) : String
++ {Override} inheritanceTranslate(element : Element) : String
++ {abstract}  {Override} contentTranslate(element : Element) : String
++ {abstract}  {Override} relationsTranslate(element : Element) : String
+-  getExtends(typeElement : TypeElement) : String
+-  getImplements(typeElement : TypeElement) : String
+# {abstract}  {readonly}   AggregationsCompositionsTranslate(element : Element) : String
+# {abstract}  {readonly}   usesTranslate(element : Element) : String
 
 }
 class pumlFromJava.translators.pumlObjects.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses {
 + <<create>> PumlLiteClass()
-+selfTranslate(element : Element) : String
-+relationsTranslate(element : Element) : String
-# {readonly} UsesTranslate(element : Element) : String
-# {readonly} AggregationsCompositionsTranslate(element : Element) : String
-+contentTranslate(element : Element) : String
--primitiveFieldsTranslate(element : Element) : String
--countPrimitivesFields(element : Element) : int
++ {Override} selfTranslate(element : Element) : String
++ {Override} relationsTranslate(element : Element) : String
+# {readonly}  {Override} usesTranslate(element : Element) : String
+# {readonly}  {Override} AggregationsCompositionsTranslate(element : Element) : String
++ {Override} contentTranslate(element : Element) : String
+-  primitiveFieldsTranslate(element : Element) : String
+-  countPrimitivesFields(element : Element) : int
+
+}
+class pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrow {
+-arrow : String
++ <<create>> PumlArrow(type : PumlArrowLook)
++  getType() : PumlArrowLook
++  getArrow() : String
+
+}
+enum pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrowLook {
+DOTTED
+SOLID
+HEADFULL_SOLID
+HEADFULL_DOTTED
+HEADSOCKET_SOLID
+HEADSOCKET_DOTTED
+DIAMOND_EMPTY
+DIAMOND_FULL
+
+}
+class pumlFromJava.translators.pumlViewers.AnnotationsViewer implements pumlFromJava.translators.ElementTranslator {
++ <<create>> AnnotationsViewer()
++ {Override} selfTranslate(element : Element) : String
 
 }
 class pumlFromJava.translators.pumlViewers.ModifiersViewer implements pumlFromJava.translators.ElementTranslator {
 + <<create>> ModifiersViewer()
-+selfTranslate(element : Element) : String
--getStatic(modifiers : Modifier[*]) : String
--getAbstract(modifiers : Modifier[*]) : String
--getFinal(modifiers : Modifier[*]) : String
++ {Override} selfTranslate(element : Element) : String
+-  getStatic(modifiers : Modifier[*]) : String
+-  getAbstract(modifiers : Modifier[*]) : String
+-  getFinal(modifiers : Modifier[*]) : String
 
 }
 class pumlFromJava.translators.pumlViewers.VisibilityViewer implements pumlFromJava.translators.ElementTranslator {
 + <<create>> VisibilityViewer()
-+selfTranslate(element : Element) : String
++ {Override} selfTranslate(element : Element) : String
 
 }
 class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies {
 -filepath : String
 + <<create>> Writer(filepath : String, filename : String)
 + <<create>> Writer(filename : String)
-+open()
-+close()
-+write(text : String)
--createFile()
--links()
--createDirectoriesPath(path : String)
++  open()
++  close()
++  write(text : String)
+-  createFile()
+-  links()
+-  createDirectoriesPath(path : String)
 
 }
 interface pumlFromJava.writers.WriterSpecies {
@@ -231,6 +254,8 @@ pumlFromJava.doclets.options.OutOption"1" <--o "1"PumlDoclet : -oOut
 pumlFromJava.doclets.options.TypeOption"1" <--o "1"PumlDoclet : -oType
 pumlFromJava.translators.pumlViewers.VisibilityViewer"1" <--o "1"PumlClass : -visibilityViewer
 pumlFromJava.translators.pumlViewers.ModifiersViewer"1" <--o "1"PumlClasses : #modifiersViewer
+pumlFromJava.translators.pumlViewers.AnnotationsViewer"1" <--o "1"PumlClasses : #annotationsViewer
+pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrowLook"1" <--o "1"PumlArrow : -type
 
 @enduml
 

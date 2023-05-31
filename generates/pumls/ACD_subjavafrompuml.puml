@@ -41,6 +41,10 @@ class pumlFromJava.translators.pumlMarker.Marker
 
 interface pumlFromJava.translators.pumlObjects.InheritableObject
 interface pumlFromJava.translators.pumlObjects.ObjectTranslator extends pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable
+class pumlFromJava.translators.pumlObjects.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject
+
+class pumlFromJava.translators.pumlObjects.PumlInterface extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject
+
 abstract pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.ObjectTranslator
 
 interface pumlFromJava.translators.pumlObjects.RelationableObject
@@ -48,11 +52,25 @@ class pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass extends pumlFro
 
 abstract pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject, pumlFromJava.translators.pumlObjects.RelationableObject
 
-class pumlFromJava.translators.pumlObjects.pumlClasses.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject
-
-class pumlFromJava.translators.pumlObjects.pumlClasses.PumlInterface extends pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava.translators.pumlObjects.InheritableObject
-
 class pumlFromJava.translators.pumlObjects.pumlClasses.PumlLiteClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses
+
+class pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrow {
+arrow
+
+}
+
+enum pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrowLook {
+DOTTED
+SOLID
+HEADFULL_SOLID
+HEADFULL_DOTTED
+HEADSOCKET_SOLID
+HEADSOCKET_DOTTED
+DIAMOND_EMPTY
+DIAMOND_FULL
+
+}
+class pumlFromJava.translators.pumlViewers.AnnotationsViewer implements pumlFromJava.translators.ElementTranslator
 
 class pumlFromJava.translators.pumlViewers.ModifiersViewer implements pumlFromJava.translators.ElementTranslator
 
@@ -64,11 +82,13 @@ filepath
 }
 
 interface pumlFromJava.writers.WriterSpecies
-pumlFromJava.doclets.options.PathOption <-- PumlDoclet : <<Use>>
-pumlFromJava.doclets.options.OutOption <-- PumlDoclet : <<Use>>
-pumlFromJava.doclets.options.TypeOption <-- PumlDoclet : <<Use>>
-pumlFromJava.translators.pumlViewers.VisibilityViewer <-- PumlClass : <<Use>>
-pumlFromJava.translators.pumlViewers.ModifiersViewer <-- PumlClasses : <<Use>>
+pumlFromJava.doclets.options.PathOption<--PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.OutOption<--PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.TypeOption<--PumlDoclet : <<Use>>
+pumlFromJava.translators.pumlViewers.VisibilityViewer<--PumlClass : <<Use>>
+pumlFromJava.translators.pumlViewers.ModifiersViewer<--PumlClasses : <<Use>>
+pumlFromJava.translators.pumlViewers.AnnotationsViewer<--PumlClasses : <<Use>>
+pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrowLook<--PumlArrow : <<Use>>
 
 @enduml
 

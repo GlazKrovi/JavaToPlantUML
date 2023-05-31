@@ -10,3 +10,4 @@ Class pour trier (static avec static; private en dessous des public, etc=
 
 (apparement) pas besoin de chercher les classes instancié dans des méthodes
 
+supprimer les securite en trop : normalement pas dans les protected ni les privates !!

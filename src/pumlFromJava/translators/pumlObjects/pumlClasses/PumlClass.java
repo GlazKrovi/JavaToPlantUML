@@ -2,7 +2,8 @@ package pumlFromJava.translators.pumlObjects.pumlClasses;
 
 import pumlFromJava.translators.PumlMethod;
 import pumlFromJava.translators.TranslatorTools;
-import pumlFromJava.translators.pumlViewers.AnnotationsViewer;
+import pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrow;
+import pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrowLook;
 import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
@@ -27,6 +28,7 @@ public class PumlClass extends PumlClasses {
     @Override
     protected String AggregationsCompositionsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
+        PumlArrow pumlArrow = new PumlArrow(PumlArrowLook.DIAMOND_EMPTY); // aggregation by default
         if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
             VisibilityViewer visibilityViewer = new VisibilityViewer();
             for (Element enclosedElement : element.getEnclosedElements()) {
@@ -42,7 +44,7 @@ public class PumlClass extends PumlClasses {
                     // add first multiplicity
                     res.append("\"1\"");
                     // add arrow
-                    res.append(" <--o ");
+                    res.append(" ").append(pumlArrow.getArrow()).append(" ");
                     // add second multiplicity
                     if (TranslatorTools.isCollection(element.getSimpleName().toString())) res.append("\"*\"");
                     else res.append("\"1\"");
@@ -158,6 +160,7 @@ public class PumlClass extends PumlClasses {
     @Override
     protected String usesTranslate(Element element) {
         StringBuilder res = new StringBuilder();
+        PumlArrow arrow = new PumlArrow(PumlArrowLook.HEADFULL_DOTTED);
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
                 ExecutableElement executableElement = (ExecutableElement) enclosedElement;
@@ -169,7 +172,7 @@ public class PumlClass extends PumlClasses {
                         res.append(this.getFullName(element));
                         // add first multiplicity
                         res.append("\"1\"");
-                        res.append(" <.. ");
+                        res.append(arrow.getArrow());
                         // add second multiplicity
                         if (TranslatorTools.isCollection(element.getSimpleName().toString())) res.append("\"*\"");
                         else res.append("\"1\"");

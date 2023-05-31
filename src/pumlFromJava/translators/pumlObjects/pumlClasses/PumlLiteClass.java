@@ -1,6 +1,8 @@
 package pumlFromJava.translators.pumlObjects.pumlClasses;
 
 import pumlFromJava.translators.TranslatorTools;
+import pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrow;
+import pumlFromJava.translators.pumlObjects.pumlRelations.PumlArrowLook;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
@@ -49,6 +51,7 @@ public class PumlLiteClass extends PumlClasses {
     @Override
     protected String usesTranslate(Element element) {
         StringBuilder res = new StringBuilder();
+        PumlArrow arrow = new PumlArrow(PumlArrowLook.DOTTED);
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
                 ExecutableElement executableElement = (ExecutableElement) enclosedElement;
@@ -58,7 +61,7 @@ public class PumlLiteClass extends PumlClasses {
                             !TranslatorTools.isPrimitiveType(parameter.asType()) &&
                             !links.contains(parameter.asType())) {
                         res.append(this.getFullName(element));
-                        res.append(" .. ");
+                        res.append(arrow.getArrow());
                         res.append(parameter.asType());
                         res.append(" : <<Use>>");
                         res.append("\n");
@@ -75,6 +78,7 @@ public class PumlLiteClass extends PumlClasses {
     @Override
     protected String AggregationsCompositionsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
+        PumlArrow arrow = new PumlArrow(PumlArrowLook.HEADFULL_SOLID);
         if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 // is the field a class or enum? (non-primitive)
@@ -87,7 +91,7 @@ public class PumlLiteClass extends PumlClasses {
                     // add the class name
                     res.append(className);
                     // add arrow
-                    res.append(" <-- ");
+                    res.append(arrow.getArrow());
                     // get the defined class (aggregation or composition)
                     res.append(element.getSimpleName().toString());
                     // use
