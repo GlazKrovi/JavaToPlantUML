@@ -87,13 +87,13 @@ class western.Histoire5 {
 
 }
 interface western.HorsLaLoi extends western.Nommable {
-+ estLibre()
-+ getRecompense()
-+ kidnapper()
-+ seFaireCapturer()
-+ seFaireTirerDessus()
-+ getLook()
-+ getCaptives()
++ {abstract}   estLibre() : Boolean
++ {abstract}   getRecompense() : Integer
++ {abstract}   kidnapper(dame : Dame)
++ {abstract}   seFaireCapturer(cowBoy : Cowboy)
++ {abstract}   seFaireTirerDessus(cowBoy : Cowboy)
++ {abstract}   getLook() : String
++ {abstract}   getCaptives() : Dame[*]
 
 }
 class western.Narrateur extends western.Personnage {
@@ -106,8 +106,8 @@ class western.Narrateur extends western.Personnage {
 
 }
 interface western.Nommable {
-+ getNom()
-+ getPseudo()
++ {abstract}   getNom() : String
++ {abstract}   getPseudo() : String
 
 }
 abstract western.Personnage implements western.Nommable {

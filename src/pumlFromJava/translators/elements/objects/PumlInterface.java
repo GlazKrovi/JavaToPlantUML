@@ -1,5 +1,7 @@
 package pumlFromJava.translators.elements.objects;
 
+import pumlFromJava.translators.elements.internals.PumlMethod;
+import pumlFromJava.translators.elements.internals.PumlType;
 import pumlFromJava.translators.elements.tools.TranslatorTools;
 
 import javax.lang.model.element.Element;
@@ -72,9 +74,8 @@ public class PumlInterface extends PumlObject implements InheritableObject {
         StringBuilder res = new StringBuilder();
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {
-                res.append("+ ");
-                res.append(enclosedElement.getSimpleName());
-                res.append("()");
+                PumlMethod method = new PumlMethod(enclosedElement);
+                res.append(method.getSelfTranslation());
                 res.append("\n");
             }
         }

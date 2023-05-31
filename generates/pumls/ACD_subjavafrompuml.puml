@@ -29,28 +29,34 @@ type
 
 class pumlFromJava.generators.Java2Puml
 
+class pumlFromJava.translators.elements.internals.PumlConstructor extends pumlFromJava.translators.elements.internals.PumlRawMethod
+
+class pumlFromJava.translators.elements.internals.PumlField extends pumlFromJava.translators.elements.internals.PumlInternal
+
 abstract pumlFromJava.translators.elements.internals.PumlInternal implements pumlFromJava.translators.elements.internals.RawInternal
 
-class pumlFromJava.translators.elements.internals.PumlMethod implements pumlFromJava.translators.elements.rawObjects.PumlRawObject, pumlFromJava.translators.elements.Nameable
+class pumlFromJava.translators.elements.internals.PumlMethod extends pumlFromJava.translators.elements.internals.PumlRawMethod
 
-class pumlFromJava.translators.elements.internals.PumlType extends pumlFromJava.translators.elements.internals.PumlInternal
+abstract pumlFromJava.translators.elements.internals.PumlRawMethod extends pumlFromJava.translators.elements.internals.PumlInternal
+
+class pumlFromJava.translators.elements.internals.PumlType
 
 interface pumlFromJava.translators.elements.internals.RawInternal
 interface pumlFromJava.translators.elements.Nameable
-interface pumlFromJava.translators.elements.rawObjects.InheritableObject
-interface pumlFromJava.translators.elements.rawObjects.ObjectTranslator extends pumlFromJava.translators.elements.rawObjects.PumlRawObject, pumlFromJava.translators.elements.Nameable
-class pumlFromJava.translators.elements.rawObjects.PumlEnum extends pumlFromJava.translators.elements.rawObjects.PumlObject
+interface pumlFromJava.translators.elements.objects.InheritableObject
+interface pumlFromJava.translators.elements.objects.ObjectTranslator extends pumlFromJava.translators.elements.objects.PumlRawObject, pumlFromJava.translators.elements.Nameable
+class pumlFromJava.translators.elements.objects.PumlEnum extends pumlFromJava.translators.elements.objects.PumlObject
 
-class pumlFromJava.translators.elements.rawObjects.PumlInterface extends pumlFromJava.translators.elements.rawObjects.PumlObject implements pumlFromJava.translators.elements.rawObjects.InheritableObject
+class pumlFromJava.translators.elements.objects.PumlInterface extends pumlFromJava.translators.elements.objects.PumlObject implements pumlFromJava.translators.elements.objects.InheritableObject
 
-abstract pumlFromJava.translators.elements.rawObjects.PumlObject implements pumlFromJava.translators.elements.rawObjects.ObjectTranslator
+abstract pumlFromJava.translators.elements.objects.PumlObject implements pumlFromJava.translators.elements.objects.ObjectTranslator
 
-interface pumlFromJava.translators.elements.rawObjects.PumlRawObject
-class pumlFromJava.translators.elements.rawObjects.pumlClasses.PumlClass extends pumlFromJava.translators.elements.rawObjects.pumlClasses.PumlClasses
+interface pumlFromJava.translators.elements.objects.PumlRawObject
+class pumlFromJava.translators.elements.objects.pumlClasses.PumlClass extends pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses
 
-abstract pumlFromJava.translators.elements.rawObjects.pumlClasses.PumlClasses extends pumlFromJava.translators.elements.rawObjects.PumlObject implements pumlFromJava.translators.elements.rawObjects.InheritableObject, pumlFromJava.translators.elements.relations.RelationableObject
+abstract pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses extends pumlFromJava.translators.elements.objects.PumlObject implements pumlFromJava.translators.elements.objects.InheritableObject, pumlFromJava.translators.elements.relations.RelationableObject
 
-class pumlFromJava.translators.elements.rawObjects.pumlClasses.PumlLiteClass extends pumlFromJava.translators.elements.rawObjects.pumlClasses.PumlClasses
+class pumlFromJava.translators.elements.objects.pumlClasses.PumlLiteClass extends pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses
 
 class pumlFromJava.translators.elements.relations.PumlArrow {
 arrow
@@ -73,11 +79,11 @@ class pumlFromJava.translators.elements.tools.TranslatorTools
 
 class pumlFromJava.translators.marker.Marker
 
-class pumlFromJava.translators.viewers.AnnotationsViewer implements pumlFromJava.translators.elements.rawObjects.PumlRawObject
+class pumlFromJava.translators.viewers.AnnotationsViewer implements pumlFromJava.translators.elements.objects.PumlRawObject
 
-class pumlFromJava.translators.viewers.ModifiersViewer implements pumlFromJava.translators.elements.rawObjects.PumlRawObject
+class pumlFromJava.translators.viewers.ModifiersViewer implements pumlFromJava.translators.elements.objects.PumlRawObject
 
-class pumlFromJava.translators.viewers.VisibilityViewer implements pumlFromJava.translators.elements.rawObjects.PumlRawObject
+class pumlFromJava.translators.viewers.VisibilityViewer implements pumlFromJava.translators.elements.objects.PumlRawObject
 
 class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies {
 filepath
@@ -85,13 +91,15 @@ filepath
 }
 
 interface pumlFromJava.writers.WriterSpecies
-pumlFromJava.doclets.options.PathOption<--PumlDoclet : <<Use>>
-pumlFromJava.doclets.options.OutOption<--PumlDoclet : <<Use>>
-pumlFromJava.doclets.options.TypeOption<--PumlDoclet : <<Use>>
-pumlFromJava.translators.viewers.VisibilityViewer<--PumlClass : <<Use>>
-pumlFromJava.translators.viewers.ModifiersViewer<--PumlClasses : <<Use>>
-pumlFromJava.translators.viewers.AnnotationsViewer<--PumlClasses : <<Use>>
-pumlFromJava.translators.elements.relations.PumlArrowLook<--PumlArrow : <<Use>>
+pumlFromJava.doclets.options.PathOption -- PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.OutOption -- PumlDoclet : <<Use>>
+pumlFromJava.doclets.options.TypeOption -- PumlDoclet : <<Use>>
+pumlFromJava.translators.viewers.VisibilityViewer -- PumlInternal : <<Use>>
+pumlFromJava.translators.viewers.ModifiersViewer -- PumlInternal : <<Use>>
+pumlFromJava.translators.viewers.VisibilityViewer -- PumlClass : <<Use>>
+pumlFromJava.translators.viewers.ModifiersViewer -- PumlClasses : <<Use>>
+pumlFromJava.translators.viewers.AnnotationsViewer -- PumlClasses : <<Use>>
+pumlFromJava.translators.elements.relations.PumlArrowLook -- PumlArrow : <<Use>>
 
 @enduml
 
