@@ -19,6 +19,11 @@ public class PumlClass extends PumlClasses {
 
     @Override
     public String relationsTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.CLASS) {
+            throw new IllegalArgumentException();
+        }
+
         String res = this.AggregationsCompositionsTranslate(element) +
                 this.usesTranslate(element);
         // reset relations for next element process
@@ -30,8 +35,8 @@ public class PumlClass extends PumlClasses {
     protected String AggregationsCompositionsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         PumlArrow pumlArrow = new PumlArrow(PumlArrowLook.DIAMOND_EMPTY); // aggregation by default
-        if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
-            VisibilityViewer visibilityViewer = new VisibilityViewer();
+        VisibilityViewer visibilityViewer = new VisibilityViewer();
+        if (TranslatorTools.isNotFromJava(element.asType())) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 // is the field a class or enum? (non-primitive)
                 if (enclosedElement.asType().getKind() == TypeKind.DECLARED &&
@@ -68,6 +73,11 @@ public class PumlClass extends PumlClasses {
 
     @Override
     public String selfTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.CLASS) {
+            throw new IllegalArgumentException();
+        }
+
         String classType = "class ";
         if (element.getModifiers().contains(Modifier.ABSTRACT)) classType = "abstract ";
         return classType + // class (or abstract)
@@ -84,6 +94,11 @@ public class PumlClass extends PumlClasses {
 
     @Override
     public String contentTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.CLASS) {
+            throw new IllegalArgumentException();
+        }
+
         StringBuilder res = new StringBuilder();
         String temporary = "";
         if (element.getKind() == ElementKind.CLASS) {

@@ -7,8 +7,8 @@ import java.util.Set;
 
 public class Cowboy extends Personnage {
     private static Boisson boissonParDefaut = Boisson.of("bière", Genre.FEMININ);
-    private int gains = 0;
     private final Set<HorsLaLoi> captures = new HashSet<>();
+    private int gains = 0;
 
     public Cowboy(String nom) {
         super(nom, boissonParDefaut);

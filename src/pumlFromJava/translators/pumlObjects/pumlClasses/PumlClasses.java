@@ -24,7 +24,6 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
     protected final AnnotationsViewer annotationsViewer = new AnnotationsViewer();
     protected final List<TypeMirror> links = new ArrayList<>(); // buffer variable to store relationships and avoid unnecessary duplication
 
-
     @Override
     public abstract String selfTranslate(Element element);
 

@@ -7,10 +7,10 @@ import java.util.List;
 public class Brigand extends Personnage implements HorsLaLoi {
     protected static String LOOK_PAR_DEFAUT = "le méchant";
     private static Boisson boissonParDefaut = Boisson.of("tord-boyaux", Genre.MASCULIN);
+    private final List<Dame> captives = new ArrayList<>();
     private String look = LOOK_PAR_DEFAUT;
     private int recompense = 100;
     private boolean estLibre = true;
-    private final List<Dame> captives = new ArrayList<>();
     private Cowboy gardien;
 
     public Brigand(String nom) {

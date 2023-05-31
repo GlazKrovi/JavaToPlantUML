@@ -17,6 +17,11 @@ public class PumlLiteClass extends PumlClasses {
 
     @Override
     public String selfTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.CLASS) {
+            throw new IllegalArgumentException();
+        }
+
         String classType = "class ";
         StringBuilder res = new StringBuilder();
         // opening
@@ -41,6 +46,11 @@ public class PumlLiteClass extends PumlClasses {
 
     @Override
     public String relationsTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.CLASS) {
+            throw new IllegalArgumentException();
+        }
+
         String res = this.AggregationsCompositionsTranslate(element) +
                 this.usesTranslate(element);
         // reset relations for next element process
@@ -109,12 +119,13 @@ public class PumlLiteClass extends PumlClasses {
 
     @Override
     public String contentTranslate(Element element) {
-        StringBuilder res = new StringBuilder();
-        if (element.getKind() == ElementKind.CLASS) {
-            // search inside
-            res.append(primitiveFieldsTranslate(element));
+        // security
+        if (element == null || element.getKind() != ElementKind.CLASS) {
+            throw new IllegalArgumentException();
         }
-        return res.toString();
+
+        // search inside
+        return primitiveFieldsTranslate(element);
     }
 
     /**
@@ -125,14 +136,12 @@ public class PumlLiteClass extends PumlClasses {
      */
     private String primitiveFieldsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
-        if (element.getKind() == ElementKind.CLASS) {
-            // search inside
-            for (Element enclosedElement : element.getEnclosedElements()) {
-                if (enclosedElement.getKind() == ElementKind.FIELD &&
-                        TranslatorTools.isPrimitiveType(enclosedElement.asType())) {
-                    res.append(enclosedElement);
-                    res.append("\n");
-                }
+        // search inside
+        for (Element enclosedElement : element.getEnclosedElements()) {
+            if (enclosedElement.getKind() == ElementKind.FIELD &&
+                    TranslatorTools.isPrimitiveType(enclosedElement.asType())) {
+                res.append(enclosedElement);
+                res.append("\n");
             }
         }
         return res.toString();
@@ -140,11 +149,9 @@ public class PumlLiteClass extends PumlClasses {
 
     private int countPrimitivesFields(Element element) {
         int nbPrimitiveFields = 0;
-        if (element.getKind() == ElementKind.CLASS) {
-            for (Element enclosedElement : element.getEnclosedElements()) {
-                if (enclosedElement.getKind() == ElementKind.FIELD && TranslatorTools.isPrimitiveType(enclosedElement.asType())) {
-                    nbPrimitiveFields++;
-                }
+        for (Element enclosedElement : element.getEnclosedElements()) {
+            if (enclosedElement.getKind() == ElementKind.FIELD && TranslatorTools.isPrimitiveType(enclosedElement.asType())) {
+                nbPrimitiveFields++;
             }
         }
         return nbPrimitiveFields;

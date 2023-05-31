@@ -1,13 +1,10 @@
-PRIORITE:
-Class pour supprimer les relations <<use>> en doubles
-
-
-
 Ajouter des lancement d'exception quand l'element passé en paramètre n'est pas du bon type
 (+voir pour d'autres erreurs personalisée)
 
 Class pour trier (static avec static; private en dessous des public, etc=
 
-(apparement) pas besoin de chercher les classes instancié dans des méthodes
 
 supprimer les securite en trop : normalement pas dans les protected ni les privates !!
+
+class pour chaque Element de type Method etc mais avec stock en champ de l'element,
+et avec verification de estUnChamp, estUneMethode...

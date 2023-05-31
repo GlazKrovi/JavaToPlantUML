@@ -79,16 +79,16 @@ class pumlFromJava.translators.diagrams.PumlCCD implements pumlFromJava.translat
 
 }
 interface pumlFromJava.translators.diagrams.PumlDiagram {
-+translateToScheme()
++ translateToScheme()
 
 }
 interface pumlFromJava.translators.ElementTranslator {
-+selfTranslate()
++ selfTranslate()
 
 }
 interface pumlFromJava.translators.Nameable {
-+getFullName()
-+getSimplifiedName()
++ getFullName()
++ getSimplifiedName()
 
 }
 class pumlFromJava.translators.PumlMethod implements pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable {
@@ -124,13 +124,13 @@ class pumlFromJava.translators.pumlMarker.Marker {
 
 }
 interface pumlFromJava.translators.pumlObjects.InheritableObject {
-+inheritanceTranslate()
++ inheritanceTranslate()
 
 }
 interface pumlFromJava.translators.pumlObjects.ObjectTranslator extends pumlFromJava.translators.ElementTranslator, pumlFromJava.translators.Nameable {
-+contentTranslate()
-+open()
-+close()
++ contentTranslate()
++ open()
++ close()
 
 }
 class pumlFromJava.translators.pumlObjects.PumlEnum extends pumlFromJava.translators.pumlObjects.PumlObject {
@@ -157,7 +157,7 @@ abstract pumlFromJava.translators.pumlObjects.PumlObject implements pumlFromJava
 
 }
 interface pumlFromJava.translators.pumlObjects.RelationableObject {
-+relationsTranslate()
++ relationsTranslate()
 
 }
 class pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass extends pumlFromJava.translators.pumlObjects.pumlClasses.PumlClasses {
@@ -244,9 +244,9 @@ class pumlFromJava.writers.Writer implements pumlFromJava.writers.WriterSpecies 
 
 }
 interface pumlFromJava.writers.WriterSpecies {
-+open()
-+close()
-+write()
++ open()
++ close()
++ write()
 
 }
 pumlFromJava.doclets.options.PathOption"1" <--o "1"PumlDoclet : -oPath

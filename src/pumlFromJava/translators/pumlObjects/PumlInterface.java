@@ -1,7 +1,6 @@
 package pumlFromJava.translators.pumlObjects;
 
 import pumlFromJava.translators.TranslatorTools;
-import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -13,6 +12,11 @@ public class PumlInterface extends PumlObject implements InheritableObject {
 
     @Override
     public String selfTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.INTERFACE) {
+            throw new IllegalArgumentException();
+        }
+
         return "interface " +
                 getFullName(element) + // name
                 inheritanceTranslate(element) +
@@ -26,6 +30,11 @@ public class PumlInterface extends PumlObject implements InheritableObject {
 
     @Override
     public String inheritanceTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.INTERFACE) {
+            throw new IllegalArgumentException();
+        }
+
         String res = "";
         StringBuilder info = new StringBuilder();
         TypeElement typeElement = (TypeElement) element;
@@ -55,16 +64,18 @@ public class PumlInterface extends PumlObject implements InheritableObject {
 
     @Override
     public String contentTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.INTERFACE) {
+            throw new IllegalArgumentException();
+        }
+
         StringBuilder res = new StringBuilder();
-        VisibilityViewer visibilityViewer = new VisibilityViewer();
-        if (element.getKind() == ElementKind.INTERFACE) {
-            for (Element enclosedElement : element.getEnclosedElements()) {
-                if (enclosedElement.getKind() == ElementKind.METHOD) {
-                    res.append(visibilityViewer.selfTranslate(enclosedElement));
-                    res.append(enclosedElement.getSimpleName());
-                    res.append("()");
-                    res.append("\n");
-                }
+        for (Element enclosedElement : element.getEnclosedElements()) {
+            if (enclosedElement.getKind() == ElementKind.METHOD) {
+                res.append("+ ");
+                res.append(enclosedElement.getSimpleName());
+                res.append("()");
+                res.append("\n");
             }
         }
         return res.toString();
