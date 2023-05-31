@@ -1,5 +1,6 @@
 package pumlFromJava.translators.elements.tools;
 
+import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 /**
@@ -101,7 +102,10 @@ public class TranslatorTools {
      * @return Returns true if the type passed is primitive, false otherwise
      */
     public static boolean isPrimitiveType(TypeMirror type) {
-        return type.getKind().isPrimitive() || type.toString().equals("java.lang.String");
+        return type.getKind().isPrimitive() ||
+                TranslatorTools.cutPackage(type.toString()).equalsIgnoreCase("string") ||
+                type.toString().equalsIgnoreCase("void") ||
+                type.toString().equalsIgnoreCase("null");
     }
 
     /**

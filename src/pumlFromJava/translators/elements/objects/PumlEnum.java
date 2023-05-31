@@ -1,4 +1,4 @@
-package pumlFromJava.translators.elements.rawObjects;
+package pumlFromJava.translators.elements.objects;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;

@@ -1,4 +1,4 @@
-package pumlFromJava.translators.elements.rawObjects.pumlClasses;
+package pumlFromJava.translators.elements.objects.pumlClasses;
 
 import pumlFromJava.translators.elements.relations.PumlArrow;
 import pumlFromJava.translators.elements.relations.PumlArrowLook;
@@ -71,7 +71,7 @@ public class PumlLiteClass extends PumlClasses {
                             !TranslatorTools.isPrimitiveType(parameter.asType()) &&
                             !links.contains(parameter.asType())) {
                         res.append(this.getFullName(element));
-                        res.append(arrow.getArrow());
+                        res.append(" ").append(arrow.getArrow()).append(" ");
                         res.append(parameter.asType());
                         res.append(" : <<Use>>");
                         res.append("\n");
@@ -88,7 +88,7 @@ public class PumlLiteClass extends PumlClasses {
     @Override
     protected String AggregationsCompositionsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
-        PumlArrow arrow = new PumlArrow(PumlArrowLook.HEADFULL_SOLID);
+        PumlArrow arrow = new PumlArrow(PumlArrowLook.SOLID);
         if (element != null && element.getKind() == ElementKind.CLASS && TranslatorTools.isNotFromJava(element.asType())) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 // is the field a class or enum? (non-primitive)
@@ -101,7 +101,7 @@ public class PumlLiteClass extends PumlClasses {
                     // add the class name
                     res.append(className);
                     // add arrow
-                    res.append(arrow.getArrow());
+                    res.append(" ").append(arrow.getArrow()).append(" ");
                     // get the defined class (aggregation or composition)
                     res.append(element.getSimpleName().toString());
                     // use

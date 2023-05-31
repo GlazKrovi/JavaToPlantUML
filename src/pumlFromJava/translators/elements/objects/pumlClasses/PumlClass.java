@@ -1,5 +1,7 @@
-package pumlFromJava.translators.elements.rawObjects.pumlClasses;
+package pumlFromJava.translators.elements.objects.pumlClasses;
 
+import pumlFromJava.translators.elements.internals.PumlConstructor;
+import pumlFromJava.translators.elements.internals.PumlField;
 import pumlFromJava.translators.elements.internals.PumlMethod;
 import pumlFromJava.translators.elements.relations.PumlArrow;
 import pumlFromJava.translators.elements.relations.PumlArrowLook;
@@ -104,9 +106,10 @@ public class PumlClass extends PumlClasses {
         if (element.getKind() == ElementKind.CLASS) {
             for (Element enclosedElement : element.getEnclosedElements()) {
                 if (enclosedElement.getKind() == ElementKind.METHOD) {
-                    temporary = methodsTranslate(enclosedElement);
-                } else if (enclosedElement.getKind() == ElementKind.FIELD) {
-                    temporary = fieldsTranslate(enclosedElement);
+                    temporary = oneMethodTranslate(enclosedElement);
+                } else if (enclosedElement.getKind() == ElementKind.FIELD &&
+                        TranslatorTools.isPrimitiveType(enclosedElement.asType())) {
+                        temporary = onePrimitiveFieldTranslate(enclosedElement);
                 } else if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
                     temporary = constructorsTranslate(enclosedElement);
                 }
@@ -126,16 +129,9 @@ public class PumlClass extends PumlClasses {
      * @param element an enclosed element from class
      * @return Returns translated string
      */
-    private String methodsTranslate(Element element) {
-        StringBuilder res = new StringBuilder();
-        PumlMethod pumlMethod = new PumlMethod();
-        if (element.getKind() == ElementKind.METHOD) {
-            res.append(visibilityViewer.selfTranslate(element));
-            res.append(modifiersViewer.selfTranslate(element));
-            res.append(pumlMethod.selfTranslate(element));
-        }
-
-        return res.toString();
+    private String oneMethodTranslate(Element element) {
+        PumlMethod method = new PumlMethod(element);
+        return method.getSelfTranslation();
     }
 
     /**
@@ -144,16 +140,9 @@ public class PumlClass extends PumlClasses {
      * @param element an enclosed element from class
      * @return Returns translated string
      */
-    private String fieldsTranslate(Element element) {
-        StringBuilder res = new StringBuilder();
-        if (element.getKind() == ElementKind.FIELD && TranslatorTools.isPrimitiveType(element.asType())) {
-            res.append(visibilityViewer.selfTranslate(element));
-            res.append(modifiersViewer.selfTranslate(element));
-            res.append(element.getSimpleName());
-            res.append(" : ");
-            res.append(TranslatorTools.reformatName(element.asType().toString()));
-        }
-        return res.toString();
+    private String onePrimitiveFieldTranslate(Element element) {
+        PumlField field = new PumlField(element);
+        return field.getSelfTranslation();
     }
 
     /**
@@ -163,14 +152,8 @@ public class PumlClass extends PumlClasses {
      * @return Returns translated string
      */
     private String constructorsTranslate(Element element) {
-        StringBuilder res = new StringBuilder();
-        PumlMethod pumlMethod = new PumlMethod();
-        if (element.getKind() == ElementKind.CONSTRUCTOR) {
-            res.append(visibilityViewer.selfTranslate(element));
-            res.append(" <<create>> ");
-            res.append(pumlMethod.selfTranslate(element));
-        }
-        return res.toString();
+        PumlConstructor constructor = new PumlConstructor(element);
+        return String.valueOf(constructor.getSelfTranslation());
     }
 
     @Override
@@ -188,7 +171,7 @@ public class PumlClass extends PumlClasses {
                         res.append(this.getFullName(element));
                         // add first multiplicity
                         res.append("\"1\"");
-                        res.append(arrow.getArrow());
+                        res.append(" ").append(arrow.getArrow()).append(" ");
                         // add second multiplicity
                         if (TranslatorTools.isCollection(element.getSimpleName().toString())) res.append("\"*\"");
                         else res.append("\"1\"");

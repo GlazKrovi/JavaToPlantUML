@@ -2,44 +2,57 @@ package pumlFromJava.translators.elements.internals;
 
 import pumlFromJava.translators.elements.tools.TranslatorTools;
 
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
-import java.util.ArrayList;
-import java.util.List;
+import javax.lang.model.type.TypeKind;
+import javax.lang.model.type.TypeMirror;
 
 /**
- * Represents puml equivalent for a java type (integer, string, etc.)
+ * Represents the puml equivalent of a java type (integer, string, etc.),
+ * such as a local variable, a field or a method parameter
  */
-public class PumlType extends PumlInternal {
+public class PumlType {
 
-    // devra être utiliser dans méthode !! methode etant elle-meme PumlInternal // todo
-    public PumlType(Element self) {
-        super(self);
+    private final TypeMirror self;
+
+    public PumlType(TypeMirror self) {
+        this.self = self;
 
         // security
-        List<ElementKind> corrects = new ArrayList<>();
-        corrects.add(ElementKind.PARAMETER);
-        corrects.add(ElementKind.LOCAL_VARIABLE);
-        corrects.add(ElementKind.FIELD);
-        if (!corrects.contains(self.getKind())) {
+        if (self.getKind() == TypeKind.NULL || self.getKind() == TypeKind.NONE){
             throw new IllegalArgumentException();
         }
     }
 
-    @Override
-    public String getContentTranslation() {
+    public String getSelfTranslation() {
         String res;
-        String type = TranslatorTools.reformatName(self.toString());
-        switch (type.toLowerCase()) {
+        // primitive
+        if (TranslatorTools.isPrimitiveType(self)){
+            res = this.translatePrimitive();
+        }
+        // others
+        else{
+            res = this.translateNonPrimitive();
+        }
+        return res;
+    }
+
+    private String translatePrimitive(){
+        String res;
+        String typeName = TranslatorTools.reformatName(this.self.toString().toLowerCase());
+        switch (typeName) {
             case "int" -> res = "Integer";
             case "float" -> res = "Float";
             case "boolean" -> res = "Boolean";
             case "char" -> res = "Char";
+            case "string" -> res = "String";
+            case "null", "none", "void" -> res = "";
             default -> {
-                res = type;
+                res = typeName;
             }
         }
         return res;
     }
 
+    private String translateNonPrimitive(){
+        return TranslatorTools.reformatName(this.self.toString());
+    }
 }

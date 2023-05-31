@@ -5,3 +5,5 @@ Class pour trier (static avec static; private en dessous des public, etc=
 
 class pour chaque Element de type Method etc mais avec stock en champ de l'element,
 et avec verification de estUnChamp, estUneMethode...
+
+Messages précis pour les erreurs perso

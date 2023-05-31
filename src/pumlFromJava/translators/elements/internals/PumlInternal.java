@@ -1,12 +1,21 @@
 package pumlFromJava.translators.elements.internals;
 
+import pumlFromJava.translators.viewers.ModifiersViewer;
+import pumlFromJava.translators.viewers.VisibilityViewer;
+
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.type.TypeMirror;
 
+/**
+ * Represents a specific content of a PumlRawObject,
+ * like method or field
+ */
 public abstract class PumlInternal implements RawInternal {
 
-    Element self;
+    protected Element self;
+    protected final VisibilityViewer visibilityViewer = new VisibilityViewer();
+    protected final ModifiersViewer modifiersViewer = new ModifiersViewer();
 
     // children have to secure super() with (element.getKind() != ElementKind.SOMETHING)
     public PumlInternal(Element self) {
@@ -14,7 +23,7 @@ public abstract class PumlInternal implements RawInternal {
     }
 
     @Override
-    public abstract String getContentTranslation();
+    public abstract String getSelfTranslation();
 
     @Override
     public String getName() {
@@ -27,7 +36,7 @@ public abstract class PumlInternal implements RawInternal {
     }
 
     @Override
-    public TypeMirror getElementType() {
+    public TypeMirror getType() {
         return self.asType();
     }
 }

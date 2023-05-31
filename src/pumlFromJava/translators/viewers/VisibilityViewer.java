@@ -1,6 +1,6 @@
 package pumlFromJava.translators.viewers;
 
-import pumlFromJava.translators.elements.rawObjects.PumlRawObject;
+import pumlFromJava.translators.elements.objects.PumlRawObject;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;

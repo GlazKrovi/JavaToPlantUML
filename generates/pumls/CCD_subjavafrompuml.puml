@@ -87,7 +87,7 @@ abstract pumlFromJava.translators.elements.internals.PumlInternal implements pum
 + {abstract}  {Override} getContentTranslation() : String
 + {Override} getName() : String
 + {Override} getKind() : ElementKind
-+ {Override} getElementType() : TypeMirror
++ {Override} getType() : TypeMirror
 
 }
 class pumlFromJava.translators.elements.internals.PumlMethod implements pumlFromJava.translators.elements.rawObjects.PumlRawObject, pumlFromJava.translators.elements.Nameable {
@@ -108,7 +108,7 @@ interface pumlFromJava.translators.elements.internals.RawInternal {
 + getContentTranslation()
 + getName()
 + getKind()
-+ getElementType()
++ getType()
 
 }
 interface pumlFromJava.translators.elements.Nameable {

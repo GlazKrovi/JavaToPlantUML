@@ -12,8 +12,8 @@ class western.Barman extends western.Personnage {
 
 }
 class western.Boisson {
-+ {static}   of(nom : String, genre : Genre) : Boisson
 - <<create>> Boisson(nom : String, genre : Genre)
++ {static}   of(nom : String, genre : Genre) : Boisson
 +  getNom() : String
 +  getGenre() : Genre
 +  getNomAvecArticleIndefini() : String
@@ -25,49 +25,49 @@ class western.Boisson {
 class western.Brigand extends western.Personnage implements western.HorsLaLoi {
 # {static}  {readonly} LOOK_PAR_DEFAUT : String
 -look : String
--recompense : int
--estLibre : boolean
+-recompense : Integer
+-estLibre : Boolean
 + <<create>> Brigand(nom : String)
 + <<create>> Brigand(nom : String, boisson : Boisson)
 + <<create>> Brigand(nom : String, boisson : Boisson, look : String)
++ {static}   getBoissonParDefaut() : Boisson
++ {static}   setBoissonParDefaut(boisson : Boisson)
 +  getLook() : String
-+  getRecompense() : int
-+  estLibre() : boolean
++  getRecompense() : Integer
++  estLibre() : Boolean
 +  kidnapper(dame : Dame)
 +  getCaptives() : Dame[*]
 +  seFaireCapturer(cowBoy : Cowboy)
 +  seFaireTirerDessus(cowBoy : Cowboy)
 + {Override} getPseudo() : String
 + {Override} sePresenter()
-+ {static}   getBoissonParDefaut() : Boisson
-+ {static}   setBoissonParDefaut(boisson : Boisson)
 
 }
 class western.Cowboy extends western.Personnage {
--gains : int
+-gains : Integer
 + <<create>> Cowboy(nom : String)
 + <<create>> Cowboy(nom : String, boisson : Boisson)
++ {static}   getBoissonParDefaut() : Boisson
++ {static}   setBoissonParDefaut(boisson : Boisson)
 + {Override} getPseudo() : String
 +  liberer(dame : Dame)
 +  liberer(captives : Dame[*])
 +  capturer(horsLaLoi : HorsLaLoi)
 +  tirerSur(brigand : HorsLaLoi)
 + {Override} sePresenter()
-+ {static}   getBoissonParDefaut() : Boisson
-+ {static}   setBoissonParDefaut(boisson : Boisson)
 
 }
 class western.Dame extends western.Personnage {
--estLibre : boolean
+-estLibre : Boolean
 + <<create>> Dame(nom : String)
 + <<create>> Dame(nom : String, boisson : Boisson)
++ {static}   getBoissonParDefaut() : Boisson
++ {static}   setBoissonParDefaut(boisson : Boisson)
 + {Override} getPseudo() : String
 +  seFaireKidnapper(horsLaLoi : HorsLaLoi)
 +  seFaireLiberer(cowBoy : Cowboy)
-+  estLibre() : boolean
++  estLibre() : Boolean
 + {Override} sePresenter()
-+ {static}   getBoissonParDefaut() : Boisson
-+ {static}   setBoissonParDefaut(boisson : Boisson)
 +  getRavisseur() : HorsLaLoi
 
 }
@@ -87,13 +87,13 @@ class western.Histoire5 {
 
 }
 interface western.HorsLaLoi extends western.Nommable {
-+estLibre()
-+getRecompense()
-+kidnapper()
-+seFaireCapturer()
-+seFaireTirerDessus()
-+getLook()
-+getCaptives()
++ estLibre()
++ getRecompense()
++ kidnapper()
++ seFaireCapturer()
++ seFaireTirerDessus()
++ getLook()
++ getCaptives()
 
 }
 class western.Narrateur extends western.Personnage {
@@ -106,22 +106,22 @@ class western.Narrateur extends western.Personnage {
 
 }
 interface western.Nommable {
-+getNom()
-+getPseudo()
++ getNom()
++ getPseudo()
 
 }
 abstract western.Personnage implements western.Nommable {
 -nom : String
 + <<create>> Personnage(nom : String)
 + <<create>> Personnage(nom : String, boisson : Boisson)
++ {static}   getPseudos(personnages : Nommable[*]) : String
++ {static}   getBoissonParDefaut() : Boisson
 +  dire(texte : String)
 +  sePresenter()
 +  boire(boisson : Boisson)
 +  boire()
 +  getNom() : String
 +  getBoisson() : Boisson
-+ {static}   getPseudos(personnages : Nommable[*]) : String
-+ {static}   getBoissonParDefaut() : Boisson
 
 }
 class western.Ripou extends western.Cowboy implements western.HorsLaLoi {
@@ -129,8 +129,8 @@ class western.Ripou extends western.Cowboy implements western.HorsLaLoi {
 + <<create>> Ripou(nom : String, boisson : Boisson)
 + <<create>> Ripou(nom : String, boisson : Boisson, look : String)
 +  getLook() : String
-+ {Override} estLibre() : boolean
-+ {Override} getRecompense() : int
++ {Override} estLibre() : Boolean
++ {Override} getRecompense() : Integer
 + {Override} kidnapper(dame : Dame)
 + {Override} getCaptives() : Dame[*]
 + {Override} seFaireCapturer(cowBoy : Cowboy)
@@ -148,24 +148,24 @@ class western.Sherif extends western.Cowboy {
 + {Override} sePresenter()
 + {Override} capturer(horsLaLoi : HorsLaLoi)
 +  rechercher(horsLaLoi : HorsLaLoi)
-+  isWanted(horsLaLoi : HorsLaLoi) : boolean
++  isWanted(horsLaLoi : HorsLaLoi) : Boolean
 
 }
 class western.Substantif {
 -nom : String
 + <<create>> Substantif(nom : String, genre : Genre)
++ {static}   isVowel(c : Char) : Boolean
++ {static}   startsWithVowel(s : String) : Boolean
++ {static}   getArticleDefini(genre : Genre) : String
++ {static}   faireElision(article : String) : String
 +  getNom() : String
 +  getGenre() : Genre
 + {Override} toString() : String
-+ {static}   isVowel(c : char) : boolean
-+ {static}   startsWithVowel(s : String) : boolean
 +  getArticleIndefini() : String
 +  avecArticleIndefini() : String
-+ {static}   getArticleDefini(genre : Genre) : String
 +  getArticleDefini() : String
 +  avecArticleDefini() : String
-+ {static}   faireElision(article : String) : String
-+  elision() : boolean
++  elision() : Boolean
 +  getArticlePartitif() : String
 +  avecArticlePartitif() : String
 +  avecElision(article : String) : String
@@ -174,18 +174,18 @@ class western.Substantif {
 }
 western.Boisson"1" <--o "1"Barman : -boissonParDefaut
 western.Barman"1" <.. "1"western.Personnage : <<Use>>
-western.Substantif"1" <--o "1"Boisson : -substantif
 western.Boisson"1" <--o "1"Boisson : +EAU
+western.Substantif"1" <--o "1"Boisson : -substantif
 western.Boisson"1" <.. "1"western.Genre : <<Use>>
-western.Cowboy"1" <--o "1"Brigand : -gardien
 western.Boisson"1" <--o "1"Brigand : -boissonParDefaut
+western.Cowboy"1" <--o "1"Brigand : -gardien
 western.Brigand"1" <.. "1"western.Dame : <<Use>>
 western.Boisson"1" <--o "1"Cowboy : -boissonParDefaut
 western.Cowboy"1" <.. "1"western.Dame : <<Use>>
 western.Cowboy"1" <.. "1"western.HorsLaLoi : <<Use>>
+western.Boisson"1" <--o "1"Dame : -boissonParDefaut
 western.Cowboy"1" <--o "1"Dame : -sauveur
 western.HorsLaLoi"1" <--o "1"Dame : -ravisseur
-western.Boisson"1" <--o "1"Dame : -boissonParDefaut
 western.Narrateur"1" <.. "1"western.Boisson : <<Use>>
 western.Boisson"1" <--o "1"Personnage : -BOISSON_PAR_DEFAUT
 western.Brigand"1" <--o "1"Ripou : -brigand

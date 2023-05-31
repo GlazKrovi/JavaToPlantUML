@@ -4,7 +4,7 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.type.TypeMirror;
 
 /**
- * Represents the content of a PumlRawObject,
+ * Any class who represents a specific content of a PumlRawObject,
  * like method or field
  */
 public interface RawInternal {
@@ -15,7 +15,7 @@ public interface RawInternal {
      * @return String like 'fieldName : fieldType' or
      * 'methodName(arg1Name : arg1Type, arg2Name : arg2Type) : returnedType'
      */
-    String getContentTranslation();
+    String getSelfTranslation();
 
     /**
      * @return Returns the name of the internal element
@@ -32,7 +32,5 @@ public interface RawInternal {
      * @return Returns the entire the name of the element that this internal element
      * instantiates (like food.Meals, if the internal element is "eat()" method)
      */
-    TypeMirror getElementType();
-
-
+    TypeMirror getType();
 }

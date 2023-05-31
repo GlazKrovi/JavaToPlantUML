@@ -1,4 +1,4 @@
-package pumlFromJava.translators.elements.rawObjects;
+package pumlFromJava.translators.elements.objects;
 
 import pumlFromJava.translators.elements.Nameable;
 
