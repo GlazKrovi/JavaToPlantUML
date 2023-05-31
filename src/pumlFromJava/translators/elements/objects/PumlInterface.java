@@ -1,7 +1,6 @@
 package pumlFromJava.translators.elements.objects;
 
-import pumlFromJava.translators.elements.internals.PumlMethod;
-import pumlFromJava.translators.elements.internals.PumlType;
+import pumlFromJava.translators.elements.objects.internals.PumlMethod;
 import pumlFromJava.translators.elements.tools.TranslatorTools;
 
 import javax.lang.model.element.Element;

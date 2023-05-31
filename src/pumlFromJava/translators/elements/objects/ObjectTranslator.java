@@ -1,7 +1,5 @@
 package pumlFromJava.translators.elements.objects;
 
-import pumlFromJava.translators.elements.Nameable;
-
 import javax.lang.model.element.Element;
 
 /**

@@ -2,10 +2,10 @@ package pumlFromJava.translators.elements.objects.pumlClasses;
 
 import pumlFromJava.translators.elements.objects.InheritableObject;
 import pumlFromJava.translators.elements.objects.PumlObject;
+import pumlFromJava.translators.elements.objects.viewers.AnnotationsViewer;
+import pumlFromJava.translators.elements.objects.viewers.ModifiersViewer;
 import pumlFromJava.translators.elements.relations.RelationableObject;
 import pumlFromJava.translators.elements.tools.TranslatorTools;
-import pumlFromJava.translators.viewers.AnnotationsViewer;
-import pumlFromJava.translators.viewers.ModifiersViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;

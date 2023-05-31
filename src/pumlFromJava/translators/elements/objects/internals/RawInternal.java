@@ -1,4 +1,4 @@
-package pumlFromJava.translators.elements.internals;
+package pumlFromJava.translators.elements.objects.internals;
 
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.type.TypeMirror;

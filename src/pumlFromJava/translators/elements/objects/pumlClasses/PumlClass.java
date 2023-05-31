@@ -1,12 +1,12 @@
 package pumlFromJava.translators.elements.objects.pumlClasses;
 
-import pumlFromJava.translators.elements.internals.PumlConstructor;
-import pumlFromJava.translators.elements.internals.PumlField;
-import pumlFromJava.translators.elements.internals.PumlMethod;
+import pumlFromJava.translators.elements.objects.internals.PumlConstructor;
+import pumlFromJava.translators.elements.objects.internals.PumlField;
+import pumlFromJava.translators.elements.objects.internals.PumlMethod;
+import pumlFromJava.translators.elements.objects.viewers.VisibilityViewer;
 import pumlFromJava.translators.elements.relations.PumlArrow;
 import pumlFromJava.translators.elements.relations.PumlArrowLook;
 import pumlFromJava.translators.elements.tools.TranslatorTools;
-import pumlFromJava.translators.viewers.VisibilityViewer;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
@@ -109,7 +109,7 @@ public class PumlClass extends PumlClasses {
                     temporary = oneMethodTranslate(enclosedElement);
                 } else if (enclosedElement.getKind() == ElementKind.FIELD &&
                         TranslatorTools.isPrimitiveType(enclosedElement.asType())) {
-                        temporary = onePrimitiveFieldTranslate(enclosedElement);
+                    temporary = onePrimitiveFieldTranslate(enclosedElement);
                 } else if (enclosedElement.getKind() == ElementKind.CONSTRUCTOR) {
                     temporary = constructorsTranslate(enclosedElement);
                 }

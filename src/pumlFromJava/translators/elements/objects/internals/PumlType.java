@@ -1,4 +1,4 @@
-package pumlFromJava.translators.elements.internals;
+package pumlFromJava.translators.elements.objects.internals;
 
 import pumlFromJava.translators.elements.tools.TranslatorTools;
 
@@ -17,7 +17,7 @@ public class PumlType {
         this.self = self;
 
         // security
-        if (self.getKind() == TypeKind.NULL || self.getKind() == TypeKind.NONE){
+        if (self.getKind() == TypeKind.NULL || self.getKind() == TypeKind.NONE) {
             throw new IllegalArgumentException();
         }
     }
@@ -25,17 +25,17 @@ public class PumlType {
     public String getSelfTranslation() {
         String res;
         // primitive
-        if (TranslatorTools.isPrimitiveType(self)){
+        if (TranslatorTools.isPrimitiveType(self)) {
             res = this.translatePrimitive();
         }
         // others
-        else{
+        else {
             res = this.translateNonPrimitive();
         }
         return res;
     }
 
-    private String translatePrimitive(){
+    private String translatePrimitive() {
         String res;
         String typeName = TranslatorTools.reformatName(this.self.toString().toLowerCase());
         switch (typeName) {
@@ -52,7 +52,7 @@ public class PumlType {
         return res;
     }
 
-    private String translateNonPrimitive(){
+    private String translateNonPrimitive() {
         return TranslatorTools.reformatName(this.self.toString());
     }
 }

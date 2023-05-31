@@ -1,6 +1,5 @@
 package pumlFromJava.translators.elements.tools;
 
-import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 /**

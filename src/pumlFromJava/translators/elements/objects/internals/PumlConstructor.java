@@ -1,7 +1,6 @@
-package pumlFromJava.translators.elements.internals;
+package pumlFromJava.translators.elements.objects.internals;
 
 import pumlFromJava.translators.elements.tools.TranslatorTools;
-import pumlFromJava.translators.viewers.AnnotationsViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;

@@ -1,7 +1,7 @@
-package pumlFromJava.translators.elements.internals;
+package pumlFromJava.translators.elements.objects.internals;
 
-import pumlFromJava.translators.viewers.ModifiersViewer;
-import pumlFromJava.translators.viewers.VisibilityViewer;
+import pumlFromJava.translators.elements.objects.viewers.ModifiersViewer;
+import pumlFromJava.translators.elements.objects.viewers.VisibilityViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -13,9 +13,9 @@ import javax.lang.model.type.TypeMirror;
  */
 public abstract class PumlInternal implements RawInternal {
 
-    protected Element self;
     protected final VisibilityViewer visibilityViewer = new VisibilityViewer();
     protected final ModifiersViewer modifiersViewer = new ModifiersViewer();
+    protected Element self;
 
     // children have to secure super() with (element.getKind() != ElementKind.SOMETHING)
     public PumlInternal(Element self) {

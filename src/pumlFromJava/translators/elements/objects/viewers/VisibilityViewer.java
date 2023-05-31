@@ -1,4 +1,4 @@
-package pumlFromJava.translators.viewers;
+package pumlFromJava.translators.elements.objects.viewers;
 
 import pumlFromJava.translators.elements.objects.PumlRawObject;
 

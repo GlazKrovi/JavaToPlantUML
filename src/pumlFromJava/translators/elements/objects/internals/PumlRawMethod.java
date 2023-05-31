@@ -1,4 +1,4 @@
-package pumlFromJava.translators.elements.internals;
+package pumlFromJava.translators.elements.objects.internals;
 
 import pumlFromJava.translators.elements.tools.TranslatorTools;
 
@@ -17,6 +17,7 @@ public abstract class PumlRawMethod extends PumlInternal {
         super(self);
         if (self == null) throw new NullPointerException();
     }
+
     public String getSimplifiedName() {
         return TranslatorTools.cutPackage(self.getSimpleName().toString());
     }
@@ -32,7 +33,7 @@ public abstract class PumlRawMethod extends PumlInternal {
     }
 
     @Override
-    public abstract String getSelfTranslation() ;
+    public abstract String getSelfTranslation();
 
     /**
      * Gives puml equivalent for parameters of specified class' method
