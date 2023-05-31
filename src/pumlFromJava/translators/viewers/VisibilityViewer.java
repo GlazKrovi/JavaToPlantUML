@@ -1,6 +1,6 @@
-package pumlFromJava.translators.pumlViewers;
+package pumlFromJava.translators.viewers;
 
-import pumlFromJava.translators.ElementTranslator;
+import pumlFromJava.translators.elements.rawObjects.PumlRawObject;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
@@ -10,7 +10,7 @@ import java.util.Set;
  * Translate an annotation into Puml equivalent,
  * like + for public, - for private, ~ for protected
  */
-public class VisibilityViewer implements ElementTranslator {
+public class VisibilityViewer implements PumlRawObject {
     @Override
     public String selfTranslate(Element element) {
         String res = "";

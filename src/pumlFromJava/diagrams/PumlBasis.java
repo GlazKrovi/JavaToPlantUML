@@ -1,17 +1,15 @@
-package pumlFromJava.translators.diagrams;
+package pumlFromJava.diagrams;
 
 import jdk.javadoc.doclet.DocletEnvironment;
-import pumlFromJava.translators.pumlMarker.Marker;
-import pumlFromJava.translators.pumlObjects.PumlEnum;
-import pumlFromJava.translators.pumlObjects.PumlInterface;
-import pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass;
+import pumlFromJava.translators.marker.Marker;
+import pumlFromJava.translators.elements.rawObjects.PumlEnum;
+import pumlFromJava.translators.elements.rawObjects.PumlInterface;
+import pumlFromJava.translators.elements.rawObjects.pumlClasses.PumlClass;
 
 import javax.lang.model.element.Element;
 
 public class PumlBasis implements PumlDiagram {
 
-    public PumlBasis() {
-    }
 
     /**
      * Translate a specified environment into a very simple Puml scheme

@@ -1,6 +1,6 @@
-package pumlFromJava.translators.pumlViewers;
+package pumlFromJava.translators.viewers;
 
-import pumlFromJava.translators.ElementTranslator;
+import pumlFromJava.translators.elements.rawObjects.PumlRawObject;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -11,7 +11,7 @@ import java.util.Set;
  * Verify if element is static, abstract and/or final and translate presents
  * annotation into their Puml equivalent
  */
-public class ModifiersViewer implements ElementTranslator {
+public class ModifiersViewer implements PumlRawObject {
 
     @Override
     public String selfTranslate(Element element) {

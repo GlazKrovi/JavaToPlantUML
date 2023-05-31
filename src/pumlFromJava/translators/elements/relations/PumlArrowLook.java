@@ -1,4 +1,4 @@
-package pumlFromJava.translators.pumlObjects.pumlRelations;
+package pumlFromJava.translators.elements.relations;
 
 public enum PumlArrowLook {
     DOTTED,

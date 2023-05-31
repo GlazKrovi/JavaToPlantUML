@@ -1,14 +1,13 @@
-package pumlFromJava.translators.pumlObjects;
+package pumlFromJava.translators.elements.rawObjects;
 
-import pumlFromJava.translators.ElementTranslator;
-import pumlFromJava.translators.Nameable;
+import pumlFromJava.translators.elements.Nameable;
 
 import javax.lang.model.element.Element;
 
 /**
  * Represents a translator for any java package, class, enum or interface
  */
-public interface ObjectTranslator extends ElementTranslator, Nameable {
+public interface ObjectTranslator extends PumlRawObject, Nameable {
     /**
      * Translate what is inside the Element (like attributes, constants or method)
      *

@@ -1,6 +1,9 @@
-package pumlFromJava.translators;
+package pumlFromJava.translators.elements.internals;
 
-import pumlFromJava.translators.pumlViewers.AnnotationsViewer;
+import pumlFromJava.translators.elements.Nameable;
+import pumlFromJava.translators.elements.rawObjects.PumlRawObject;
+import pumlFromJava.translators.elements.tools.TranslatorTools;
+import pumlFromJava.translators.viewers.AnnotationsViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -8,7 +11,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 
 
-public class PumlMethod implements ElementTranslator, Nameable {
+public class PumlMethod implements PumlRawObject, Nameable {
     /**
      * Translate what is inside the method Element (parameters and returned value type)
      *

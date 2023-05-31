@@ -3,8 +3,5 @@ Ajouter des lancement d'exception quand l'element passé en paramètre n'est pas
 
 Class pour trier (static avec static; private en dessous des public, etc=
 
-
-supprimer les securite en trop : normalement pas dans les protected ni les privates !!
-
 class pour chaque Element de type Method etc mais avec stock en champ de l'element,
 et avec verification de estUnChamp, estUneMethode...

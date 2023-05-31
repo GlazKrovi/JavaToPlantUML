@@ -1,4 +1,4 @@
-package pumlFromJava.translators.pumlMarker;
+package pumlFromJava.translators.marker;
 
 /**
  * This writes the basic lines for opening and closing a puml file, as well as a possible theme and/or option

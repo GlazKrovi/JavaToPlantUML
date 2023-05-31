@@ -1,11 +1,11 @@
-package pumlFromJava.translators.pumlObjects.pumlClasses;
+package pumlFromJava.translators.elements.rawObjects.pumlClasses;
 
-import pumlFromJava.translators.TranslatorTools;
-import pumlFromJava.translators.pumlObjects.InheritableObject;
-import pumlFromJava.translators.pumlObjects.PumlObject;
-import pumlFromJava.translators.pumlObjects.RelationableObject;
-import pumlFromJava.translators.pumlViewers.AnnotationsViewer;
-import pumlFromJava.translators.pumlViewers.ModifiersViewer;
+import pumlFromJava.translators.elements.tools.TranslatorTools;
+import pumlFromJava.translators.elements.rawObjects.InheritableObject;
+import pumlFromJava.translators.elements.rawObjects.PumlObject;
+import pumlFromJava.translators.elements.relations.RelationableObject;
+import pumlFromJava.translators.viewers.AnnotationsViewer;
+import pumlFromJava.translators.viewers.ModifiersViewer;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;

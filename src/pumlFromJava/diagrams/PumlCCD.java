@@ -1,18 +1,15 @@
-package pumlFromJava.translators.diagrams;
+package pumlFromJava.diagrams;
 
 import jdk.javadoc.doclet.DocletEnvironment;
-import pumlFromJava.translators.pumlMarker.Marker;
-import pumlFromJava.translators.pumlObjects.PumlEnum;
-import pumlFromJava.translators.pumlObjects.PumlInterface;
-import pumlFromJava.translators.pumlObjects.pumlClasses.PumlClass;
+import pumlFromJava.translators.marker.Marker;
+import pumlFromJava.translators.elements.rawObjects.PumlEnum;
+import pumlFromJava.translators.elements.rawObjects.PumlInterface;
+import pumlFromJava.translators.elements.rawObjects.pumlClasses.PumlClass;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
 public class PumlCCD implements PumlDiagram {
-    public PumlCCD() {
-    }
-
     /**
      * Design a full Puml Conception Class Diagram scheme
      *

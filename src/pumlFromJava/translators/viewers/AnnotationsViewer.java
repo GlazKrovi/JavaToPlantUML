@@ -1,7 +1,7 @@
-package pumlFromJava.translators.pumlViewers;
+package pumlFromJava.translators.viewers;
 
-import pumlFromJava.translators.ElementTranslator;
-import pumlFromJava.translators.TranslatorTools;
+import pumlFromJava.translators.elements.rawObjects.PumlRawObject;
+import pumlFromJava.translators.elements.tools.TranslatorTools;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
@@ -11,7 +11,7 @@ import java.util.List;
  * Gets and translates the @Override annotations of a method
  * (or, more unusually, a class)
  */
-public class AnnotationsViewer implements ElementTranslator {
+public class AnnotationsViewer implements PumlRawObject {
     @Override
     public String selfTranslate(Element element) {
         StringBuilder res = new StringBuilder();

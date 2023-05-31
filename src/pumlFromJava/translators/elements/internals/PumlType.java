@@ -1,11 +1,14 @@
-package pumlFromJava.translators;
+package pumlFromJava.translators.elements.internals;
+
+import pumlFromJava.translators.elements.rawObjects.PumlRawObject;
+import pumlFromJava.translators.elements.tools.TranslatorTools;
 
 import javax.lang.model.element.Element;
 
 /**
  * Represents puml equivalent for a java type (integer, string, etc.)
  */
-public class PumlType implements ElementTranslator {
+public class PumlType implements PumlRawObject {
     @Override
     public String selfTranslate(Element element) {
         String res;

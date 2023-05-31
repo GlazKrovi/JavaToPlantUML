@@ -1,4 +1,4 @@
-package pumlFromJava.translators;
+package pumlFromJava.translators.elements;
 
 import javax.lang.model.element.Element;
 

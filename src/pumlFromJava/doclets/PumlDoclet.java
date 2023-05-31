@@ -6,8 +6,8 @@ import jdk.javadoc.doclet.Reporter;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.doclets.options.TypeOption;
-import pumlFromJava.translators.diagrams.PumlACD;
-import pumlFromJava.translators.diagrams.PumlCCD;
+import pumlFromJava.diagrams.PumlACD;
+import pumlFromJava.diagrams.PumlCCD;
 import pumlFromJava.writers.Writer;
 
 import javax.lang.model.SourceVersion;

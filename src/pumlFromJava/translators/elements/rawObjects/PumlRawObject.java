@@ -1,4 +1,4 @@
-package pumlFromJava.translators;
+package pumlFromJava.translators.elements.rawObjects;
 
 import javax.lang.model.element.Element;
 
@@ -6,7 +6,7 @@ import javax.lang.model.element.Element;
  * Represents any type of element (class, enum, interface, method, constructor, fields, ...)
  * in his puml equivalent
  */
-public interface ElementTranslator {
+public interface PumlRawObject {
     /**
      * Translate the name (like class, enum or interface)
      * and what is inside the Element (like attributes, constants or method)
