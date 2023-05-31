@@ -4,6 +4,7 @@ import pumlFromJava.translators.TranslatorTools;
 import pumlFromJava.translators.pumlObjects.InheritableObject;
 import pumlFromJava.translators.pumlObjects.PumlObject;
 import pumlFromJava.translators.pumlObjects.RelationableObject;
+import pumlFromJava.translators.pumlViewers.AnnotationsViewer;
 import pumlFromJava.translators.pumlViewers.ModifiersViewer;
 
 import javax.lang.model.element.Element;
@@ -18,7 +19,9 @@ import java.util.List;
  */
 public abstract class PumlClasses extends PumlObject implements InheritableObject, RelationableObject {
 
+    // Usefully objects
     protected final ModifiersViewer modifiersViewer = new ModifiersViewer();
+    protected final AnnotationsViewer annotationsViewer = new AnnotationsViewer();
     protected final List<TypeMirror> links = new ArrayList<>(); // buffer variable to store relationships and avoid unnecessary duplication
 
 
@@ -96,5 +99,5 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
      */
     protected abstract String AggregationsCompositionsTranslate(Element element);
 
-    protected abstract String UsesTranslate(Element element);
+    protected abstract String usesTranslate(Element element);
 }

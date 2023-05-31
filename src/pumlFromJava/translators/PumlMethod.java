@@ -1,5 +1,7 @@
 package pumlFromJava.translators;
 
+import pumlFromJava.translators.pumlViewers.AnnotationsViewer;
+
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -16,12 +18,16 @@ public class PumlMethod implements ElementTranslator, Nameable {
     @Override
     public String selfTranslate(Element element) {
         StringBuilder res = new StringBuilder();
+        AnnotationsViewer annotationsViewer = new AnnotationsViewer();
         if (element.getKind() == ElementKind.METHOD) {
             ExecutableElement executableElement = (ExecutableElement) element;
-            res.append(this.getSimplifiedName(element));
-            res.append("(");
-            res.append(TranslatorTools.reformatName(this.getParameters(executableElement)));
-            res.append(")");
+            res.append(" ")
+                    .append(annotationsViewer.selfTranslate(element)) // {@Override} {@myPersonalTag}
+                    .append(" ")
+                    .append(this.getSimplifiedName(element))
+                    .append("(")
+                    .append(TranslatorTools.reformatName(this.getParameters(executableElement)))
+                    .append(")");
             if (!this.getReturnType(executableElement).isEmpty()) {
                 res.append(" : ");
                 res.append(this.getReturnType(executableElement));

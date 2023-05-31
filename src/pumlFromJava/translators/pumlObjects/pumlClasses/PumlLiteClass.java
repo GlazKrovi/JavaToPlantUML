@@ -21,6 +21,7 @@ public class PumlLiteClass extends PumlClasses {
         if (element.getModifiers().contains(Modifier.ABSTRACT)) classType = "abstract ";
         res.append(classType) // class (or abstract)
             .append(modifiersViewer.selfTranslate(element)) // {abstract}
+            .append(annotationsViewer.selfTranslate(element)) // {@myPersonalTag})
             .append(getFullName(element)) // name
             .append(inheritanceTranslate(element)); // extends something implements otherThing
         // content (open and closing)?
@@ -39,14 +40,14 @@ public class PumlLiteClass extends PumlClasses {
     @Override
     public String relationsTranslate(Element element) {
         String res =  this.AggregationsCompositionsTranslate(element) +
-                this.UsesTranslate(element);
+                this.usesTranslate(element);
         // reset relations for next element process
         links.clear();
         return res;
     }
 
     @Override
-    protected String UsesTranslate(Element element) {
+    protected String usesTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {

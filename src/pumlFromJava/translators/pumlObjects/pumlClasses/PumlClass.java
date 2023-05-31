@@ -2,6 +2,7 @@ package pumlFromJava.translators.pumlObjects.pumlClasses;
 
 import pumlFromJava.translators.PumlMethod;
 import pumlFromJava.translators.TranslatorTools;
+import pumlFromJava.translators.pumlViewers.AnnotationsViewer;
 import pumlFromJava.translators.pumlViewers.VisibilityViewer;
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
@@ -17,7 +18,7 @@ public class PumlClass extends PumlClasses {
     @Override
     public String relationsTranslate(Element element) {
         String res =  this.AggregationsCompositionsTranslate(element) +
-                this.UsesTranslate(element);
+                this.usesTranslate(element);
         // reset relations for next element process
         links.clear();
         return res;
@@ -68,6 +69,7 @@ public class PumlClass extends PumlClasses {
         if (element.getModifiers().contains(Modifier.ABSTRACT)) classType = "abstract ";
         return  classType + // class (or abstract)
                 modifiersViewer.selfTranslate(element) + // {abstract}
+                annotationsViewer.selfTranslate(element) + // {@myPersonalTag}
                 getFullName(element) + // name
                 inheritanceTranslate(element) + // extends something implements otherThing
                 open() + // {
@@ -154,7 +156,7 @@ public class PumlClass extends PumlClasses {
     }
 
     @Override
-    protected String UsesTranslate(Element element) {
+    protected String usesTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         for (Element enclosedElement : element.getEnclosedElements()) {
             if (enclosedElement.getKind() == ElementKind.METHOD) {

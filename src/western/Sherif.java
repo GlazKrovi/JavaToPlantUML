@@ -49,6 +49,10 @@ public class Sherif extends Cowboy{
         }
     }
 
+    /**
+     * @pumlAggregation  compote
+     * @param horsLaLoi
+     */
     public void rechercher(HorsLaLoi horsLaLoi){
         if (!this.isWanted(horsLaLoi)){
             this.wanted.add(horsLaLoi);

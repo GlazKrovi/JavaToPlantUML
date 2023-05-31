@@ -1,4 +1,4 @@
-package pumlFromJava.translators.pumlObjects.pumlClasses;
+package pumlFromJava.translators.pumlObjects;
 
 import pumlFromJava.translators.pumlObjects.PumlObject;
 
