@@ -8,13 +8,13 @@ public abstract class PumlInternal implements RawInternal {
 
     Element self;
 
-    // children have to secure super() with (element == null || element.getKind() != ElementKind.SOMETHING)
+    // children have to secure super() with (element.getKind() != ElementKind.SOMETHING)
     public PumlInternal(Element self) {
         this.self = self;
     }
 
     @Override
-    public abstract String getContentTranslation() ;
+    public abstract String getContentTranslation();
 
     @Override
     public String getName() {

@@ -1,9 +1,9 @@
 package pumlFromJava.translators.elements.rawObjects.pumlClasses;
 
-import pumlFromJava.translators.elements.tools.TranslatorTools;
 import pumlFromJava.translators.elements.rawObjects.InheritableObject;
 import pumlFromJava.translators.elements.rawObjects.PumlObject;
 import pumlFromJava.translators.elements.relations.RelationableObject;
+import pumlFromJava.translators.elements.tools.TranslatorTools;
 import pumlFromJava.translators.viewers.AnnotationsViewer;
 import pumlFromJava.translators.viewers.ModifiersViewer;
 

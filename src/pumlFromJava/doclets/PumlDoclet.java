@@ -3,11 +3,11 @@ package pumlFromJava.doclets;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
+import pumlFromJava.diagrams.PumlACD;
+import pumlFromJava.diagrams.PumlCCD;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.doclets.options.TypeOption;
-import pumlFromJava.diagrams.PumlACD;
-import pumlFromJava.diagrams.PumlCCD;
 import pumlFromJava.writers.Writer;
 
 import javax.lang.model.SourceVersion;

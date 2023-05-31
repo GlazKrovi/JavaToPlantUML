@@ -1,8 +1,8 @@
 package pumlFromJava.translators.elements.rawObjects.pumlClasses;
 
-import pumlFromJava.translators.elements.tools.TranslatorTools;
 import pumlFromJava.translators.elements.relations.PumlArrow;
 import pumlFromJava.translators.elements.relations.PumlArrowLook;
+import pumlFromJava.translators.elements.tools.TranslatorTools;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;

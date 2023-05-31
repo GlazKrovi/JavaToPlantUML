@@ -18,20 +18,17 @@ public interface RawInternal {
     String getContentTranslation();
 
     /**
-     *
      * @return Returns the name of the internal element
      */
     String getName();
 
     /**
-     *
      * @return Returns the type of the internal element,
      * in an ElementKind form (CLASS, ENUM, INTERFACE, etc.)
      */
     ElementKind getKind();
 
     /**
-     *
      * @return Returns the entire the name of the element that this internal element
      * instantiates (like food.Meals, if the internal element is "eat()" method)
      */
