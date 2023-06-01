@@ -20,20 +20,6 @@ public class PumlClass extends PumlClasses {
     private final VisibilityViewer visibilityViewer = new VisibilityViewer();
 
     @Override
-    public String relationsTranslate(Element element) {
-        // security
-        if (element == null || element.getKind() != ElementKind.CLASS) {
-            throw new IllegalArgumentException();
-        }
-
-        String res = this.AggregationsCompositionsTranslate(element) +
-                this.usesTranslate(element);
-        // reset relations for next element process
-        links.clear();
-        return res;
-    }
-
-    @Override
     protected String AggregationsCompositionsTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         PumlArrow pumlArrow = new PumlArrow(PumlArrowLook.DIAMOND_EMPTY); // aggregation by default

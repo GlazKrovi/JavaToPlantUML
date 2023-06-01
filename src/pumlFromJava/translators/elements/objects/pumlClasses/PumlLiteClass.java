@@ -45,20 +45,6 @@ public class PumlLiteClass extends PumlClasses {
     }
 
     @Override
-    public String relationsTranslate(Element element) {
-        // security
-        if (element == null || element.getKind() != ElementKind.CLASS) {
-            throw new IllegalArgumentException();
-        }
-
-        String res = this.AggregationsCompositionsTranslate(element) +
-                this.usesTranslate(element);
-        // reset relations for next element process
-        links.clear();
-        return res;
-    }
-
-    @Override
     protected String usesTranslate(Element element) {
         StringBuilder res = new StringBuilder();
         PumlArrow arrow = new PumlArrow(PumlArrowLook.DOTTED);

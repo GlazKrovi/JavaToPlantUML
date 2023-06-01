@@ -2,7 +2,7 @@
   <configuration default="false" name="APIRun" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="pumlFromJava.generators.Java2Puml" />
     <module name="sae-doo-fernandes-marsault" />
-    <option name="PROGRAM_PARAMETERS" value="-private -sourcepath src -doclet pumlFromJava.doclets.PumlDoclet -d generates/pumls/ -g both -out subjavafrompuml.puml -subpackages pumlFromJava" />
+    <option name="PROGRAM_PARAMETERS" value="-private -sourcepath src -doclet pumlFromJava.doclets.PumlDoclet -d generates/pumls/ -out subjavafrompuml.puml -g both -subpackages pumlFromJava" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

@@ -8,22 +8,16 @@ import pumlFromJava.diagrams.PumlCCD;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.doclets.options.TypeOption;
+import pumlFromJava.generators.Help;
 import pumlFromJava.writers.Writer;
 
 import javax.lang.model.SourceVersion;
 import java.util.Locale;
 import java.util.Set;
 
-/* Directories management is not yet complete
- * A command line which work:
- * -private -sourcepath src -doclet pumlFromJava.doclets.PumlDoclet -d generates/pumls/ -g both -out exemple.puml western
- * */
-
 public class PumlDoclet implements Doclet {
-
     private final PathOption oPath = new PathOption();
     private final OutOption oOut = new OutOption();
-
     private final TypeOption oType = new TypeOption();
 
     @Override
@@ -49,19 +43,16 @@ public class PumlDoclet implements Doclet {
 
     @Override
     public boolean run(DocletEnvironment environment) {
-        try {
-            if (oType.getType().equalsIgnoreCase("both")) {
-                generateACD(environment);
-                generateCCD(environment);
-            } else if (oType.getType().equalsIgnoreCase("ccd")) {
-                generateCCD(environment);
-            } else if (oType.getType().equalsIgnoreCase("acd")) {
-                generateACD(environment);
-            } else {
-                throw new IllegalArgumentException("Please specify if you want 'both', 'acd' or 'dcc' scheme");
-            }
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+        // scan parameters
+        if (oType.getType().equalsIgnoreCase("both")) {
+            generateACD(environment);
+            generateCCD(environment);
+        } else if (oType.getType().equalsIgnoreCase("ccd")) {
+            generateCCD(environment);
+        } else if (oType.getType().equalsIgnoreCase("acd")) {
+            generateACD(environment);
+        } else {
+            throw new IllegalArgumentException("Please specify if you want 'both', 'acd' or 'dcc' scheme");
         }
         return true;
     }
@@ -75,7 +66,7 @@ public class PumlDoclet implements Doclet {
         PumlACD diagram = new PumlACD();
         Writer writer;
         // specific file's path and/or name
-        if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().equals("")) {
+        if (oOut.getFileName() != null && !oOut.getNames().isEmpty() && oPath.getNames() != null && !oPath.getNames().isEmpty()) {
             writer = new Writer(oPath.getPath(), "ACD_" + oOut.getFileName());
         } else if (oOut.getFileName() != null && !oOut.getNames().isEmpty()) {
             writer = new Writer("ACD_" + oOut.getFileName());
@@ -84,7 +75,7 @@ public class PumlDoclet implements Doclet {
         }
         // open file
         writer.open();
-        // writing what we want (a acd)
+        // writing what we want (an acd)
         writer.write(diagram.translateToScheme(environment));
         // close file
         writer.close();

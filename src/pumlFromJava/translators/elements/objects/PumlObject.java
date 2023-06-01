@@ -5,7 +5,7 @@ import pumlFromJava.translators.elements.tools.TranslatorTools;
 import javax.lang.model.element.Element;
 
 /**
- * Translator for any java package, class, enum or interface
+ * Translator for any java package, class, enum or interface element
  */
 public abstract class PumlObject implements ObjectTranslator {
 

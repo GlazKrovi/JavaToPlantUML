@@ -9,6 +9,9 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import java.util.List;
 
+/**
+ * A puml equivalent for any type of java interface
+ */
 public class PumlInterface extends PumlObject implements InheritableObject {
 
     @Override

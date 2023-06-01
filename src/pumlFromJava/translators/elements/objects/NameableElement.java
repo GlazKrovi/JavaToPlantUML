@@ -3,9 +3,9 @@ package pumlFromJava.translators.elements.objects;
 import javax.lang.model.element.Element;
 
 /**
- * Represents an element with a name and package name
+ * Represents an element with a name and eventual packages names
  */
-public interface Nameable {
+public interface NameableElement {
     /**
      * Give the full name of the specified element
      *

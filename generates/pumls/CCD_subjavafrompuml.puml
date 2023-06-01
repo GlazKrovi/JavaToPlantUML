@@ -77,6 +77,16 @@ class pumlFromJava.doclets.options.TypeOption {
 +  getType() : String
 
 }
+class pumlFromJava.generators.Help {
++ <<create>> Help()
++  print()
+-  outOption() : String
+-  pathOption() : String
+-  typeOption() : String
+-  subPackages() : String
+-  scannedPackage() : String
+
+}
 class pumlFromJava.generators.Java2Puml {
 + <<create>> Java2Puml()
 + {static}   main(args : String[*])
@@ -86,12 +96,12 @@ interface pumlFromJava.translators.elements.objects.InheritableObject {
 + {abstract}   inheritanceTranslate(element : Element) : String
 
 }
-interface pumlFromJava.translators.elements.objects.Nameable {
+interface pumlFromJava.translators.elements.objects.NameableElement {
 + {abstract}   getFullName(element : Element) : String
 + {abstract}   getSimplifiedName(element : Element) : String
 
 }
-interface pumlFromJava.translators.elements.objects.ObjectTranslator extends pumlFromJava.translators.elements.objects.PumlRawObject, pumlFromJava.translators.elements.objects.Nameable {
+interface pumlFromJava.translators.elements.objects.ObjectTranslator extends pumlFromJava.translators.elements.objects.PumlRawObject, pumlFromJava.translators.elements.objects.NameableElement {
 + {abstract}   contentTranslate(element : Element) : String
 + {abstract}   open() : String
 + {abstract}   close() : String
@@ -172,7 +182,6 @@ interface pumlFromJava.translators.elements.objects.internals.RawInternal {
 }
 class pumlFromJava.translators.elements.objects.pumlClasses.PumlClass extends pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses {
 + <<create>> PumlClass()
-+ {Override} relationsTranslate(element : Element) : String
 # {readonly}  {Override} AggregationsCompositionsTranslate(element : Element) : String
 + {Override} selfTranslate(element : Element) : String
 + {Override} contentTranslate(element : Element) : String
@@ -187,7 +196,7 @@ abstract pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses exten
 + {abstract}  {Override} selfTranslate(element : Element) : String
 + {Override} inheritanceTranslate(element : Element) : String
 + {abstract}  {Override} contentTranslate(element : Element) : String
-+ {abstract}  {Override} relationsTranslate(element : Element) : String
++ {Override} relationsTranslate(element : Element) : String
 -  getExtends(typeElement : TypeElement) : String
 -  getImplements(typeElement : TypeElement) : String
 # {abstract}  {readonly}   AggregationsCompositionsTranslate(element : Element) : String
@@ -197,7 +206,6 @@ abstract pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses exten
 class pumlFromJava.translators.elements.objects.pumlClasses.PumlLiteClass extends pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses {
 + <<create>> PumlLiteClass()
 + {Override} selfTranslate(element : Element) : String
-+ {Override} relationsTranslate(element : Element) : String
 # {readonly}  {Override} usesTranslate(element : Element) : String
 # {readonly}  {Override} AggregationsCompositionsTranslate(element : Element) : String
 + {Override} contentTranslate(element : Element) : String

@@ -5,7 +5,7 @@ import javax.lang.model.element.Element;
 /**
  * Represents a translator for any java package, class, enum or interface
  */
-public interface ObjectTranslator extends PumlRawObject, Nameable {
+public interface ObjectTranslator extends PumlRawObject, NameableElement {
     /**
      * Translate what is inside the Element (like attributes, constants or method)
      *

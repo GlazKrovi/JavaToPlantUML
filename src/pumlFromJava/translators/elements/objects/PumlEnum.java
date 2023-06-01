@@ -4,7 +4,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 
 /**
- * Represents a Puml translator for java enumeration
+ * A puml equivalent for any type of java enumeration
  */
 public class PumlEnum extends PumlObject {
 

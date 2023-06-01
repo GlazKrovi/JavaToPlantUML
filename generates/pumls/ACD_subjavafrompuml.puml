@@ -27,11 +27,13 @@ type
 
 }
 
+class pumlFromJava.generators.Help
+
 class pumlFromJava.generators.Java2Puml
 
 interface pumlFromJava.translators.elements.objects.InheritableObject
-interface pumlFromJava.translators.elements.objects.Nameable
-interface pumlFromJava.translators.elements.objects.ObjectTranslator extends pumlFromJava.translators.elements.objects.PumlRawObject, pumlFromJava.translators.elements.objects.Nameable
+interface pumlFromJava.translators.elements.objects.NameableElement
+interface pumlFromJava.translators.elements.objects.ObjectTranslator extends pumlFromJava.translators.elements.objects.PumlRawObject, pumlFromJava.translators.elements.objects.NameableElement
 class pumlFromJava.translators.elements.objects.PumlEnum extends pumlFromJava.translators.elements.objects.PumlObject
 
 class pumlFromJava.translators.elements.objects.PumlInterface extends pumlFromJava.translators.elements.objects.PumlObject implements pumlFromJava.translators.elements.objects.InheritableObject

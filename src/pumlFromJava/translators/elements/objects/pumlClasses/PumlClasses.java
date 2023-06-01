@@ -8,6 +8,7 @@ import pumlFromJava.translators.elements.relations.RelationableObject;
 import pumlFromJava.translators.elements.tools.TranslatorTools;
 
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import java.util.ArrayList;
@@ -42,11 +43,22 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
     public abstract String contentTranslate(Element element);
 
     @Override
-    public abstract String relationsTranslate(Element element);
+    public String relationsTranslate(Element element) {
+        // security
+        if (element == null || element.getKind() != ElementKind.CLASS) {
+            throw new IllegalArgumentException();
+        }
+
+        String res = this.AggregationsCompositionsTranslate(element) +
+                this.usesTranslate(element);
+        // reset relations for next element process
+        links.clear();
+        return res;
+    }
 
     /**
      * Indicates the superclass that the specified element extends.
-     *
+     * @pumlInheritance
      * @param typeElement a class element casted in TypeElement
      * @return Returns the name of the extended superclass
      */
@@ -60,7 +72,7 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
 
     /**
      * Indicates the interfaces that the specified element extends.
-     *
+     * @pumlInheritance
      * @param typeElement a class element casted in TypeElement
      * @return Returns the name of the extended superclass
      */
@@ -98,6 +110,7 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
      * Hamburger --* Steak
      * @pumlAggregation
      * @pumlComposition
+     * @pumlMultiplicities
      */
     protected abstract String AggregationsCompositionsTranslate(Element element);
 
