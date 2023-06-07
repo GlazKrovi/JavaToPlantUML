@@ -56,9 +56,9 @@ public class PumlLiteClass extends PumlClasses {
                     if (TranslatorTools.isNotFromJava(parameter.asType()) &&
                             !TranslatorTools.isPrimitiveType(parameter.asType()) &&
                             !links.contains(parameter.asType())) {
-                        res.append(this.getFullName(element));
+                        res.append("\"").append(TranslatorTools.cutCollection(this.getFullName(element))).append("\"");
                         res.append(" ").append(arrow.getArrow()).append(" ");
-                        res.append(parameter.asType());
+                        res.append("\"").append(TranslatorTools.cutCollection(parameter.asType().toString())).append("\"");
                         res.append(" : <<Use>>");
                         res.append("\n");
 

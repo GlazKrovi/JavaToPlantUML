@@ -18,7 +18,7 @@ public class TranslatorTools {
      * @return Returns string like 'Persons[*]' (from the complete specified name java.List< Society.Person >)
      */
     public static String reformatName(String name) {
-        return identifyCollection(cutPackage(name));
+        return identifyAsCollection(cutPackage(name));
     }
 
     /**
@@ -45,7 +45,7 @@ public class TranslatorTools {
      * @return Returns the passed name, plus the collection symbol (i.e. [*]) if the specified name is a collection,
      * or just the passed name otherwise
      */
-    public static String identifyCollection(String parameterName) {
+    public static String identifyAsCollection(String parameterName) {
         /* * As we've split the package, parameter names from the collection are returned with a '>' remaining at the end of their name.
          * This makes it easy to identify them! So that replace '>' and '[' with '[*]' */
         String res = parameterName;
@@ -121,5 +121,14 @@ public class TranslatorTools {
             }
         }
         return fullName.substring(0, ending);
+    }
+
+    /**
+     * Cut eventual collections marks
+     * @param name String representing a parameter or field name
+     * @return Returns string like 'something' (cut from the complete specified name somethings[])
+     */
+    public static String cutCollection(String name){
+        return name.replaceAll("[<>\\[\\]]", "");
     }
 }

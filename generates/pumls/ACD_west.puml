@@ -54,25 +54,25 @@ nom
 }
 
 western.Boisson -- Barman : <<Use>>
-western.Barman .. western.Personnage : <<Use>>
+"western.Barman" .. "western.Personnage" : <<Use>>
 western.Boisson -- Boisson : <<Use>>
 western.Substantif -- Boisson : <<Use>>
-western.Boisson .. western.Genre : <<Use>>
+"western.Boisson" .. "western.Genre" : <<Use>>
 western.Boisson -- Brigand : <<Use>>
 western.Cowboy -- Brigand : <<Use>>
-western.Brigand .. western.Dame : <<Use>>
+"western.Brigand" .. "western.Dame" : <<Use>>
 western.Boisson -- Cowboy : <<Use>>
-western.Cowboy .. western.Dame : <<Use>>
-western.Cowboy .. western.HorsLaLoi : <<Use>>
+"western.Cowboy" .. "western.Dame" : <<Use>>
+"western.Cowboy" .. "western.HorsLaLoi" : <<Use>>
 western.Boisson -- Dame : <<Use>>
 western.Cowboy -- Dame : <<Use>>
 western.HorsLaLoi -- Dame : <<Use>>
-western.Narrateur .. western.Boisson : <<Use>>
+"western.Narrateur" .. "western.Boisson" : <<Use>>
 western.Boisson -- Personnage : <<Use>>
 western.Brigand -- Ripou : <<Use>>
-western.Ripou .. western.Dame : <<Use>>
-western.Ripou .. western.Cowboy : <<Use>>
-western.Sherif .. western.HorsLaLoi : <<Use>>
+"western.Ripou" .. "western.Dame" : <<Use>>
+"western.Ripou" .. "western.Cowboy" : <<Use>>
+"western.Sherif" .. "western.HorsLaLoi" : <<Use>>
 western.Genre -- Substantif : <<Use>>
 
 @enduml

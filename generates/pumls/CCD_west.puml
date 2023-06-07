@@ -173,25 +173,25 @@ class western.Substantif {
 
 }
 western.Boisson"1" <--o "1"Barman : -boissonParDefaut
-western.Barman"1" <.. "1"western.Personnage : <<Use>>
+"western.Barman""1" <.. "1""western.Personnage" : <<Use>>
 western.Boisson"1" <--o "1"Boisson : +EAU
 western.Substantif"1" <--o "1"Boisson : -substantif
-western.Boisson"1" <.. "1"western.Genre : <<Use>>
+"western.Boisson""1" <.. "1""western.Genre" : <<Use>>
 western.Boisson"1" <--o "1"Brigand : -boissonParDefaut
 western.Cowboy"1" <--o "1"Brigand : -gardien
-western.Brigand"1" <.. "1"western.Dame : <<Use>>
+"western.Brigand""1" <.. "1""western.Dame" : <<Use>>
 western.Boisson"1" <--o "1"Cowboy : -boissonParDefaut
-western.Cowboy"1" <.. "1"western.Dame : <<Use>>
-western.Cowboy"1" <.. "1"western.HorsLaLoi : <<Use>>
+"western.Cowboy""1" <.. "1""western.Dame" : <<Use>>
+"western.Cowboy""1" <.. "1""western.HorsLaLoi" : <<Use>>
 western.Boisson"1" <--o "1"Dame : -boissonParDefaut
 western.Cowboy"1" <--o "1"Dame : -sauveur
 western.HorsLaLoi"1" <--o "1"Dame : -ravisseur
-western.Narrateur"1" <.. "1"western.Boisson : <<Use>>
+"western.Narrateur""1" <.. "1""western.Boisson" : <<Use>>
 western.Boisson"1" <--o "1"Personnage : -BOISSON_PAR_DEFAUT
 western.Brigand"1" <--o "1"Ripou : -brigand
-western.Ripou"1" <.. "1"western.Dame : <<Use>>
-western.Ripou"1" <.. "1"western.Cowboy : <<Use>>
-western.Sherif"1" <.. "1"western.HorsLaLoi : <<Use>>
+"western.Ripou""1" <.. "1""western.Dame" : <<Use>>
+"western.Ripou""1" <.. "1""western.Cowboy" : <<Use>>
+"western.Sherif""1" <.. "1""western.HorsLaLoi" : <<Use>>
 western.Genre"1" <--o "1"Substantif : -genre
 
 @enduml
