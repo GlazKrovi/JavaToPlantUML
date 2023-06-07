@@ -1,0 +1,37 @@
+@startuml
+!theme reddress-darkgreen
+
+class test.A {
+anInt
+aShort
+aLong
+aByte
+aFloat
+aDouble
+aChar
+aBoolean
+
+}
+
+abstract test.B
+
+class test.C
+
+abstract test.D
+
+abstract test.E
+
+class test.Java2PumlTest1
+
+test.C .. int[] : <<Use>>
+test.C .. long[][][][] : <<Use>>
+test.A -- D : <<Use>>
+test.D .. test.A[] : <<Use>>
+test.D .. test.A[][] : <<Use>>
+test.D .. test.A[][][] : <<Use>>
+test.D .. test.B : <<Use>>
+test.D .. test.C : <<Use>>
+test.D .. test.D : <<Use>>
+
+@enduml
+

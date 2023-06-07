@@ -22,6 +22,12 @@ public class VisibilityViewer implements PumlRawObject {
         } else if (visibility.contains(Modifier.PROTECTED)) {
             res = "#";
         }
+        else if (visibility.contains(Modifier.DEFAULT)){
+            res = "+";
+        }
+        else{
+            res = "~";
+        }
         return res;
     }
 

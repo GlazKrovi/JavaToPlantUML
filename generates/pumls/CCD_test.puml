@@ -1,0 +1,79 @@
+@startuml
+!theme reddress-darkgreen
+
+class test.A {
+~ <<create>> A()
+-anInt : Integer
+# {readonly} aShort : short
+~aLong : long
++aByte : byte
+-aFloat : Float
+# {static}  {readonly} aDouble : double
+~ {static} aChar : Char
++ {static} aBoolean : Boolean
+-  anIntFunction(anIntParam : Integer) : Integer
+# {readonly}   aShortFunction(aShortParam : short) : short
+~  aLongFunction(aLongParam : long) : long
++  aByteFunction(aByteParam : byte) : byte
+- {static}   aFloatFunction(aFloatParam : Float) : Float
+# {static}  {readonly}   aDoubleFunction(aDoubleParam : double) : double
+~ {static}   aCharFunction(aCharParam : Char) : Char
++ {static}   aBooleanFunction(aBooleanParam : Boolean) : Boolean
+
+}
+abstract test.B {
+~ <<create>> B()
+-  anIntFunction(anIntParam : Integer) : Integer
+# {readonly}   aShortFunction(aShortParam : Short) : Short
+~  aLongFunction(aLongParam : Long) : Long
++  aByteFunction(aByteParam : Byte) : Byte
+-  aFloatFunction(aFloatParam : Float) : Float
+# {abstract}  {readonly}   aDoubleFunction(aDoubleParam : Double) : Double
+~ {static}   aCharacterFunction(aCharacterParam : Character) : Character
++ {static}   aBooleanFunction(aBooleanParam : Boolean) : Boolean
+
+}
+class test.C {
+~ <<create>> C()
+-  anIntArrayFunction(anIntArrayParam : int[*]) : int[*]
+# {readonly}   aShortArrayFunction(aShortArrayParam : Short[*]) : Short[*]
+~  aLong3DArrayFunction(someLongs : long[*]) : long[*]
++  aByte5DArrayFunction(someBytes : Byte[*]) : Byte[*]
+-  aFloatListFunction(aFloatListParam : Float[*]) : Float[*]
+# {readonly}   aListOfDoubleListFunction(someDoubles : Double[*]) : Double[*]
+~  aCharacterSetFunction(aCharacterSetParam : Character[*]) : Character[*]
++  aSetOfBooleanListFunction(someBooleans : Boolean[*]) : Boolean[*]
+
+}
+abstract test.D {
+~ <<create>> D()
+-  aFunction(a0 : A, a1 : A[*], a2 : A[*], a3 : A[*]) : A
+~  bFunction(b0 : B, b1 : B[*], b2 : B[*], b3 : B[*]) : B[*]
+# {abstract}  {readonly}   cFunction(c0 : C, c1 : C[*], c2 : C[*], c3 : C[*]) : C[*]
++ {static}   dFunction(d0 : D, d1 : D[*], d2 : D[*], d3 : D[*], d4 : D[*]) : D[*]
+
+}
+abstract test.E {
+~ <<create>> E()
+-  mapOfIntFunction(a0 : Integer[*], a1 : Integer[*], a2 : Integer[*], a3 : Integer[*]) : Integer[*]
+~ {abstract}   mapOfDoubleArrayFunction(a0 : Double[*], a1 : Double[*], a2 : Double[*], a3 : Double[*]) : Double[*]
+# {readonly}   mapOfAFunction(a0 : A[*], a1 : A[*], a2 : A[*], a3 : A[*]) : A[*]
++ {static}   mapOfArrayOfAFunction(a0 : A[*], a1 : A[*], a2 : A[*], a3 : A[*]) : A[*]
+
+}
+class test.Java2PumlTest1 {
++ <<create>> Java2PumlTest1()
+
+}
+test.C"1" <.. "1"int[] : <<Use>>
+test.C"1" <.. "1"long[][][][] : <<Use>>
+test.A"1" <--o "1"D : -a
+test.D"1" <.. "1"test.A[] : <<Use>>
+test.D"1" <.. "1"test.A[][] : <<Use>>
+test.D"1" <.. "1"test.A[][][] : <<Use>>
+test.D"1" <.. "1"test.B : <<Use>>
+test.D"1" <.. "1"test.C : <<Use>>
+test.D"1" <.. "1"test.D : <<Use>>
+
+@enduml
+
