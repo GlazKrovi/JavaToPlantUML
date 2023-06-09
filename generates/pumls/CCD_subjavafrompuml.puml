@@ -257,11 +257,12 @@ class pumlFromJava.translators.elements.tools.TranslatorTools {
 + <<create>> TranslatorTools()
 + {static}   reformatName(name : String) : String
 + {static}   cutPackage(name : String) : String
-+ {static}   identifyCollection(parameterName : String) : String
++ {static}   identifyAsCollection(parameterName : String) : String
 + {static}   isCollection(parameterName : String) : Boolean
 + {static}   isNotFromJava(typeMirror : TypeMirror) : Boolean
 + {static}   isPrimitiveType(type : TypeMirror) : Boolean
 + {static}   obtainPackage(fullName : String) : String
++ {static}   cutCollection(name : String) : String
 
 }
 class pumlFromJava.translators.marker.Marker {
@@ -294,7 +295,6 @@ pumlFromJava.doclets.options.OutOption"1" <--o "1"PumlDoclet : -oOut
 pumlFromJava.doclets.options.TypeOption"1" <--o "1"PumlDoclet : -oType
 pumlFromJava.translators.elements.objects.viewers.VisibilityViewer"1" <--o "1"PumlInternal : #visibilityViewer
 pumlFromJava.translators.elements.objects.viewers.ModifiersViewer"1" <--o "1"PumlInternal : #modifiersViewer
-pumlFromJava.translators.elements.objects.viewers.VisibilityViewer"1" <--o "1"PumlClass : -visibilityViewer
 pumlFromJava.translators.elements.objects.viewers.ModifiersViewer"1" <--o "1"PumlClasses : #modifiersViewer
 pumlFromJava.translators.elements.objects.viewers.AnnotationsViewer"1" <--o "1"PumlClasses : #annotationsViewer
 pumlFromJava.translators.elements.relations.PumlArrowLook"1" <--o "1"PumlArrow : -type

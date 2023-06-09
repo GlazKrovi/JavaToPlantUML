@@ -98,7 +98,6 @@ pumlFromJava.doclets.options.OutOption -- PumlDoclet : <<Use>>
 pumlFromJava.doclets.options.TypeOption -- PumlDoclet : <<Use>>
 pumlFromJava.translators.elements.objects.viewers.VisibilityViewer -- PumlInternal : <<Use>>
 pumlFromJava.translators.elements.objects.viewers.ModifiersViewer -- PumlInternal : <<Use>>
-pumlFromJava.translators.elements.objects.viewers.VisibilityViewer -- PumlClass : <<Use>>
 pumlFromJava.translators.elements.objects.viewers.ModifiersViewer -- PumlClasses : <<Use>>
 pumlFromJava.translators.elements.objects.viewers.AnnotationsViewer -- PumlClasses : <<Use>>
 pumlFromJava.translators.elements.relations.PumlArrowLook -- PumlArrow : <<Use>>
