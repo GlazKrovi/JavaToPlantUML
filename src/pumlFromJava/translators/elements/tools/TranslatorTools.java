@@ -125,10 +125,11 @@ public class TranslatorTools {
 
     /**
      * Cut eventual collections marks
+     *
      * @param name String representing a parameter or field name
      * @return Returns string like 'something' (cut from the complete specified name somethings[])
      */
-    public static String cutCollection(String name){
+    public static String cutCollection(String name) {
         return name.replaceAll("[<>\\[\\]]", "");
     }
 }

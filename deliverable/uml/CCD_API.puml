@@ -326,5 +326,7 @@ pumlFromJava.translators.elements.objects.PumlObject <.. javax.lang.model.elemen
 pumlFromJava.translators.elements.objects.PumlObject <.. javax.lang.model.element.ExecutableElement : <<Use>>
 pumlFromJava.writers.Writer <.. java.io.File : <<Use>>
 pumlFromJava.writers.Writer <.. java.io.PrintWriter : <<Use>>
+pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses <.. PumlMethod
+pumlFromJava.translators.elements.objects.pumlClasses.PumlClasses <.. PumlConstructor
 
 @enduml

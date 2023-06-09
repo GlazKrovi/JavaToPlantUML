@@ -58,9 +58,10 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
 
     /**
      * Indicates the superclass that the specified element extends.
-     * @pumlInheritance
+     *
      * @param typeElement a class element casted in TypeElement
      * @return Returns the name of the extended superclass
+     * @pumlInheritance
      */
     private String getExtends(TypeElement typeElement) {
         String res = "";
@@ -72,9 +73,10 @@ public abstract class PumlClasses extends PumlObject implements InheritableObjec
 
     /**
      * Indicates the interfaces that the specified element extends.
-     * @pumlInheritance
+     *
      * @param typeElement a class element casted in TypeElement
      * @return Returns the name of the extended superclass
+     * @pumlInheritance
      */
     private String getImplements(TypeElement typeElement) {
         String res = "";

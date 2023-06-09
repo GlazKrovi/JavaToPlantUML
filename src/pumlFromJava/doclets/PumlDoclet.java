@@ -8,7 +8,6 @@ import pumlFromJava.diagrams.PumlCCD;
 import pumlFromJava.doclets.options.OutOption;
 import pumlFromJava.doclets.options.PathOption;
 import pumlFromJava.doclets.options.TypeOption;
-import pumlFromJava.generators.Help;
 import pumlFromJava.writers.Writer;
 
 import javax.lang.model.SourceVersion;

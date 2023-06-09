@@ -9,9 +9,9 @@ public interface InheritableObject {
     /**
      * Translates what the element inherits from (implementation or extension)
      *
-     * @pumlInheritance
      * @param element an element like class, enum or interface
      * @return Puml equivalents for smt extends/inherit Asmt/Ismt
+     * @pumlInheritance
      */
     String inheritanceTranslate(Element element);
 }
