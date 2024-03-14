@@ -18,7 +18,7 @@ public class PathOption implements Doclet.Option {
 
     @Override
     public String getDescription() {
-        return "Permet de dire ou on mettre le fichier";
+        return "Permet de dire où ranger le fichier";
     }
 
     @Override
