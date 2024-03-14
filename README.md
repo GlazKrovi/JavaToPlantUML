@@ -21,3 +21,8 @@ Functional but complicated to launch, not very ergonomic
 ## Comments' languages
 
 French, English
+
+## Credits
+
+Fernandes Samuel
+Marsault Samuel
